@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/tiles/ground_tiles.tres" type="TileSet" id=1]
+[ext_resource path="res://bin/scripts_Map.gdns" type="Script" id=2]
+
+[node name="Map" type="Node"]
+script = ExtResource( 2 )
+tile_set = ExtResource( 1 )
+
+[node name="Ground" type="TileMap" parent="."]
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Holes" type="TileMap" parent="."]
+cell_size = Vector2( 32, 32 )
+collision_layer = 2
+format = 1
