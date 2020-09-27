@@ -25,7 +25,7 @@ script = ExtResource( 7 )
 
 [node name="ScrollCamera" parent="." instance=ExtResource( 2 )]
 script = ExtResource( 4 )
-speed = 20.0
+speed = 80.0
 
 [node name="GameBoundary" parent="ScrollCamera" instance=ExtResource( 6 )]
 
