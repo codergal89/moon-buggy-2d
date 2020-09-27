@@ -13,6 +13,7 @@ namespace moon_buggy
     godot::register_method("_ready", &ScrollCamera::_ready);
     godot::register_method("_physics_process", &ScrollCamera::_physics_process);
     godot::register_property("speed", &ScrollCamera::speed, default_speed);
+    godot::register_property("should_scroll", &ScrollCamera::should_scroll, false);
   }
 
   auto ScrollCamera::_init() -> void
@@ -28,8 +29,11 @@ namespace moon_buggy
 
   auto ScrollCamera::_physics_process(real_t delta) -> void
   {
-    auto current_position = get_position();
-    set_position(current_position + godot::Vector2{-1, 0} * speed * delta);
+    if (should_scroll)
+    {
+      auto current_position = get_position();
+      set_position(current_position + godot::Vector2{-1, 0} * speed * delta);
+    }
   }
 
 }  // namespace moon_buggy

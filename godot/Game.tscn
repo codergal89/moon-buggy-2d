@@ -22,7 +22,6 @@ script = ExtResource( 7 )
 
 [node name="ScrollCamera" parent="." instance=ExtResource( 2 )]
 position = Vector2( 320, 240 )
-current = true
 script = ExtResource( 4 )
 speed = 20.0
 

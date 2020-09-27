@@ -1,5 +1,6 @@
 #include "Game.hpp"
 
+#include <Camera2D.hpp>
 #include <Godot.hpp>
 
 namespace moon_buggy
@@ -22,6 +23,10 @@ namespace moon_buggy
 
     auto level = level_generator->generate(0);
     map->level(level);
+
+    auto scroll_camera = get_typed_node<godot::Camera2D>("ScrollCamera");
+    scroll_camera->make_current();
+    scroll_camera->set("should_scroll", true);
   }
 
   auto Game::kill_zone_entered(godot::Node * node) -> void

@@ -26,6 +26,7 @@ namespace moon_buggy
     GODOT_CLASS(ScrollCamera, godot::Camera2D)
 
     real_t speed{default_speed};
+    bool should_scroll{};
   };
 
 }  // namespace moon_buggy
