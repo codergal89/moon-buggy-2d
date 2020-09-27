@@ -19,6 +19,7 @@ namespace moon_buggy
 
     godot::register_property("acceleration", &Buggy::acceleration, default_acceleration);
     godot::register_property("drag", &Buggy::drag, default_drag);
+    godot::register_property("jump_velocity", &Buggy::jump_velocity, default_jump_velocity);
     godot::register_property("speed_limit", &Buggy::speed_limit, default_speed_limit);
   }
 
@@ -67,7 +68,7 @@ namespace moon_buggy
 
     if (input->is_action_pressed("player_jump") && is_on_floor())
     {
-      velocity.y = -98.f;
+      velocity.y = -jump_velocity;
     }
   }
 

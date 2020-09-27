@@ -15,9 +15,10 @@ namespace moon_buggy
       : godot::KinematicBody2D
       , TypedNodeCastMixin<Buggy>
   {
-    auto static constexpr default_speed_limit{100.f};
     auto static constexpr default_acceleration{10.f};
     auto static constexpr default_drag{2.f};
+    auto static constexpr default_jump_velocity{98.f};
+    auto static constexpr default_speed_limit{100.f};
 
     auto static _register_methods() -> void;
 
@@ -36,6 +37,7 @@ namespace moon_buggy
 
     real_t acceleration{default_acceleration};
     real_t drag{default_drag};
+    real_t jump_velocity{default_jump_velocity};
     real_t speed_limit{default_speed_limit};
 
     godot::Vector2 velocity{};
