@@ -16,6 +16,9 @@ namespace moon_buggy
   {
     godot::register_method("_ready", &Buggy::_ready);
     godot::register_method("_physics_process", &Buggy::_physics_process);
+
+    godot::register_property("acceleration", &Buggy::acceleration, default_acceleration);
+    godot::register_property("drag", &Buggy::drag, default_drag);
     godot::register_property("speed_limit", &Buggy::speed_limit, default_speed_limit);
   }
 
@@ -23,8 +26,6 @@ namespace moon_buggy
   {
     gravity = godot::ProjectSettings::get_singleton()->get_setting("physics/2d/default_gravity_vector");
     gravity *= static_cast<real_t>(godot::ProjectSettings::get_singleton()->get_setting("physics/2d/default_gravity"));
-
-    speed_limit = default_speed_limit;
   }
 
   auto Buggy::_ready() -> void
@@ -53,15 +54,15 @@ namespace moon_buggy
 
     if (input->is_action_pressed("player_speed_up") && is_on_floor())
     {
-      accelerate(10.f);
+      accelerate();
     }
     else if (input->is_action_pressed("player_slow_down") && is_on_floor())
     {
-      accelerate(-10.f);
+      decelerate();
     }
     else
     {
-      decelerate(2.f);
+      handle_drag();
     }
 
     if (input->is_action_pressed("player_jump") && is_on_floor())
@@ -70,20 +71,25 @@ namespace moon_buggy
     }
   }
 
-  auto Buggy::accelerate(real_t difference) -> void
+  auto Buggy::accelerate() -> void
   {
-    velocity.x = std::clamp(velocity.x - difference, -speed_limit, speed_limit);
+    velocity.x = std::clamp(velocity.x - acceleration, -speed_limit, speed_limit);
   }
 
-  auto Buggy::decelerate(real_t difference) -> void
+  auto Buggy::decelerate() -> void
+  {
+    velocity.x = std::clamp(velocity.x + acceleration, -speed_limit, speed_limit);
+  }
+
+  auto Buggy::handle_drag() -> void
   {
     if (velocity.x < 0.f)
     {
-      velocity.x = std::clamp(velocity.x + difference, -speed_limit, 0.f);
+      velocity.x = std::clamp(velocity.x + drag, -speed_limit, 0.f);
     }
     else if (velocity.x > 0.f)
     {
-      velocity.x = std::clamp(velocity.x - difference, 0.f, speed_limit);
+      velocity.x = std::clamp(velocity.x - drag, 0.f, speed_limit);
     }
   }
 
