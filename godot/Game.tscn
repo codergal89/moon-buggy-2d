@@ -27,11 +27,14 @@ script = ExtResource( 7 )
 [node name="MainMenu" parent="." instance=ExtResource( 11 )]
 
 [node name="ScrollCamera" parent="." instance=ExtResource( 2 )]
+anchor_mode = 0
 current = true
 script = ExtResource( 4 )
 speed = 80.0
+should_scroll = true
 
 [node name="GameBoundary" parent="ScrollCamera" instance=ExtResource( 6 )]
 
 [node name="KillZone" parent="ScrollCamera" instance=ExtResource( 9 )]
+position = Vector2( 360, 480 )
 [connection signal="start_game" from="MainMenu" to="." method="start_game"]

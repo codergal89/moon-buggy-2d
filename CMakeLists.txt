@@ -34,7 +34,6 @@ add_library("scripts" SHARED
   "source/scripts.cpp"
   "source/Buggy.cpp"
   "source/Game.cpp"
-  "source/GameBoundary.cpp"
   "source/LevelGenerator.cpp"
   "source/MainMenu.cpp"
   "source/Map.cpp"
@@ -60,7 +59,6 @@ set_target_properties("scripts" PROPERTIES
 godot_register_library("scripts")
 godot_register_class("scripts" "Buggy")
 godot_register_class("scripts" "Game")
-godot_register_class("scripts" "GameBoundary")
 godot_register_class("scripts" "LevelGenerator")
 godot_register_class("scripts" "MainMenu")
 godot_register_class("scripts" "Map")

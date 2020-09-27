@@ -8,9 +8,9 @@
 #include <Godot.hpp>
 #include <KinematicBody2D.hpp>
 #include <PackedScene.hpp>
+#include <ProjectSettings.hpp>
 #include <Ref.hpp>
 #include <TileMap.hpp>
-#include <Viewport.hpp>
 
 namespace moon_buggy
 {
@@ -27,6 +27,9 @@ namespace moon_buggy
 
   auto Game::_init() -> void
   {
+    auto settings = godot::ProjectSettings::get_singleton();
+    window_height = settings->get_setting("display/window/size/height");
+    window_width = settings->get_setting("display/window/size/width");
   }
 
   auto Game::_ready() -> void
@@ -35,7 +38,7 @@ namespace moon_buggy
     level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
 
     auto level = level_generator->generate(0);
-    map->level(level);
+    map->level(level, window_width, window_height);
 
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
     kill_zone = scroll_camera->get_kill_zone();
@@ -62,16 +65,16 @@ namespace moon_buggy
 
   auto Game::start_game() -> void
   {
+    scroll_camera->set_deferred("position", godot::Vector2{0.f, 0.f});
+
     auto buggy = cast_to<Buggy>(buggy_scene->instance());
     auto ground = map->get_typed_node<godot::TileMap>("Ground");
-    auto viewport_size = get_viewport()->get_size();
-    buggy->set_position({.0f, viewport_size.y / 2 - ground->get_cell_size().y});
+    buggy->set_position({window_width / 2.f, window_height - ground->get_cell_size().y});
     buggy->connect("crashed", this, "buggy_crashed");
     scroll_camera->add_child(buggy);
 
     kill_zone->connect("body_entered", buggy, "kill_zone_entered");
 
-    scroll_camera->reset_position();
     scroll_camera->set("should_scroll", true);
 
     main_menu->call_deferred("hide");

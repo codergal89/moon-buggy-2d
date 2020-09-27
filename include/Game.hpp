@@ -32,11 +32,15 @@ namespace moon_buggy
     auto buggy_crashed(Buggy * buggy) -> void;
     auto start_game() -> void;
 
+    std::uint64_t window_width{};
+    std::uint64_t window_height{};
+
     Map * map;
     LevelGenerator * level_generator;
     ScrollCamera * scroll_camera;
     godot::Area2D * kill_zone;
     MainMenu * main_menu;
+
     godot::Ref<godot::PackedScene> buggy_scene;
     godot::Ref<godot::PackedScene> explosion_scene;
   };

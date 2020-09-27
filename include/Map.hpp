@@ -27,15 +27,12 @@ namespace moon_buggy
     auto _init() -> void;
     auto _ready() -> void;
 
-    auto level(Level level) -> void;
+    auto level(Level level, std::uint64_t width, std::uint64_t height) -> void;
 
   private:
     GODOT_CLASS(Map, godot::Node2D);
 
     godot::Ref<godot::TileSet> tile_set{};
-
-    std::int64_t x_tiles_per_screen{};
-    std::int64_t y_tiles_per_screen{};
 
     godot::TileMap * ground{};
     godot::TileMap * holes{};
