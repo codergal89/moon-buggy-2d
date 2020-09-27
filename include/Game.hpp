@@ -33,6 +33,7 @@ namespace moon_buggy
     LevelGenerator * level_generator;
     ScrollCamera * scroll_camera;
     godot::Ref<godot::PackedScene> buggy_scene;
+    godot::Ref<godot::PackedScene> explosion_scene;
   };
 
 }  // namespace moon_buggy

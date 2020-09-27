@@ -41,6 +41,7 @@ namespace moon_buggy
     auto accelerate() -> void;
     auto decelerate() -> void;
     auto jump() -> void;
+    auto stop() -> void;
 
     auto kill_zone_entered(godot::Node * node) -> void;
 
@@ -53,6 +54,8 @@ namespace moon_buggy
 
     godot::Vector2 velocity{};
     godot::Vector2 gravity{};
+
+    bool can_drive{};
   };
 
 }  // namespace moon_buggy

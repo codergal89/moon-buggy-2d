@@ -1,10 +1,12 @@
 #include "Buggy.hpp"
 
+#include <AnimatedSprite.hpp>
 #include <Camera2D.hpp>
 #include <Godot.hpp>
 #include <Input.hpp>
 #include <KinematicCollision2D.hpp>
 #include <ProjectSettings.hpp>
+#include <Sprite.hpp>
 #include <Vector2.hpp>
 
 #include <algorithm>
@@ -40,13 +42,18 @@ namespace moon_buggy
 
   auto Buggy::_ready() -> void
   {
+    can_drive = true;
   }
 
   auto Buggy::_physics_process(float delta) -> void
   {
     handle_gravity(delta);
     handle_drag(delta);
-    handle_input();
+
+    if (can_drive)
+    {
+      handle_input();
+    }
 
     move_and_slide(velocity, godot::Vector2{0.f, -1.f});
   }
@@ -103,10 +110,17 @@ namespace moon_buggy
     velocity.y = -jump_velocity;
   }
 
+  auto Buggy::stop() -> void
+  {
+    can_drive = false;
+    velocity.x = 0.f;
+  }
+
   auto Buggy::kill_zone_entered(godot::Node * node) -> void
   {
     if (cast_to<Buggy>(node) == this)
     {
+      stop();
       emit_signal("crashed", this);
     }
   }

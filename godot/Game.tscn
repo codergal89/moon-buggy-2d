@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/ScrollCamera.tscn" type="PackedScene" id=2]
@@ -9,10 +9,12 @@
 [ext_resource path="res://bin/scripts_LevelGenerator.gdns" type="Script" id=7]
 [ext_resource path="res://bin/scripts_Game.gdns" type="Script" id=8]
 [ext_resource path="res://scenes/KillZone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Explosion.tscn" type="PackedScene" id=10]
 
 [node name="Game" type="Node"]
 script = ExtResource( 8 )
 buggy_scene = ExtResource( 5 )
+explosion_scene = ExtResource( 10 )
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 3 )]
 
@@ -28,5 +30,3 @@ speed = 20.0
 [node name="GameBoundary" parent="ScrollCamera" instance=ExtResource( 6 )]
 
 [node name="KillZone" parent="ScrollCamera" instance=ExtResource( 9 )]
-collision_layer = 2
-collision_mask = 16

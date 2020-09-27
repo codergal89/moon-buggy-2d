@@ -3,6 +3,7 @@
 #include "Buggy.hpp"
 #include "ScrollCamera.hpp"
 
+#include <AnimatedSprite.hpp>
 #include <Camera2D.hpp>
 #include <Godot.hpp>
 #include <KinematicBody2D.hpp>
@@ -20,6 +21,7 @@ namespace moon_buggy
     godot::register_method("buggy_crashed", &Game::buggy_crashed);
 
     godot::register_property("buggy_scene", &Game::buggy_scene, godot::Ref<godot::PackedScene>{});
+    godot::register_property("explosion_scene", &Game::explosion_scene, godot::Ref<godot::PackedScene>{});
   }
 
   auto Game::_init() -> void
@@ -51,8 +53,18 @@ namespace moon_buggy
 
   auto Game::buggy_crashed(Buggy * buggy) -> void
   {
-    godot::Godot::print("buggy {0} crashed", buggy->get_instance_id());
     scroll_camera->set_deferred("should_scroll", false);
+
+    auto explosion = cast_to<godot::AnimatedSprite>(explosion_scene->instance());
+    auto explosion_position = buggy->get_position();
+    explosion_position.y -= 16.f;
+    scroll_camera->add_child(explosion);
+    explosion->set_position(explosion_position);
+    explosion->connect("animation_finished", explosion, "queue_free");
+    explosion->call_deferred("play");
+
+    buggy->queue_free();
+    scroll_camera->clear_current();
   }
 
 }  // namespace moon_buggy
