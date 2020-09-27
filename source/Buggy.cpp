@@ -8,6 +8,8 @@
 #include <Vector2.hpp>
 
 #include <algorithm>
+#include <functional>
+#include <iterator>
 
 namespace moon_buggy
 {
@@ -27,7 +29,11 @@ namespace moon_buggy
   {
     gravity = godot::ProjectSettings::get_singleton()->get_setting("physics/2d/default_gravity_vector");
     gravity *= static_cast<real_t>(godot::ProjectSettings::get_singleton()->get_setting("physics/2d/default_gravity"));
-  }
+
+    floor_actions["player_speed_up"] = std::bind(&Buggy::accelerate, this);
+    floor_actions["player_slow_down"] = std::bind(&Buggy::decelerate, this);
+    floor_actions["player_jump"] = std::bind(&Buggy::jump, this);
+  };
 
   auto Buggy::_ready() -> void
   {
@@ -36,7 +42,9 @@ namespace moon_buggy
   auto Buggy::_physics_process(float delta) -> void
   {
     handle_gravity(delta);
+    handle_drag(delta);
     handle_input();
+
     move_and_slide(velocity, godot::Vector2{0.f, -1.f});
   }
 
@@ -49,26 +57,31 @@ namespace moon_buggy
     }
   }
 
+  auto Buggy::handle_drag(real_t delta) -> void
+  {
+    if (is_on_floor())
+    {
+      if (velocity.x < 0.f)
+      {
+        velocity.x = std::clamp(velocity.x + drag * delta, -speed_limit, 0.f);
+      }
+      else if (velocity.x > 0.f)
+      {
+        velocity.x = std::clamp(velocity.x - drag * delta, 0.f, speed_limit);
+      }
+    }
+  }
+
   auto Buggy::handle_input() -> void
   {
-    auto input = godot::Input::get_singleton();
-
-    if (input->is_action_pressed("player_speed_up") && is_on_floor())
+    if (is_on_floor())
     {
-      accelerate();
-    }
-    else if (input->is_action_pressed("player_slow_down") && is_on_floor())
-    {
-      decelerate();
-    }
-    else
-    {
-      handle_drag();
-    }
-
-    if (input->is_action_pressed("player_jump") && is_on_floor())
-    {
-      velocity.y = -jump_velocity;
+      for_each(cbegin(floor_actions), cend(floor_actions), [input = godot::Input::get_singleton()](auto action) {
+        if (input->is_action_pressed(action.first))
+        {
+          invoke(action.second);
+        }
+      });
     }
   }
 
@@ -82,16 +95,9 @@ namespace moon_buggy
     velocity.x = std::clamp(velocity.x + acceleration, -speed_limit, speed_limit);
   }
 
-  auto Buggy::handle_drag() -> void
+  auto Buggy::jump() -> void
   {
-    if (velocity.x < 0.f)
-    {
-      velocity.x = std::clamp(velocity.x + drag, -speed_limit, 0.f);
-    }
-    else if (velocity.x > 0.f)
-    {
-      velocity.x = std::clamp(velocity.x - drag, 0.f, speed_limit);
-    }
+    velocity.y = -jump_velocity;
   }
 
 }  // namespace moon_buggy
