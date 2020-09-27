@@ -42,6 +42,8 @@ namespace moon_buggy
     auto decelerate() -> void;
     auto jump() -> void;
 
+    auto kill_zone_entered(godot::Node * node) -> void;
+
     std::map<char const *, input_action> floor_actions{};
 
     real_t acceleration{default_acceleration};

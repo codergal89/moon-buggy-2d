@@ -3,6 +3,7 @@
 
 #include "TypedNodeCastMixin.hpp"
 
+#include <Area2D.hpp>
 #include <Camera2D.hpp>
 #include <Defs.hpp>
 #include <Godot.hpp>
@@ -22,11 +23,15 @@ namespace moon_buggy
     auto _ready() -> void;
     auto _physics_process(real_t delta) -> void;
 
+    auto get_kill_zone() -> godot::Area2D *;
+
   private:
     GODOT_CLASS(ScrollCamera, godot::Camera2D)
 
     real_t speed{default_speed};
     bool should_scroll{};
+
+    godot::Area2D * kill_zone;
   };
 
 }  // namespace moon_buggy

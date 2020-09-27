@@ -1,8 +1,10 @@
 #ifndef MOON_BUGGY_2D_GAME_HPP
 #define MOON_BUGGY_2D_GAME_HPP
 
+#include "Buggy.hpp"
 #include "LevelGenerator.hpp"
 #include "Map.hpp"
+#include "ScrollCamera.hpp"
 #include "TypedNodeCastMixin.hpp"
 
 #include <Godot.hpp>
@@ -25,10 +27,11 @@ namespace moon_buggy
   private:
     GODOT_CLASS(Game, godot::Node)
 
-    auto kill_zone_entered(godot::Node * node) -> void;
+    auto buggy_crashed(Buggy * buggy) -> void;
 
     Map * map;
     LevelGenerator * level_generator;
+    ScrollCamera * scroll_camera;
     godot::Ref<godot::PackedScene> buggy_scene;
   };
 
