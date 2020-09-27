@@ -1,11 +1,11 @@
 {
     "configurations": [
         {
-            "name": "Default",
+            "name": "Linux",
             "cppStandard": "c++17",
-            "compileCommands": "build/compile_commands.json",
             "intelliSenseMode": "gcc-x64",
-            "cStandard": "c11"
+            "cStandard": "c11",
+            "configurationProvider": "go2sh.cmake-integration"
         }
     ],
     "version": 4
