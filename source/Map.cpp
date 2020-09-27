@@ -27,9 +27,6 @@ namespace moon_buggy
   {
     ground = get_typed_node<godot::TileMap>("Ground");
     ground->set_tileset(tile_set);
-
-    holes = get_typed_node<godot::TileMap>("Holes");
-    holes->set_tileset(tile_set);
   }
 
   auto Map::level(Level level) -> void
