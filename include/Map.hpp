@@ -1,6 +1,7 @@
 #ifndef MOON_BUGGY_2D_MAP_HPP
 #define MOON_BUGGY_2D_MAP_HPP
 
+#include "Level.hpp"
 #include "TypedNodeCastMixin.hpp"
 
 #include <Godot.hpp>
@@ -23,6 +24,8 @@ namespace moon_buggy
 
     auto _init() -> void;
     auto _ready() -> void;
+
+    auto level(Level level) -> void;
 
   private:
     GODOT_CLASS(Map, godot::Node2D);

@@ -7,6 +7,9 @@
 #include <TileSet.hpp>
 #include <Vector2.hpp>
 
+#include <algorithm>
+#include <iterator>
+
 namespace moon_buggy
 {
 
@@ -27,11 +30,22 @@ namespace moon_buggy
 
     holes = get_typed_node<godot::TileMap>("Holes");
     holes->set_tileset(tile_set);
+  }
 
-    for (auto x{0}; x < 20; ++x)
-    {
-      ground->set_cellv({static_cast<real_t>(x), 14}, tile_set->find_tile_by_name(ground_tile_name));
-    }
+  auto Map::level(Level level) -> void
+  {
+    auto const & tiles = level.tiles;
+    for_each(cbegin(tiles), cend(tiles), [x = 0, this](auto tile) mutable {
+      switch (tile)
+      {
+      case tile_kind::ground:
+        ground->set_cellv({static_cast<real_t>(x++), 14}, tile_set->find_tile_by_name(ground_tile_name));
+        break;
+      case tile_kind::hole:
+        ground->set_cellv({static_cast<real_t>(x++), 14}, tile_set->find_tile_by_name(hole_tile_name));
+        break;
+      }
+    });
   }
 
 }  // namespace moon_buggy
