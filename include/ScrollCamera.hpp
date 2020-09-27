@@ -24,6 +24,7 @@ namespace moon_buggy
     auto _physics_process(real_t delta) -> void;
 
     auto get_kill_zone() -> godot::Area2D *;
+    auto reset_position() -> void;
 
   private:
     GODOT_CLASS(ScrollCamera, godot::Camera2D)

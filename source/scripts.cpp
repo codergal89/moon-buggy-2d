@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "GameBoundary.hpp"
 #include "LevelGenerator.hpp"
+#include "MainMenu.hpp"
 #include "Map.hpp"
 #include "ScrollCamera.hpp"
 
@@ -26,6 +27,7 @@ extern "C"
     godot::register_class<moon_buggy::Game>();
     godot::register_class<moon_buggy::GameBoundary>();
     godot::register_class<moon_buggy::LevelGenerator>();
+    godot::register_class<moon_buggy::MainMenu>();
     godot::register_class<moon_buggy::Map>();
     godot::register_class<moon_buggy::ScrollCamera>();
   }

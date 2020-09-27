@@ -28,10 +28,11 @@ namespace moon_buggy
     auto viewport_size = get_viewport()->get_size();
     set("limit_top", 0);
     set("limit_bottom", viewport_size.y);
-    set_position({viewport_size.x / 2, viewport_size.y / 2});
 
     kill_zone = get_typed_node<godot::Area2D>("KillZone");
     kill_zone->set_position({.0f, viewport_size.y / 2});
+
+    reset_position();
   }
 
   auto ScrollCamera::_physics_process(real_t delta) -> void
@@ -46,6 +47,12 @@ namespace moon_buggy
   auto ScrollCamera::get_kill_zone() -> godot::Area2D *
   {
     return kill_zone;
+  }
+
+  auto ScrollCamera::reset_position() -> void
+  {
+    auto viewport_size = get_viewport()->get_size();
+    set_position({viewport_size.x / 2, viewport_size.y / 2});
   }
 
 }  // namespace moon_buggy

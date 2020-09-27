@@ -19,6 +19,7 @@ namespace moon_buggy
   {
     godot::register_method("_ready", &Game::_ready);
     godot::register_method("buggy_crashed", &Game::buggy_crashed);
+    godot::register_method("start_game", &Game::start_game);
 
     godot::register_property("buggy_scene", &Game::buggy_scene, godot::Ref<godot::PackedScene>{});
     godot::register_property("explosion_scene", &Game::explosion_scene, godot::Ref<godot::PackedScene>{});
@@ -37,18 +38,10 @@ namespace moon_buggy
     map->level(level);
 
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
-    scroll_camera->make_current();
-    scroll_camera->set("should_scroll", true);
+    kill_zone = scroll_camera->get_kill_zone();
 
-    auto buggy = cast_to<Buggy>(buggy_scene->instance());
-    auto ground = map->get_typed_node<godot::TileMap>("Ground");
-    auto viewport_size = get_viewport()->get_size();
-    buggy->set_position({.0f, viewport_size.y / 2 - ground->get_cell_size().y});
-    buggy->connect("crashed", this, "buggy_crashed");
-    scroll_camera->add_child(buggy);
-
-    auto kill_zone = scroll_camera->get_kill_zone();
-    kill_zone->connect("body_entered", buggy, "kill_zone_entered");
+    main_menu = get_typed_node<MainMenu>("MainMenu");
+    main_menu->show();
   }
 
   auto Game::buggy_crashed(Buggy * buggy) -> void
@@ -61,10 +54,27 @@ namespace moon_buggy
     scroll_camera->add_child(explosion);
     explosion->set_position(explosion_position);
     explosion->connect("animation_finished", explosion, "queue_free");
+    explosion->connect("animation_finished", main_menu, "show");
     explosion->call_deferred("play");
 
     buggy->queue_free();
-    scroll_camera->clear_current();
+  }
+
+  auto Game::start_game() -> void
+  {
+    auto buggy = cast_to<Buggy>(buggy_scene->instance());
+    auto ground = map->get_typed_node<godot::TileMap>("Ground");
+    auto viewport_size = get_viewport()->get_size();
+    buggy->set_position({.0f, viewport_size.y / 2 - ground->get_cell_size().y});
+    buggy->connect("crashed", this, "buggy_crashed");
+    scroll_camera->add_child(buggy);
+
+    kill_zone->connect("body_entered", buggy, "kill_zone_entered");
+
+    scroll_camera->reset_position();
+    scroll_camera->set("should_scroll", true);
+
+    main_menu->call_deferred("hide");
   }
 
 }  // namespace moon_buggy

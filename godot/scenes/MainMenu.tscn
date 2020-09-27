@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/fonts/monogram.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://bin/scripts_MainMenu.gdns" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 72
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+extra_spacing_top = -7
+font_data = ExtResource( 1 )
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Title" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -28.0
+custom_fonts/font = SubResource( 1 )
+text = "Moon Buggy"
+align = 1
+autowrap = true
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -200.0
+margin_right = 80.0
+margin_bottom = -150.0
+custom_fonts/font = SubResource( 2 )
+shortcut_in_tooltip = false
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="StartButton" to="." method="start_button_clicked"]

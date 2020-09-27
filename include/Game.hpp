@@ -3,10 +3,12 @@
 
 #include "Buggy.hpp"
 #include "LevelGenerator.hpp"
+#include "MainMenu.hpp"
 #include "Map.hpp"
 #include "ScrollCamera.hpp"
 #include "TypedNodeCastMixin.hpp"
 
+#include <Area2D.hpp>
 #include <Godot.hpp>
 #include <Node.hpp>
 #include <PackedScene.hpp>
@@ -28,10 +30,13 @@ namespace moon_buggy
     GODOT_CLASS(Game, godot::Node)
 
     auto buggy_crashed(Buggy * buggy) -> void;
+    auto start_game() -> void;
 
     Map * map;
     LevelGenerator * level_generator;
     ScrollCamera * scroll_camera;
+    godot::Area2D * kill_zone;
+    MainMenu * main_menu;
     godot::Ref<godot::PackedScene> buggy_scene;
     godot::Ref<godot::PackedScene> explosion_scene;
   };

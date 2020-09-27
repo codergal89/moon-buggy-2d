@@ -12,3 +12,4 @@ All assets used in this project are licensed as follows:
 | 2D Car Sprite | [chasersgaming](https://opengameart.org/users/chasersgaming) | [CC0-1.0](https://spdx.org/licenses/CC0-1.0.html)     |
 | Background    | [Graul98](https://opengameart.org/users/graul98)             | [CC0-1.0](https://spdx.org/licenses/CC0-1.0.html)     |
 | Explosion     | [Sogomn](https://opengameart.org/users/sogomn)               | [CC0-1.0](https://spdx.org/licenses/CC0-1.0.html)     |
+| monogram Font | [datagoblin](https://datagoblin.itch.io/)                    | [CC0-1.0](https://spdx.org/licenses/CC0-1.0.html)     |
