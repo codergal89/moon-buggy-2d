@@ -16,7 +16,6 @@ script = ExtResource( 8 )
 
 [node name="LevelGenerator" type="Node" parent="."]
 script = ExtResource( 7 )
-start_area_length = 10
 
 [node name="Map" parent="." instance=ExtResource( 1 )]
 
