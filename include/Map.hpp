@@ -10,6 +10,8 @@
 #include <TileMap.hpp>
 #include <TileSet.hpp>
 
+#include <cstdint>
+
 namespace moon_buggy
 {
 
@@ -31,6 +33,9 @@ namespace moon_buggy
     GODOT_CLASS(Map, godot::Node2D);
 
     godot::Ref<godot::TileSet> tile_set{};
+
+    std::int64_t x_tiles_per_screen{};
+    std::int64_t y_tiles_per_screen{};
 
     godot::TileMap * ground{};
     godot::TileMap * holes{};
