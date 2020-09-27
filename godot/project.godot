@@ -27,9 +27,11 @@ window/stretch/aspect="keep"
 
 [layer_names]
 
-2d_physics/layer_1="Ground"
-2d_physics/layer_2="Holes"
-2d_physics/layer_3="Player"
+2d_physics/layer_1="Boundary"
+2d_physics/layer_2="Kill Zone"
+2d_physics/layer_3="Meteorites"
+2d_physics/layer_4="Ground"
+2d_physics/layer_5="Player"
 
 [rendering]
 
