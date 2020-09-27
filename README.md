@@ -10,4 +10,5 @@ All assets used in this project are licensed as follows:
 |---------------|--------------------------------------------------------------|-------------------------------------------------------|
 | Ground Tiles  | [Sharm](https://opengameart.org/users/sharm)                 | [CC-BY-3.0](https://spdx.org/licenses/CC-BY-3.0.html) |
 | 2D Car Sprite | [chasersgaming](https://opengameart.org/users/chasersgaming) | [CC0-1.0](https://spdx.org/licenses/CC0-1.0.html)     |
-https://opengameart.org/users/graul98
+| Background    | [Graul98](https://opengameart.org/users/graul98)             | [CC0-1.0](https://spdx.org/licenses/CC0-1.0.html)     |
+| Explosion     | [Sogomn](https://opengameart.org/users/sogomn)               | [CC0-1.0](https://spdx.org/licenses/CC0-1.0.html)     |
