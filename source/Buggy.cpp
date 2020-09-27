@@ -63,6 +63,11 @@ namespace moon_buggy
     {
       decelerate(2.f);
     }
+
+    if (input->is_action_pressed("player_jump") && is_on_floor())
+    {
+      velocity.y = -98.f;
+    }
   }
 
   auto Buggy::accelerate(real_t difference) -> void
