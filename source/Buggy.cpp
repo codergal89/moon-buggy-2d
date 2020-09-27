@@ -51,11 +51,11 @@ namespace moon_buggy
   {
     auto input = godot::Input::get_singleton();
 
-    if (input->is_action_pressed("ui_left") && is_on_floor())
+    if (input->is_action_pressed("player_speed_up") && is_on_floor())
     {
       accelerate(10.f);
     }
-    else if (input->is_action_pressed("ui_right") && is_on_floor())
+    else if (input->is_action_pressed("player_slow_down") && is_on_floor())
     {
       accelerate(-10.f);
     }
