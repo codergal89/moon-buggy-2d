@@ -4,16 +4,14 @@
 [ext_resource path="res://bin/scripts_Buggy.gdns" type="Script" id=2]
 
 [node name="Buggy" type="KinematicBody2D"]
-position = Vector2( 0, -18 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -18 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -18 )
 scale = Vector2( 0.25, 0.25 )
 polygon = PoolVector2Array( -128, 46, -128, 72, 116, 72, 116, 16, -128, 16 )
-
-[node name="Camera" type="Camera2D" parent="."]
-drag_margin_h_enabled = true

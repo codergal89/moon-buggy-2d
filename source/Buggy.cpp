@@ -29,12 +29,6 @@ namespace moon_buggy
 
   auto Buggy::_ready() -> void
   {
-    viewport = get_viewport();
-
-    camera = get_typed_node<godot::Camera2D>("Camera");
-    camera->set("limit_top", 0);
-    camera->set("limit_bottom", viewport->get_size().y);
-    camera->make_current();
   }
 
   auto Buggy::_physics_process(float delta) -> void

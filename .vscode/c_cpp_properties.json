@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "Default",
+            "cppStandard": "c++17",
+            "compileCommands": "build/compile_commands.json",
+            "intelliSenseMode": "gcc-x64",
+            "cStandard": "c11"
+        }
+    ],
+    "version": 4
+}

@@ -3,12 +3,10 @@
 
 #include "TypedNodeCastMixin.hpp"
 
-#include <Camera2D.hpp>
 #include <Defs.hpp>
 #include <Godot.hpp>
 #include <KinematicBody2D.hpp>
 #include <Vector2.hpp>
-#include <Viewport.hpp>
 
 namespace moon_buggy
 {
@@ -37,9 +35,6 @@ namespace moon_buggy
 
     godot::Vector2 velocity{};
     godot::Vector2 gravity{};
-
-    godot::Camera2D * camera;
-    godot::Viewport * viewport;
   };
 
 }  // namespace moon_buggy

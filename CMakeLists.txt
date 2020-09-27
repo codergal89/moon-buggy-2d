@@ -34,6 +34,7 @@ add_library("scripts" SHARED
   "source/scripts.cpp"
   "source/Buggy.cpp"
   "source/Map.cpp"
+  "source/ScrollCamera.cpp"
 )
 
 target_include_directories("scripts" PRIVATE
@@ -55,3 +56,4 @@ set_target_properties("scripts" PROPERTIES
 godot_register_library("scripts")
 godot_register_class("scripts" "Buggy")
 godot_register_class("scripts" "Map")
+godot_register_class("scripts" "ScrollCamera")

@@ -1,5 +1,6 @@
 #include "Buggy.hpp"
 #include "Map.hpp"
+#include "ScrollCamera.hpp"
 
 #include <GDNative.hpp>
 
@@ -20,5 +21,6 @@ extern "C"
     godot::Godot::nativescript_init(handle);
     godot::register_class<moon_buggy::Buggy>();
     godot::register_class<moon_buggy::Map>();
+    godot::register_class<moon_buggy::ScrollCamera>();
   }
 }
