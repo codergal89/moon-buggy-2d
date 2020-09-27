@@ -1,5 +1,8 @@
 #include "ScrollCamera.hpp"
 
+#include "Buggy.hpp"
+
+#include <Area2D.hpp>
 #include <Defs.hpp>
 #include <Godot.hpp>
 #include <Vector2.hpp>
@@ -22,9 +25,13 @@ namespace moon_buggy
 
   auto ScrollCamera::_ready() -> void
   {
-    auto viewport = get_viewport();
+    auto viewport_size = get_viewport()->get_size();
     set("limit_top", 0);
-    set("limit_bottom", viewport->get_size().y);
+    set("limit_bottom", viewport_size.y);
+    set_position({viewport_size.x / 2, viewport_size.y / 2});
+
+    auto kill_zone = get_typed_node<godot::Area2D>("KillZone");
+    kill_zone->set_position({.0f, viewport_size.y / 2});
   }
 
   auto ScrollCamera::_physics_process(real_t delta) -> void

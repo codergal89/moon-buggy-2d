@@ -7,6 +7,8 @@
 
 #include <Godot.hpp>
 #include <Node.hpp>
+#include <PackedScene.hpp>
+#include <Ref.hpp>
 
 namespace moon_buggy
 {
@@ -27,6 +29,7 @@ namespace moon_buggy
 
     Map * map;
     LevelGenerator * level_generator;
+    godot::Ref<godot::PackedScene> buggy_scene;
   };
 
 }  // namespace moon_buggy
