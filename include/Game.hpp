@@ -21,7 +21,9 @@ namespace moon_buggy
     auto _ready() -> void;
 
   private:
-    GODOT_CLASS(Game, godot::Node2D)
+    GODOT_CLASS(Game, godot::Node)
+
+    auto kill_zone_entered(godot::Node * node) -> void;
 
     Map * map;
     LevelGenerator * level_generator;
