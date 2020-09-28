@@ -8,27 +8,34 @@ project("moon-buggy-2d"
 
 include("FetchContent")
 
+### Godot
+
 FetchContent_Declare("Godot" GIT_REPOSITORY https://github.com/fmorgner/cmake-godot-cpp.git)
 FetchContent_MakeAvailable("Godot")
-
-list(APPEND CMAKE_MODULE_PATH
-  "${PROJECT_SOURCE_DIR}/cmake/Modules"
-  "${PROJECT_BINARY_DIR}/_deps/godot-src/Modules"
-)
-
-include("Conan")
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_BINARY_DIR}/_deps/godot-src/Modules")
 include("Godot")
 
-conan_check(REQUIRED)
+### Conan
+
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+   file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/master/conan.cmake" "${CMAKE_BINARY_DIR}/conan.cmake" TLS_VERIFY ON)
+endif()
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_BINARY_DIR}")
+include("conan")
+
 conan_add_remote(NAME "arknet" URL "https://conan.arknet.ch/artifactory/api/conan/public")
-conan_cmake_run(CONANFILE "conanfile.txt"
-  OUTPUT_QUIET
+conan_cmake_run(REQUIRES
+  "godot-cpp/3.2"
   BASIC_SETUP
   CMAKE_TARGETS
   BUILD "missing"
   NO_OUTPUT_DIRS
   SETTINGS "os=${CMAKE_SYSTEM_NAME}"
+  OUTPUT_QUIET
 )
+
+### Scripts
 
 add_library("scripts" SHARED
   "source/scripts.cpp"
