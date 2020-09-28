@@ -38,6 +38,8 @@ namespace moon_buggy
     auto x_tiles_per_screen = static_cast<std::int64_t>((width + cell_size.x - 1) / cell_size.x);
     auto y_tiles_per_screen = static_cast<std::int64_t>((height + cell_size.y - 1) / cell_size.y);
 
+    end_tile = -(level.tiles.size() - x_tiles_per_screen);
+
     auto tile_ids = std::vector<std::int64_t>();
     tile_ids.reserve(level.tiles.size());
     transform(cbegin(level.tiles), cend(level.tiles), back_inserter(tile_ids), [this](auto tile) {
@@ -57,6 +59,11 @@ namespace moon_buggy
     for_each(cbegin(tile_ids), cend(tile_ids), [x = 0, this, bottom, right](auto tile_id) mutable {
       ground->set_cell(right - x++, bottom, tile_id);
     });
+  }
+
+  auto Map::world_end() -> std::int64_t
+  {
+    return static_cast<std::int64_t>(ground->map_to_world({static_cast<real_t>(end_tile), 0.f}).x);
   }
 
 }  // namespace moon_buggy

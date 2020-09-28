@@ -30,6 +30,7 @@ namespace moon_buggy
     GODOT_CLASS(Game, godot::Node)
 
     auto buggy_crashed(Buggy * buggy) -> void;
+    auto goal_reached() -> void;
     auto start_game() -> void;
 
     std::uint64_t window_width{};

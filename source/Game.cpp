@@ -19,6 +19,7 @@ namespace moon_buggy
   {
     godot::register_method("_ready", &Game::_ready);
     godot::register_method("buggy_crashed", &Game::buggy_crashed);
+    godot::register_method("goal_reached", &Game::goal_reached);
     godot::register_method("start_game", &Game::start_game);
 
     godot::register_property("buggy_scene", &Game::buggy_scene, godot::Ref<godot::PackedScene>{});
@@ -60,6 +61,13 @@ namespace moon_buggy
     buggy->queue_free();
   }
 
+  auto Game::goal_reached() -> void
+  {
+    auto buggy = scroll_camera->get_typed_node<Buggy>("Buggy");
+    buggy->queue_free();
+    main_menu->call_deferred("show");
+  }
+
   auto Game::start_game() -> void
   {
     main_menu->hide();
@@ -67,7 +75,10 @@ namespace moon_buggy
     auto level = level_generator->generate(0);
     map->level(level, window_width, window_height);
 
+    godot::Godot::print("end of the world is at: {0}", map->world_end());
+
     scroll_camera->set_position(godot::Vector2{0.f, 0.f});
+    scroll_camera->set("limit_left", map->world_end());
 
     auto buggy = cast_to<Buggy>(buggy_scene->instance());
     auto ground = map->get_typed_node<godot::TileMap>("Ground");
