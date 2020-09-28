@@ -8,9 +8,11 @@
 #include <Godot.hpp>
 #include <KinematicBody2D.hpp>
 #include <PackedScene.hpp>
+#include <Particles2D.hpp>
 #include <ProjectSettings.hpp>
 #include <Ref.hpp>
 #include <TileMap.hpp>
+#include <Timer.hpp>
 
 namespace moon_buggy
 {
@@ -24,6 +26,7 @@ namespace moon_buggy
 
     godot::register_property("buggy_scene", &Game::buggy_scene, godot::Ref<godot::PackedScene>{});
     godot::register_property("explosion_scene", &Game::explosion_scene, godot::Ref<godot::PackedScene>{});
+    godot::register_property("fireworks_scene", &Game::fireworks_scene, godot::Ref<godot::PackedScene>{});
   }
 
   auto Game::_init() -> void
@@ -35,14 +38,16 @@ namespace moon_buggy
 
   auto Game::_ready() -> void
   {
-    map = get_typed_node<Map>("Map");
-    level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
+    restart_timer = get_typed_node<godot::Timer>("RestartTimer");
 
-    scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
-    kill_zone = scroll_camera->get_kill_zone();
+    level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
+    map = get_typed_node<Map>("Map");
 
     main_menu = get_typed_node<MainMenu>("MainMenu");
     main_menu->show();
+
+    scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
+    kill_zone = scroll_camera->get_kill_zone();
   }
 
   auto Game::buggy_crashed(Buggy * buggy) -> void
@@ -64,8 +69,16 @@ namespace moon_buggy
   auto Game::goal_reached() -> void
   {
     auto buggy = scroll_camera->get_typed_node<Buggy>("Buggy");
+    auto fireworks = cast_to<godot::Particles2D>(fireworks_scene->instance());
+
+    fireworks->set_deferred("emitting", true);
+    fireworks->set_position(buggy->get_position());
+    restart_timer->connect("timeout", main_menu, "show");
+    restart_timer->start();
+
+    scroll_camera->add_child(fireworks);
+
     buggy->queue_free();
-    main_menu->call_deferred("show");
   }
 
   auto Game::start_game() -> void

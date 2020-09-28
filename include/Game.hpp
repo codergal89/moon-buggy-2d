@@ -13,6 +13,7 @@
 #include <Node.hpp>
 #include <PackedScene.hpp>
 #include <Ref.hpp>
+#include <Timer.hpp>
 
 namespace moon_buggy
 {
@@ -36,14 +37,16 @@ namespace moon_buggy
     std::uint64_t window_width{};
     std::uint64_t window_height{};
 
-    Map * map;
+    godot::Timer * restart_timer;
     LevelGenerator * level_generator;
+    Map * map;
+    MainMenu * main_menu;
     ScrollCamera * scroll_camera;
     godot::Area2D * kill_zone;
-    MainMenu * main_menu;
 
-    godot::Ref<godot::PackedScene> buggy_scene;
-    godot::Ref<godot::PackedScene> explosion_scene;
+    godot::Ref<godot::PackedScene> buggy_scene{};
+    godot::Ref<godot::PackedScene> explosion_scene{};
+    godot::Ref<godot::PackedScene> fireworks_scene{};
   };
 
 }  // namespace moon_buggy
