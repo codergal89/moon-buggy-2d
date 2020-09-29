@@ -47,6 +47,7 @@ namespace moon_buggy
     main_menu->show();
 
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
+    scroll_camera->set("should_scroll", true);
     kill_zone = scroll_camera->get_kill_zone();
   }
 
