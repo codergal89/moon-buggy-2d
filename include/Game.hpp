@@ -2,6 +2,7 @@
 #define MOON_BUGGY_2D_GAME_HPP
 
 #include "Buggy.hpp"
+#include "Level.hpp"
 #include "LevelGenerator.hpp"
 #include "MainMenu.hpp"
 #include "Map.hpp"
@@ -14,6 +15,10 @@
 #include <PackedScene.hpp>
 #include <Ref.hpp>
 #include <Timer.hpp>
+
+#include <cstddef>
+#include <cstdint>
+#include <vector>
 
 namespace moon_buggy
 {
@@ -36,6 +41,8 @@ namespace moon_buggy
 
     std::uint64_t window_width{};
     std::uint64_t window_height{};
+    std::vector<LevelDescriptor> levels{};
+    std::size_t current_level{};
 
     godot::Timer * restart_timer;
     LevelGenerator * level_generator;

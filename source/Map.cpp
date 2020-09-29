@@ -38,21 +38,28 @@ namespace moon_buggy
     auto x_tiles_per_screen = static_cast<std::int64_t>((width + cell_size.x - 1) / cell_size.x);
     auto y_tiles_per_screen = static_cast<std::int64_t>((height + cell_size.y - 1) / cell_size.y);
 
-    end_tile = -(level.tiles.size() - x_tiles_per_screen);
-
+    end_tile = -(level.tiles.size() + x_tiles_per_screen);
     auto tile_ids = std::vector<std::int64_t>();
-    tile_ids.reserve(level.tiles.size());
-    transform(cbegin(level.tiles), cend(level.tiles), back_inserter(tile_ids), [this](auto tile) {
+    tile_ids.reserve(level.tiles.size() + 2 * x_tiles_per_screen);
+
+    auto ground_tile = tile_set->find_tile_by_name(ground_tile_name);
+    auto hole_tile = tile_set->find_tile_by_name(hole_tile_name);
+
+    generate_n(back_inserter(tile_ids), x_tiles_per_screen, [&] { return ground_tile; });
+
+    transform(cbegin(level.tiles), cend(level.tiles), back_inserter(tile_ids), [&](auto tile) {
       switch (tile)
       {
       case tile_kind::ground:
-        return tile_set->find_tile_by_name(ground_tile_name);
+        return ground_tile;
       case tile_kind::hole:
-        return tile_set->find_tile_by_name(hole_tile_name);
+        return hole_tile;
       default:
         return static_cast<std::int64_t>(-1);
       }
     });
+
+    generate_n(back_inserter(tile_ids), x_tiles_per_screen, [&] { return ground_tile; });
 
     auto right = x_tiles_per_screen - 1;
     auto bottom = y_tiles_per_screen - 1;

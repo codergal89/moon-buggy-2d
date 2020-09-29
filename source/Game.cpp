@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 #include "Buggy.hpp"
+#include "Level.hpp"
 #include "ScrollCamera.hpp"
 
 #include <AnimatedSprite.hpp>
@@ -34,6 +35,7 @@ namespace moon_buggy
     auto settings = godot::ProjectSettings::get_singleton();
     window_height = settings->get_setting("display/window/size/height");
     window_width = settings->get_setting("display/window/size/width");
+    levels = load_level_descriptors("res://config/levels.json");
   }
 
   auto Game::_ready() -> void
@@ -86,10 +88,8 @@ namespace moon_buggy
   {
     main_menu->hide();
 
-    auto level = level_generator->generate(0);
+    auto level = level_generator->generate(current_level < levels.size() - 1 ? levels[current_level++] : levels.back());
     map->level(level, window_width, window_height);
-
-    godot::Godot::print("end of the world is at: {0}", map->world_end());
 
     scroll_camera->set_position(godot::Vector2{0.f, 0.f});
     scroll_camera->set("limit_left", map->world_end());
