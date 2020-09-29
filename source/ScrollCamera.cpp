@@ -1,7 +1,5 @@
 #include "ScrollCamera.hpp"
 
-#include "Buggy.hpp"
-
 #include <Area2D.hpp>
 #include <Defs.hpp>
 #include <Dictionary.hpp>
