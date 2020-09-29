@@ -55,6 +55,13 @@ target_link_libraries("scripts" PRIVATE
   "CONAN_PKG::godot-cpp"
 )
 
+target_compile_options("scripts" PRIVATE
+  $<$<CXX_COMPILER_ID:GNU,Clang>:-Wall>
+  $<$<CXX_COMPILER_ID:GNU,Clang>:-Wextra>
+  $<$<CXX_COMPILER_ID:GNU,Clang>:-Werror>
+  $<$<CXX_COMPILER_ID:GNU,Clang>:-pedantic-errors>
+)
+
 set_target_properties("scripts" PROPERTIES
   CXX_STANDARD "20"
   CXX_STANDARD_REQUIRED YES
