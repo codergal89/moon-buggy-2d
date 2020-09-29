@@ -10,6 +10,7 @@
 #include <Vector2.hpp>
 
 #include <algorithm>
+#include <cmath>
 #include <functional>
 #include <iterator>
 
@@ -34,10 +35,6 @@ namespace moon_buggy
   {
     gravity = godot::ProjectSettings::get_singleton()->get_setting("physics/2d/default_gravity_vector");
     gravity *= static_cast<real_t>(godot::ProjectSettings::get_singleton()->get_setting("physics/2d/default_gravity"));
-
-    floor_actions["player_speed_up"] = std::bind(&Buggy::accelerate, this);
-    floor_actions["player_slow_down"] = std::bind(&Buggy::decelerate, this);
-    floor_actions["player_jump"] = std::bind(&Buggy::jump, this);
   };
 
   auto Buggy::_ready() -> void
@@ -47,62 +44,50 @@ namespace moon_buggy
 
   auto Buggy::_physics_process(float delta) -> void
   {
-    handle_gravity(delta);
-    handle_drag(delta);
-
-    if (can_drive)
-    {
-      handle_input();
-    }
-
-    move_and_slide(velocity, godot::Vector2{0.f, -1.f});
+    apply_gravity(delta);
+    handle_input(delta);
   }
 
-  auto Buggy::handle_gravity(real_t delta) -> void
+  auto Buggy::apply_gravity(real_t delta) -> void
   {
-    velocity += gravity * delta;
-    if (is_on_floor())
-    {
-      velocity.y = 0.f;
-    }
+    velocity.y += gravity.y * delta;
+    velocity = move_and_slide(velocity, godot::Vector2{0.f, -1.f});
   }
 
-  auto Buggy::handle_drag(real_t delta) -> void
+  auto Buggy::handle_input(real_t delta) -> void
   {
+    auto input{godot::Input::get_singleton()};
+    auto direction{0};
+
+    direction += static_cast<int>(input->is_action_pressed("player_slow_down"));
+    direction -= static_cast<int>(input->is_action_pressed("player_speed_up"));
+
     if (is_on_floor())
     {
-      if (velocity.x < 0.f)
+      if (direction)
       {
-        velocity.x = std::clamp(velocity.x + drag * delta, -speed_limit, 0.f);
+        accelerate(direction);
       }
-      else if (velocity.x > 0.f)
+      else
       {
-        velocity.x = std::clamp(velocity.x - drag * delta, 0.f, speed_limit);
+        apply_drag();
+      }
+
+      if (input->is_action_pressed("player_jump"))
+      {
+        jump();
       }
     }
   }
 
-  auto Buggy::handle_input() -> void
+  auto Buggy::accelerate(int direction) -> void
   {
-    if (is_on_floor())
-    {
-      for_each(cbegin(floor_actions), cend(floor_actions), [input = godot::Input::get_singleton()](auto action) {
-        if (input->is_action_pressed(action.first))
-        {
-          invoke(action.second);
-        }
-      });
-    }
+    velocity.x = std::lerp(velocity.x, direction * speed_limit, acceleration);
   }
 
-  auto Buggy::accelerate() -> void
+  auto Buggy::apply_drag() -> void
   {
-    velocity.x = std::clamp(velocity.x - acceleration, -speed_limit, speed_limit);
-  }
-
-  auto Buggy::decelerate() -> void
-  {
-    velocity.x = std::clamp(velocity.x + acceleration, -speed_limit, speed_limit);
+    velocity.x = std::lerp(velocity.x, 0.f, drag);
   }
 
   auto Buggy::jump() -> void

@@ -8,9 +8,6 @@
 #include <KinematicBody2D.hpp>
 #include <Vector2.hpp>
 
-#include <functional>
-#include <map>
-
 namespace moon_buggy
 {
 
@@ -18,8 +15,8 @@ namespace moon_buggy
       : godot::KinematicBody2D
       , TypedNodeCastMixin<Buggy>
   {
-    auto static constexpr default_acceleration{10.f};
-    auto static constexpr default_drag{100.f};
+    auto static constexpr default_acceleration{.25f};
+    auto static constexpr default_drag{.1f};
     auto static constexpr default_jump_velocity{98.f};
     auto static constexpr default_speed_limit{100.f};
 
@@ -32,20 +29,15 @@ namespace moon_buggy
   private:
     GODOT_CLASS(Buggy, godot::KinematicBody2D)
 
-    using input_action = std::function<void()>;
+    auto apply_gravity(real_t delta) -> void;
+    auto handle_input(real_t delta) -> void;
 
-    auto handle_gravity(real_t delta) -> void;
-    auto handle_drag(real_t delta) -> void;
-    auto handle_input() -> void;
-
-    auto accelerate() -> void;
-    auto decelerate() -> void;
+    auto accelerate(int direction) -> void;
+    auto apply_drag() -> void;
     auto jump() -> void;
     auto stop() -> void;
 
     auto kill_zone_entered(godot::Node * node) -> void;
-
-    std::map<char const *, input_action> floor_actions{};
 
     real_t acceleration{default_acceleration};
     real_t drag{default_drag};
