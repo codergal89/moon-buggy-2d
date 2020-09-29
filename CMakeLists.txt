@@ -56,7 +56,7 @@ target_link_libraries("scripts" PRIVATE
 )
 
 set_target_properties("scripts" PROPERTIES
-  CXX_STANDARD "17"
+  CXX_STANDARD "20"
   CXX_STANDARD_REQUIRED YES
   INTERPROCEDURAL_OPTIMIZATION ON
   LINK_FLAGS_MINSIZEREL "-s"
