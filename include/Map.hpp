@@ -31,7 +31,7 @@ namespace moon_buggy
     auto world_end() -> std::int64_t;
 
   private:
-    GODOT_CLASS(Map, godot::Node2D);
+    GODOT_CLASS(Map, godot::Node2D)
 
     std::int64_t end_tile{};
 

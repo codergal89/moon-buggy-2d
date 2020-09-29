@@ -35,7 +35,7 @@ namespace moon_buggy
   {
     gravity = godot::ProjectSettings::get_singleton()->get_setting("physics/2d/default_gravity_vector");
     gravity *= static_cast<real_t>(godot::ProjectSettings::get_singleton()->get_setting("physics/2d/default_gravity"));
-  };
+  }
 
   auto Buggy::_ready() -> void
   {
@@ -45,7 +45,7 @@ namespace moon_buggy
   auto Buggy::_physics_process(float delta) -> void
   {
     apply_gravity(delta);
-    handle_input(delta);
+    handle_input();
   }
 
   auto Buggy::apply_gravity(real_t delta) -> void
@@ -54,7 +54,7 @@ namespace moon_buggy
     velocity = move_and_slide(velocity, godot::Vector2{0.f, -1.f});
   }
 
-  auto Buggy::handle_input(real_t delta) -> void
+  auto Buggy::handle_input() -> void
   {
     auto input{godot::Input::get_singleton()};
     auto direction{0};

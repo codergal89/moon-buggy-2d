@@ -30,7 +30,7 @@ namespace moon_buggy
     GODOT_CLASS(Buggy, godot::KinematicBody2D)
 
     auto apply_gravity(real_t delta) -> void;
-    auto handle_input(real_t delta) -> void;
+    auto handle_input() -> void;
 
     auto accelerate(int direction) -> void;
     auto apply_drag() -> void;
