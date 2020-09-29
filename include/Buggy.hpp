@@ -27,7 +27,7 @@ namespace moon_buggy
     auto _physics_process(float delta) -> void;
 
   private:
-    GODOT_CLASS(Buggy, godot::KinematicBody2D)
+    GODOT_CLASS(Buggy, godot::KinematicBody2D)  // NOLINT
 
     auto apply_gravity(real_t delta) -> void;
     auto handle_input() -> void;

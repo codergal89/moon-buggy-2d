@@ -82,7 +82,7 @@ namespace moon_buggy
 
   auto Buggy::accelerate(int direction) -> void
   {
-    velocity.x = std::lerp(velocity.x, direction * speed_limit, acceleration);
+    velocity.x = std::lerp(velocity.x, static_cast<real_t>(direction) * speed_limit, acceleration);
   }
 
   auto Buggy::apply_drag() -> void

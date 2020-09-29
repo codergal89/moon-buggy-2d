@@ -11,7 +11,7 @@ template<typename CRTP>
 struct TypedNodeCastMixin
 {
   template<typename TargetType>
-  auto get_typed_node(godot::NodePath path) const -> TargetType *
+  [[nodiscard]] auto get_typed_node(godot::NodePath path) const -> TargetType *
   {
     static_assert(std::is_base_of_v<godot::Object, CRTP>);
 

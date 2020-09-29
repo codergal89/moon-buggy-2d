@@ -26,7 +26,7 @@ namespace moon_buggy
     auto get_kill_zone() -> godot::Area2D *;
 
   private:
-    GODOT_CLASS(ScrollCamera, godot::Camera2D)
+    GODOT_CLASS(ScrollCamera, godot::Camera2D)  // NOLINT
 
     real_t speed{default_speed};
     bool should_scroll{};

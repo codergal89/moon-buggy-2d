@@ -24,7 +24,7 @@ namespace moon_buggy
     auto hide() -> void;
 
   private:
-    GODOT_CLASS(MainMenu, godot::CanvasLayer)
+    GODOT_CLASS(MainMenu, godot::CanvasLayer)  // NOLINT
 
     auto start_button_clicked() -> void;
 

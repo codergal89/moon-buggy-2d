@@ -27,7 +27,7 @@ namespace moon_buggy
     auto generate(unsigned difficulty) -> Level;
 
   private:
-    GODOT_CLASS(LevelGenerator, godot::Node)
+    GODOT_CLASS(LevelGenerator, godot::Node)  // NOLINT
 
     using RandomNumberGeneratorPtr = std::unique_ptr<godot::RandomNumberGenerator, ReferenceDeleter>;
 

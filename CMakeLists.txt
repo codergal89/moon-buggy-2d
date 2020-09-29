@@ -35,6 +35,13 @@ conan_cmake_run(REQUIRES
   OUTPUT_QUIET
 )
 
+### Clang-tidy
+
+find_program(CLANG_TIDY_EXE
+  NAMES "clang-tidy"
+  DOC "Path to clang-tidy"
+)
+
 ### Scripts
 
 add_library("scripts" SHARED
@@ -68,6 +75,7 @@ set_target_properties("scripts" PROPERTIES
   INTERPROCEDURAL_OPTIMIZATION ON
   LINK_FLAGS_MINSIZEREL "-s"
   GODOT_BINARY_INSTALL_DIR "godot/bin"
+  CXX_CLANG_TIDY "${CLANG_TIDY_EXE}"
 )
 
 godot_register_library("scripts")
