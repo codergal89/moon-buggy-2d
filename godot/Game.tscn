@@ -29,7 +29,9 @@ script = ExtResource( 7 )
 
 [node name="Map" parent="." instance=ExtResource( 1 )]
 
-[node name="MainMenu" parent="." instance=ExtResource( 11 )]
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="GUI" instance=ExtResource( 11 )]
 
 [node name="ScrollCamera" parent="." instance=ExtResource( 2 )]
 anchor_mode = 0
@@ -39,5 +41,5 @@ current = true
 
 [node name="KillZone" parent="ScrollCamera" instance=ExtResource( 9 )]
 position = Vector2( 360, 480 )
-[connection signal="start_game" from="MainMenu" to="." method="start_game"]
+[connection signal="start_game" from="GUI/MainMenu" to="." method="start_game"]
 [connection signal="reached_end" from="ScrollCamera" to="." method="goal_reached"]

@@ -4,7 +4,7 @@
 #include "TypedNodeCastMixin.hpp"
 
 #include <Button.hpp>
-#include <CanvasLayer.hpp>
+#include <Control.hpp>
 #include <Godot.hpp>
 #include <Label.hpp>
 
@@ -12,7 +12,7 @@ namespace moon_buggy
 {
 
   struct MainMenu
-      : godot::CanvasLayer
+      : godot::Control
       , TypedNodeCastMixin<MainMenu>
   {
     auto static _register_methods() -> void;
@@ -20,11 +20,8 @@ namespace moon_buggy
     auto _init() -> void;
     auto _ready() -> void;
 
-    auto show() -> void;
-    auto hide() -> void;
-
   private:
-    GODOT_CLASS(MainMenu, godot::CanvasLayer)  // NOLINT
+    GODOT_CLASS(MainMenu, godot::Control)  // NOLINT
 
     auto start_button_clicked() -> void;
 

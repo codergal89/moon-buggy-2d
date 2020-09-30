@@ -45,7 +45,7 @@ namespace moon_buggy
     level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
     map = get_typed_node<Map>("Map");
 
-    main_menu = get_typed_node<MainMenu>("MainMenu");
+    main_menu = get_typed_node<MainMenu>("GUI/MainMenu");
     main_menu->show();
 
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
