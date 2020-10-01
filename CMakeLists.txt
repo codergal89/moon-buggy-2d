@@ -76,8 +76,13 @@ set_target_properties("scripts" PROPERTIES
   INTERPROCEDURAL_OPTIMIZATION ON
   LINK_FLAGS_MINSIZEREL "-s"
   GODOT_BINARY_INSTALL_DIR "godot/bin"
-  CXX_CLANG_TIDY "${CLANG_TIDY_EXE}"
 )
+
+if(NOT CMAKE_CROSSCOMPILING)
+  set_target_properties("scripts" PROPERTIES
+    CXX_CLANG_TIDY "${CLANG_TIDY_EXE}"
+  )
+endif()
 
 godot_register_library("scripts")
 godot_register_class("scripts" "Buggy")
