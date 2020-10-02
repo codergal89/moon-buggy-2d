@@ -1,0 +1,29 @@
+---
+name: CI
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install CMake
+        uses: lukka/get-cmake@latest
+      - name: Install Conan
+        run: |
+          python -m pip install --upgrade pip
+          pip install conan
+      - name: Install Clang Tidy
+        run: |
+          sudo apt-get install clang-tidy-9
+          sudo update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-9 100
+      - name: Prepare Build
+        run: conan install . -if build/linux -b missing
+      - name: Build
+        run: conan build . -bf build/linux
+...

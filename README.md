@@ -1,3 +1,5 @@
+![CI](https://github.com/codergal89/moon-buggy-2d/workflows/CI/badge.svg)
+
 # Moon Buggy 2D
 
 Moon Buggy 2D is a 2D reimplementation of the classic [moon buggy](https://www.seehuhn.de/pages/moon-buggy) terminal game, using the [Godot](https://godotengine.org) game engine.
