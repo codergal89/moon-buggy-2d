@@ -2,12 +2,12 @@
 #define MOON_BUGGY_2D_LEVEL_GENERATOR_HPP
 
 #include "Level.hpp"
-#include "ReferenceDeleter.hpp"
 #include "TypedNodeCastMixin.hpp"
 
 #include <Godot.hpp>
 #include <Node.hpp>
 #include <RandomNumberGenerator.hpp>
+#include <Ref.hpp>
 
 #include <memory>
 
@@ -34,11 +34,9 @@ namespace moon_buggy
   private:
     GODOT_CLASS(LevelGenerator, godot::Node)  // NOLINT
 
-    using RandomNumberGeneratorPtr = std::unique_ptr<godot::RandomNumberGenerator, ReferenceDeleter>;
-
     auto clamp(LevelDescriptor & descriptor) const -> void;
 
-    RandomNumberGeneratorPtr random_number_generator{};
+    godot::Ref<godot::RandomNumberGenerator> random_number_generator{};
 
     int minimum_hole_length{default_minimum_hole_length};
     int maximum_hole_length{default_maximum_hole_length};

@@ -1,12 +1,11 @@
 #include "Level.hpp"
 
-#include "ReferenceDeleter.hpp"
-
 #include <Array.hpp>
 #include <Dictionary.hpp>
 #include <File.hpp>
 #include <JSON.hpp>
 #include <JSONParseResult.hpp>
+#include <Ref.hpp>
 #include <String.hpp>
 #include <Variant.hpp>
 
@@ -38,7 +37,7 @@ namespace moon_buggy
 
   auto load_level_descriptors(godot::String path) -> std::vector<LevelDescriptor>
   {
-    auto config_file = std::unique_ptr<godot::File, ReferenceDeleter>{godot::File::_new()};
+    auto config_file = godot::Ref{godot::File::_new()};
     if (config_file->open(path, godot::File::READ) != godot::Error::OK)
     {
       return {};

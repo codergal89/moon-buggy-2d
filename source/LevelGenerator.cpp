@@ -24,7 +24,7 @@ namespace moon_buggy
 
   auto LevelGenerator::_init() -> void
   {
-    random_number_generator = RandomNumberGeneratorPtr{godot::RandomNumberGenerator::_new()};
+    random_number_generator.instance();
     random_number_generator->randomize();
   }
 
