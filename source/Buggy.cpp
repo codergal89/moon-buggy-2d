@@ -20,7 +20,6 @@ namespace moon_buggy
   auto Buggy::_register_methods() -> void
   {
     godot::register_method("_ready", &Buggy::_ready);
-    godot::register_method("_physics_process", &Buggy::_physics_process);
     godot::register_method("kill_zone_entered", &Buggy::kill_zone_entered);
 
     godot::register_property("acceleration", &Buggy::acceleration, default_acceleration);
@@ -40,59 +39,6 @@ namespace moon_buggy
   auto Buggy::_ready() -> void
   {
     can_drive = true;
-  }
-
-  auto Buggy::_physics_process(float delta) -> void
-  {
-    apply_gravity(delta);
-    handle_input();
-  }
-
-  auto Buggy::apply_gravity(real_t delta) -> void
-  {
-    velocity.y += gravity.y * delta;
-    velocity = move_and_slide(velocity, godot::Vector2{0.f, -1.f});
-  }
-
-  auto Buggy::handle_input() -> void
-  {
-    auto input{godot::Input::get_singleton()};
-    auto direction{0};
-
-    direction += static_cast<int>(input->is_action_pressed("player_slow_down"));
-    direction -= static_cast<int>(input->is_action_pressed("player_speed_up"));
-
-    if (is_on_floor())
-    {
-      if (direction)
-      {
-        accelerate(direction);
-      }
-      else
-      {
-        apply_drag();
-      }
-
-      if (input->is_action_pressed("player_jump"))
-      {
-        jump();
-      }
-    }
-  }
-
-  auto Buggy::accelerate(int direction) -> void
-  {
-    velocity.x = std::lerp(velocity.x, static_cast<real_t>(direction) * speed_limit, acceleration);
-  }
-
-  auto Buggy::apply_drag() -> void
-  {
-    velocity.x = std::lerp(velocity.x, 0.f, drag);
-  }
-
-  auto Buggy::jump() -> void
-  {
-    velocity.y = -jump_velocity;
   }
 
   auto Buggy::stop() -> void

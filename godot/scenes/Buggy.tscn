@@ -7,9 +7,10 @@
 radius = 9.0
 height = 44.0
 
-[node name="Buggy" type="KinematicBody2D"]
+[node name="Buggy" type="RigidBody2D"]
 collision_layer = 16
 collision_mask = 9
+mode = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

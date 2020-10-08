@@ -5,14 +5,14 @@
 
 #include <Defs.hpp>
 #include <Godot.hpp>
-#include <KinematicBody2D.hpp>
+#include <RigidBody2D.hpp>
 #include <Vector2.hpp>
 
 namespace moon_buggy
 {
 
   struct Buggy
-      : godot::KinematicBody2D
+      : godot::RigidBody2D
       , TypedNodeCastMixin<Buggy>
   {
     auto static constexpr default_acceleration{.25f};
@@ -24,17 +24,10 @@ namespace moon_buggy
 
     auto _init() -> void;
     auto _ready() -> void;
-    auto _physics_process(float delta) -> void;
 
   private:
-    GODOT_CLASS(Buggy, godot::KinematicBody2D)  // NOLINT
+    GODOT_CLASS(Buggy, godot::RigidBody2D)  // NOLINT
 
-    auto apply_gravity(real_t delta) -> void;
-    auto handle_input() -> void;
-
-    auto accelerate(int direction) -> void;
-    auto apply_drag() -> void;
-    auto jump() -> void;
     auto stop() -> void;
 
     auto kill_zone_entered(godot::Node * node) -> void;
