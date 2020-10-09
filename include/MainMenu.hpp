@@ -18,15 +18,11 @@ namespace moon_buggy
     auto static _register_methods() -> void;
 
     auto _init() -> void;
-    auto _ready() -> void;
 
   private:
     GODOT_CLASS(MainMenu, godot::Control)  // NOLINT
 
     auto start_button_clicked() -> void;
-
-    godot::Label * title;
-    godot::Button * start_button;
   };
 
 }  // namespace moon_buggy
