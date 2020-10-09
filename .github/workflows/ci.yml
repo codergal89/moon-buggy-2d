@@ -25,5 +25,5 @@ jobs:
       - name: Prepare Build
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=MinSizeRel
       - name: Build
-        run: cmake --build build --paralel $(nproc)
+        run: cmake --build build --parallel $(nproc)
 ...
