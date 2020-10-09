@@ -1,0 +1,10 @@
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[ext_resource path="res://scripts/scripts.gdnlib" type="GDNativeLibrary" id=100000]
+
+[resource]
+
+resource_name = "scripts"
+class_name = "LevelGenerator"
+library = ExtResource( 100000 )
+

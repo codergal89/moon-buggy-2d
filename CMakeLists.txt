@@ -8,18 +8,11 @@ project("moon-buggy-2d"
 
 include("FetchContent")
 
-### Godot
-
-FetchContent_Declare("Godot" GIT_REPOSITORY https://github.com/fmorgner/cmake-godot-cpp.git)
-FetchContent_MakeAvailable("Godot")
-list(APPEND CMAKE_MODULE_PATH "${PROJECT_BINARY_DIR}/_deps/godot-src/Modules")
-include("Godot")
-
 ### Conan
 
 if(CONAN_EXPORTED)
   include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
-  conan_basic_setup(TARGETS)
+  conan_basic_setup(TARGETS NO_OUTPUT_DIRS)
 else()
   if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
      message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
@@ -76,7 +69,9 @@ set_target_properties("scripts" PROPERTIES
   CXX_STANDARD_REQUIRED YES
   INTERPROCEDURAL_OPTIMIZATION ON
   LINK_FLAGS_MINSIZEREL "-s"
-  GODOT_BINARY_INSTALL_DIR "godot/bin"
+  PREFIX ""
+  LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/godot/bin"
+  RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/godot/bin"
 )
 
 if(NOT CMAKE_CROSSCOMPILING)
@@ -84,11 +79,3 @@ if(NOT CMAKE_CROSSCOMPILING)
     CXX_CLANG_TIDY "${CLANG_TIDY_EXE}"
   )
 endif()
-
-godot_register_library("scripts")
-godot_register_class("scripts" "Buggy")
-godot_register_class("scripts" "Game")
-godot_register_class("scripts" "LevelGenerator")
-godot_register_class("scripts" "MainMenu")
-godot_register_class("scripts" "Map")
-godot_register_class("scripts" "ScrollCamera")
