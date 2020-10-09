@@ -93,10 +93,12 @@ namespace moon_buggy
 
     scroll_camera->set_position(godot::Vector2{0.f, 0.f});
     scroll_camera->set("limit_left", map->world_end());
+    auto scroll_speed = scroll_camera->get("speed");
 
     auto buggy = cast_to<Buggy>(buggy_scene->instance());
     auto ground = map->get_typed_node<godot::TileMap>("Ground");
-    buggy->set_position({window_width / 2.f, window_height - ground->get_cell_size().y});
+    buggy->set_position({window_width / 2.f, window_height - 2 * ground->get_cell_size().y});
+    buggy->set("base_speed", scroll_speed);
     buggy->connect("crashed", this, "buggy_crashed");
     scroll_camera->add_child(buggy);
     kill_zone->connect("body_entered", buggy, "kill_zone_entered");
