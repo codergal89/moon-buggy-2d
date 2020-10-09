@@ -23,7 +23,7 @@ jobs:
           sudo apt-get install clang-tidy-9
           sudo update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-9 100
       - name: Prepare Build
-        run: conan install . -if build/linux -b missing
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=MinSizeRel
       - name: Build
-        run: conan build . -bf build/linux
+        run: cmake --build build --paralel $(nproc)
 ...
