@@ -64,6 +64,15 @@ target_compile_options("scripts" PRIVATE
   $<$<CXX_COMPILER_ID:GNU,Clang>:-pedantic-errors>
 )
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  target_link_options("scripts" PRIVATE
+    $<$<CXX_COMPILER_ID:GNU>:--static>
+    $<$<CXX_COMPILER_ID:GNU>:-Wl,--no-undefined>
+    $<$<CXX_COMPILER_ID:GNU>:-static-libgcc>
+    $<$<CXX_COMPILER_ID:GNU>:-static-libstdc++>
+  )
+endif()
+
 set_target_properties("scripts" PROPERTIES
   CXX_STANDARD "20"
   CXX_STANDARD_REQUIRED YES
