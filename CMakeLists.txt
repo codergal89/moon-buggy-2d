@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION "3.18.0")
 
-project("moon-buggy-2d"
+project("Moon Buggy 2D"
   LANGUAGES CXX
   VERSION "1.0.0"
   DESCRIPTION "A 2D implementation of the classic Moon Buggy terminal game"
@@ -88,3 +88,35 @@ if(NOT CMAKE_CROSSCOMPILING)
     CXX_CLANG_TIDY "${CLANG_TIDY_EXE}"
   )
 endif()
+
+### Export
+
+find_program(GODOT_EXE
+  NAMES "godot" "org.godotengine.Godot"
+  REQUIRED
+  DOC "Godot engine executable"
+)
+
+set(GODOT_EXPORT_PLATFORM "${CMAKE_SYSTEM_NAME}")
+if(GODOT_EXPORT_PLATFORM STREQUAL "Darwin")
+  set(GODOT_EXPORT_PLATFORM "macOS")
+endif()
+
+if(GODOT_EXPORT_PLATFORM STREQUAL "Linux")
+  set(GODOT_EXPORT_EXTENSION "x86_64")
+elseif(GODOT_EXPORT_PLATFORM STREQUAL "macOS")
+  set(GODOT_EXPORT_EXTENSION "zip")
+elseif(GODOT_EXPORT_PLATFORM STREQUAL "Windows")
+  set(GODOT_EXPORT_EXTENSION "exe")
+endif()
+
+add_custom_target("export"
+  COMMAND "${GODOT_EXE}"
+  "--path"
+  "${PROJECT_SOURCE_DIR}/godot"
+  "--export"
+  "${GODOT_EXPORT_PLATFORM}"
+  "${PROJECT_SOURCE_DIR}/export/${GODOT_EXPORT_PLATFORM}/${PROJECT_NAME}.${GODOT_EXPORT_EXTENSION}"
+  DEPENDS "scripts"
+  SOURCES "${PROJECT_SOURCE_DIR}/godot/project.godot"
+)

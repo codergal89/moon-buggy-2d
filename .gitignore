@@ -6,3 +6,6 @@
 
 /godot/bin
 /godot/.import
+
+export/*/*
+!export/*/.gitkeep
