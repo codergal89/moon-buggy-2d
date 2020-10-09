@@ -1,8 +1,8 @@
 {
     "recommendations": [
-        "twxs.cmake",
-        "go2sh.cmake-integration-vscode",
+        "ms-vscode.cmake-tools",
         "ms-vscode.cpptools",
+        "twxs.cmake",
         "bierner.github-markdown-preview",
         "xaver.clang-format",
     ]
