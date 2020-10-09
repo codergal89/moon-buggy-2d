@@ -1,0 +1,2 @@
+[requires]
+godot-cpp/cci.3.2-20200130

@@ -10,24 +10,19 @@ include("FetchContent")
 
 ### Conan
 
-if(CONAN_EXPORTED)
-  include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
-  conan_basic_setup(TARGETS NO_OUTPUT_DIRS)
-else()
-  if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-     message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-     file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/master/conan.cmake" "${CMAKE_BINARY_DIR}/conan.cmake" TLS_VERIFY ON)
-  endif()
-  include("${CMAKE_BINARY_DIR}/conan.cmake")
-  conan_cmake_run(CONANFILE "conanfile.py"
-    BASIC_SETUP
-    CMAKE_TARGETS
-    BUILD "missing"
-    NO_OUTPUT_DIRS
-    SETTINGS "os=${CMAKE_SYSTEM_NAME}"
-    OUTPUT_QUIET
-  )
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+    message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+    file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/master/conan.cmake" "${CMAKE_BINARY_DIR}/conan.cmake" TLS_VERIFY ON)
 endif()
+include("${CMAKE_BINARY_DIR}/conan.cmake")
+conan_cmake_run(CONANFILE "conanfile.txt"
+  BASIC_SETUP
+  CMAKE_TARGETS
+  BUILD "missing"
+  NO_OUTPUT_DIRS
+  SETTINGS "os=${CMAKE_SYSTEM_NAME}"
+  OUTPUT_QUIET
+)
 
 ### Clang-tidy
 
