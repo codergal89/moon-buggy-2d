@@ -9,18 +9,15 @@
 #include <String.hpp>
 #include <Variant.hpp>
 
-#include <experimental/source_location>
 #include <memory>
 
 namespace moon_buggy
 {
 
-  auto check_array_entry_type(godot::Variant const & entry,
-                              std::experimental::source_location where = std::experimental::source_location::current()) -> godot::Variant
+  auto check_array_entry_type(godot::Variant const & entry) -> godot::Variant
   {
     if (entry.get_type() != godot::Variant::DICTIONARY)
     {
-      godot::Godot::print_warning("found invalid level descriptor", where.function_name(), where.file_name(), where.line());
       return godot::Variant::NIL;
     }
     return entry;
