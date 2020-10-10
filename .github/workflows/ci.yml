@@ -4,8 +4,7 @@ name: CI
 on: [push]
 
 jobs:
-  job:
-    name: build-${{ matrix.os }}
+  build-scripts:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
