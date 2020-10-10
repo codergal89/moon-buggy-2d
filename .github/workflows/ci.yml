@@ -46,10 +46,11 @@ jobs:
         with:
           cmakeGenerator: ${{ matrix.generator }}
           cmakeBuildType: Release
-      
+
       - name: Archive Script Library
         uses: actions/upload-artifact@v2
         with:
+          name: native-scripts
           path: |
             godot/bin/scripts.dll
             godot/bin/scripts.dylib
