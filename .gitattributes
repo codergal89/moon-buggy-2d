@@ -1,4 +1,6 @@
 godot/assets/**/*.png filter=lfs diff=lfs merge=lfs -text
 godot/assets/**/*.ttf filter=lfs diff=lfs merge=lfs -text
 
+godot/addons/* linguist-vendored
+
 * text=auto
