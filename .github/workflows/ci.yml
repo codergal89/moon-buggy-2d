@@ -54,4 +54,23 @@ jobs:
             godot/bin/scripts.dll
             godot/bin/scripts.dylib
             godot/bin/scripts.so
+
+  run-gut-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Source
+        uses: actions/checkout@v2
+
+      - name: Download Script Libraries
+        uses: actions/download-artifact@v2
+        with:
+          name: native-scripts
+          path: godot/bin
+
+      - name: Run GUT Tests
+        uses: croconut/godot-tester@v2
+        with:
+          version: 3.2.2
+          path: "godot"
+
 ...
