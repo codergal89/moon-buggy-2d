@@ -61,6 +61,8 @@ jobs:
     steps:
       - name: Download Source
         uses: actions/checkout@v2
+        with:
+          lfs: true
 
       - name: Download Script Libraries
         uses: actions/download-artifact@v2
@@ -72,5 +74,5 @@ jobs:
         uses: croconut/godot-tester@v2
         with:
           version: 3.2.2
-          path: "godot"
+          path: godot
 ...
