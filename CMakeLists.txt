@@ -24,18 +24,21 @@ conan_cmake_run(CONANFILE "conanfile.txt"
   BASIC_SETUP
   CMAKE_TARGETS
   BUILD "missing"
-  NO_OUTPUT_DIRS
   ${OS_SETTING}
   OUTPUT_QUIET
 )
 
 ### Clang-tidy
 
-find_program(CLANG_TIDY_EXE
-  NAMES "clang-tidy" "clang-tidy-10" "clang-tidy-9"
-  DOC "Path to clang-tidy"
-  HINTS "/bin" "/usr/bin" "/usr/local/bin" "/usr/local/opt/llvm/bin"
-)
+option(ENABLE_CLANG_TIDY "Enable linting using clang tidy" OFF)
+
+if(ENABLE_CLANG_TIDY)
+  find_program(CLANG_TIDY_EXE
+    NAMES "clang-tidy" "clang-tidy-10" "clang-tidy-9"
+    DOC "Path to clang-tidy"
+    HINTS "/bin" "/usr/bin" "/usr/local/bin" "/usr/local/opt/llvm/bin"
+  )
+endif()
 
 ### Scripts
 
@@ -79,9 +82,14 @@ set_target_properties("scripts" PROPERTIES
   CXX_STANDARD_REQUIRED YES
   INTERPROCEDURAL_OPTIMIZATION ON
   LINK_FLAGS_MINSIZEREL "-s"
+  LINK_FLAGS_RELEASE "-s"
   PREFIX ""
-  LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/godot/bin"
-  RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/godot/bin"
+)
+
+add_custom_command(TARGET "scripts"
+  POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:scripts> ${PROJECT_SOURCE_DIR}/godot/bin
+  COMMENT "Make script library available to Godot"
 )
 
 if(NOT CMAKE_CROSSCOMPILING)

@@ -4,8 +4,9 @@
 /*.tzst*
 /*.zip*
 
-/godot/bin
+/godot/bin/*
+!/godot/bin/.gitkeep
 /godot/.import
 
-export/*/*
-!export/*/.gitkeep
+/export/*/*
+/!export/*/.gitkeep
