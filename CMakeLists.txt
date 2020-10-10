@@ -32,8 +32,9 @@ conan_cmake_run(CONANFILE "conanfile.txt"
 ### Clang-tidy
 
 find_program(CLANG_TIDY_EXE
-  NAMES "clang-tidy"
+  NAMES "clang-tidy" "clang-tidy-10" "clang-tidy-9"
   DOC "Path to clang-tidy"
+  HINTS "/bin" "/usr/bin" "/usr/local/bin" "/usr/local/opt/llvm/bin"
 )
 
 ### Scripts
