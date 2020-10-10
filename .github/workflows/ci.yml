@@ -70,9 +70,12 @@ jobs:
           name: native-scripts
           path: godot/bin
 
-      - name: Run GUT Tests
-        uses: croconut/godot-tester@v2
-        with:
-          version: 3.2.2
-          path: godot
+      - name: List native-scripts
+        run: find godot/bin
+
+          #      - name: Run GUT Tests
+          #        uses: croconut/godot-tester@v2
+          #        with:
+          #          version: 3.2.2
+          #          path: godot
 ...
