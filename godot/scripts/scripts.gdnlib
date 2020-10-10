@@ -8,6 +8,7 @@ reloadable=true
 [entry]
 
 X11.64="res://bin/scripts.so"
+Server.64="res://bin/scripts.so"
 Windows.64="res://bin/scripts.dll"
 OSX.64="res://bin/scripts.dylib"
 
