@@ -4,7 +4,7 @@ extends "res://addons/gut/test.gd"
 class TestLevelGeneratorProperties:
 	extends "res://addons/gut/test.gd"
 	
-	var Generator = load("res://bin/scripts_LevelGenerator.gdns")
+	var Generator = load("res://scripts/LevelGenerator.gdns")
 	var instance: Node
 	
 	func before_each():
