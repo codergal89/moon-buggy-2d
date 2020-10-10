@@ -1,4 +1,4 @@
-![CI](https://github.com/codergal89/moon-buggy-2d/workflows/CI/badge.svg)
+[![CI](https://github.com/codergal89/moon-buggy-2d/workflows/CI/badge.svg)](https://github.com/codergal89/moon-buggy-2d/actions?query=workflow%3ACI)
 
 # Moon Buggy 2D
 
