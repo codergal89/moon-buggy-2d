@@ -15,12 +15,17 @@ if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/master/conan.cmake" "${CMAKE_BINARY_DIR}/conan.cmake" TLS_VERIFY ON)
 endif()
 include("${CMAKE_BINARY_DIR}/conan.cmake")
+
+if(CMAKE_CROSSCOMPILING)
+  set(OS_SETTING SETTING "os=${CMAKE_SYSTEM_NAME}")
+endif()
+
 conan_cmake_run(CONANFILE "conanfile.txt"
   BASIC_SETUP
   CMAKE_TARGETS
   BUILD "missing"
   NO_OUTPUT_DIRS
-  SETTINGS "os=${CMAKE_SYSTEM_NAME}"
+  ${OS_SETTING}
   OUTPUT_QUIET
 )
 
