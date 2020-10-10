@@ -56,6 +56,7 @@ jobs:
             godot/bin/scripts.so
 
   run-gut-tests:
+    needs: build-scripts
     runs-on: ubuntu-latest
     steps:
       - name: Download Source
@@ -72,5 +73,4 @@ jobs:
         with:
           version: 3.2.2
           path: "godot"
-
 ...
