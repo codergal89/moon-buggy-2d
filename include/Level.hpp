@@ -1,35 +1,29 @@
 #ifndef MOON_BUGGY_2D_LEVEL_HPP
 #define MOON_BUGGY_2D_LEVEL_HPP
 
-#include <String.hpp>
-
-#include <cstdint>
-#include <vector>
+#include <Array.hpp>
+#include <Godot.hpp>
+#include <Object.hpp>
 
 namespace moon_buggy
 {
 
-  enum struct tile_kind
+  struct Level : godot::Object
   {
-    ground,
-    hole,
-  };
+    enum struct Tile
+    {
+      ground,
+      hole
+    };
 
-  struct Level
-  {
-    std::vector<tile_kind> tiles{};
-  };
+    auto static _register_methods() -> void;
 
-  struct LevelDescriptor
-  {
-    int segments{};
-    int minimum_hole_length{};
-    int maximum_hole_length{};
-    int minimum_platform_length{};
-    int maximum_platform_length{};
-  };
+    auto _init() -> void;
 
-  auto load_level_descriptors(godot::String path) -> std::vector<LevelDescriptor>;
+    godot::Array tiles{};
+
+    GODOT_CLASS(Level, godot::Object)  // NOLINT
+  };
 
 }  // namespace moon_buggy
 

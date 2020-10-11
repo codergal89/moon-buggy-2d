@@ -6,6 +6,7 @@
 #include "LevelGenerator.hpp"
 #include "MainMenu.hpp"
 #include "Map.hpp"
+#include "ObjectPointer.hpp"
 #include "ScrollCamera.hpp"
 #include "TypedNodeCastMixin.hpp"
 
@@ -18,7 +19,6 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <vector>
 
 namespace moon_buggy
 {
@@ -41,8 +41,9 @@ namespace moon_buggy
 
     std::uint64_t window_width{};
     std::uint64_t window_height{};
-    std::vector<LevelDescriptor> levels{};
-    std::size_t current_level{};
+    int number_of_levels{};
+    int current_level_number{};
+    object_ptr<Level> current_level{};
 
     godot::Timer * restart_timer;
     LevelGenerator * level_generator;

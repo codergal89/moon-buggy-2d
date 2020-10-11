@@ -2,6 +2,8 @@
 #define MOON_BUGGY_2D_LEVEL_GENERATOR_HPP
 
 #include "Level.hpp"
+#include "LevelDescriptor.hpp"
+#include "ObjectPointer.hpp"
 #include "TypedNodeCastMixin.hpp"
 
 #include <Godot.hpp>
@@ -9,7 +11,7 @@
 #include <RandomNumberGenerator.hpp>
 #include <Ref.hpp>
 
-#include <memory>
+#include <queue>
 
 namespace moon_buggy
 {
@@ -29,14 +31,16 @@ namespace moon_buggy
 
     auto _init() -> void;
 
-    auto generate(LevelDescriptor descriptor) -> Level;
+    auto load(godot::String descriptor_file_path) -> int;
+    auto generate_next() -> Level *;
+    [[nodiscard]] auto get_remaining_level_count() const -> int;
+    [[nodiscard]] auto has_remaining_levels() const -> bool;
 
-  private:
     GODOT_CLASS(LevelGenerator, godot::Node)  // NOLINT
 
-    auto clamp(LevelDescriptor & descriptor) const -> void;
-
+  private:
     godot::Ref<godot::RandomNumberGenerator> random_number_generator{};
+    std::queue<object_ptr<LevelDescriptor>> level_descriptors{};
 
     int minimum_hole_length{default_minimum_hole_length};
     int maximum_hole_length{default_maximum_hole_length};

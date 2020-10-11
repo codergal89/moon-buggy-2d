@@ -27,7 +27,7 @@ namespace moon_buggy
     auto _init() -> void;
     auto _ready() -> void;
 
-    auto level(Level level, std::uint64_t width, std::uint64_t height) -> void;
+    auto level(Level * level, std::uint64_t width, std::uint64_t height) -> void;
     auto world_end() -> std::int64_t;
 
   private:

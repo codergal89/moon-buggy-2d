@@ -1,5 +1,8 @@
 #include "Map.hpp"
 
+#include "ArrayIterator.hpp"
+#include "Level.hpp"
+
 #include <Defs.hpp>
 #include <GodotGlobal.hpp>
 #include <Ref.hpp>
@@ -30,7 +33,7 @@ namespace moon_buggy
     ground->set_tileset(tile_set);
   }
 
-  auto Map::level(Level level, std::uint64_t width, std::uint64_t height) -> void
+  auto Map::level(Level * level, std::uint64_t width, std::uint64_t height) -> void
   {
     ground->clear();
 
@@ -38,21 +41,21 @@ namespace moon_buggy
     auto x_tiles_per_screen = static_cast<std::int64_t>((width + cell_size.x - 1) / cell_size.x);
     auto y_tiles_per_screen = static_cast<std::int64_t>((height + cell_size.y - 1) / cell_size.y);
 
-    end_tile = -(level.tiles.size() + x_tiles_per_screen);
+    end_tile = -(level->tiles.size() + x_tiles_per_screen);
     auto tile_ids = std::vector<std::int64_t>();
-    tile_ids.reserve(level.tiles.size() + 2 * x_tiles_per_screen);
+    tile_ids.reserve(level->tiles.size() + 2 * x_tiles_per_screen);
 
     auto ground_tile = tile_set->find_tile_by_name(ground_tile_name);
     auto hole_tile = tile_set->find_tile_by_name(hole_tile_name);
 
     generate_n(back_inserter(tile_ids), x_tiles_per_screen, [&] { return ground_tile; });
 
-    transform(cbegin(level.tiles), cend(level.tiles), back_inserter(tile_ids), [&](auto tile) {
-      switch (tile)
+    transform(cbegin(level->tiles), cend(level->tiles), back_inserter(tile_ids), [&](auto tile) {
+      switch (static_cast<Level::Tile>(static_cast<int>(tile)))
       {
-      case tile_kind::ground:
+      case Level::Tile::ground:
         return ground_tile;
-      case tile_kind::hole:
+      case Level::Tile::hole:
         return hole_tile;
       default:
         return static_cast<std::int64_t>(-1);

@@ -47,6 +47,7 @@ add_library("scripts" SHARED
   "source/Buggy.cpp"
   "source/Game.cpp"
   "source/Level.cpp"
+  "source/LevelDescriptor.cpp"
   "source/LevelGenerator.cpp"
   "source/MainMenu.cpp"
   "source/Map.cpp"

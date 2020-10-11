@@ -35,18 +35,19 @@ namespace moon_buggy
     auto settings = godot::ProjectSettings::get_singleton();
     window_height = settings->get_setting("display/window/size/height");
     window_width = settings->get_setting("display/window/size/width");
-    levels = load_level_descriptors("res://config/levels.json");
   }
 
   auto Game::_ready() -> void
   {
-    restart_timer = get_typed_node<godot::Timer>("RestartTimer");
-
     level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
+    number_of_levels = level_generator->load("res://config/levels.json");
     map = get_typed_node<Map>("Map");
 
     main_menu = get_typed_node<MainMenu>("GUI/MainMenu");
     main_menu->show();
+
+    restart_timer = get_typed_node<godot::Timer>("RestartTimer");
+    restart_timer->connect("timeout", main_menu, "show");
 
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
     scroll_camera->set("should_scroll", true);
@@ -76,7 +77,6 @@ namespace moon_buggy
 
     fireworks->set_deferred("emitting", true);
     fireworks->set_position(buggy->get_position());
-    restart_timer->connect("timeout", main_menu, "show");
     restart_timer->start();
 
     scroll_camera->add_child(fireworks);
@@ -88,8 +88,12 @@ namespace moon_buggy
   {
     main_menu->hide();
 
-    auto level = level_generator->generate(current_level < levels.size() - 1 ? levels[current_level++] : levels.back());
-    map->level(level, window_width, window_height);
+    if (level_generator->has_remaining_levels())
+    {
+      current_level.reset(level_generator->generate_next());
+    }
+
+    map->level(current_level.get(), window_width, window_height);
 
     scroll_camera->set_position(godot::Vector2{0.f, 0.f});
     scroll_camera->set("limit_left", map->world_end());
