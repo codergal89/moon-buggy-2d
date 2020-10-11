@@ -28,7 +28,7 @@ namespace moon_buggy
     {
       if (result->get_error() != godot::Error::OK)
       {
-        ERR_PRINTS(godot::String{"Failed to parse level descriptors: {0}"}.format(result->get_error_string()));
+        ERR_PRINTS(godot::String{"Failed to parse level descriptors: {0}"}.format(godot::Array::make(result->get_error_string())));
         return false;
       }
       else if (result->get_result().get_type() != godot::Variant::ARRAY)
@@ -75,6 +75,8 @@ namespace moon_buggy
     auto file = godot::Ref{godot::File::_new()};
     if (file->open(descriptor_file_path, godot::File::READ) != godot::Error::OK)
     {
+      ERR_PRINTS(
+          godot::String{"Failed to load level descriptors. File '{0}' does not exists"}.format(godot::Array::make(descriptor_file_path)));
       return 0;
     }
 

@@ -1,0 +1,17 @@
+[
+    {
+        "segments": 5,
+        "minimum_hole_length": 6,
+        "maximum_hole_length": 10,
+        "minimum_platform_length": 8,
+        "maximum_platform_length": 12,
+    },
+    [],
+    {
+        "segments": 12,
+        "minimum_hole_length": 6,
+        "maximum_hole_length": 10,
+        "minimum_platform_length": 8,
+        "maximum_platform_length": 12,
+    }
+]
