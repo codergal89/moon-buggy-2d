@@ -108,7 +108,7 @@ namespace moon_buggy
       level_descriptors.push(make_object_ptr(LevelDescriptor::_new(segments, min_hole, max_hole, min_platform, max_platform)));
     }
 
-    return level_descriptors.size();
+    return static_cast<int>(level_descriptors.size());
   }
 
   auto LevelGenerator::generate_next() -> Level *

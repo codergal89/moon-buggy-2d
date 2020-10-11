@@ -117,12 +117,12 @@ namespace godot
 
     auto operator*() const -> reference
     {
-      return (*m_array)[m_position];
+      return (*m_array)[static_cast<int>(m_position)];
     }
 
     auto operator->() const -> pointer
     {
-      return &(*m_array)[m_position];
+      return &(*m_array)[static_cast<int>(m_position)];
     }
 
   private:
