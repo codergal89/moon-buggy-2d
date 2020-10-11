@@ -1,9 +1,0 @@
-{
-    "[cpp]": {
-        "editor.wordBasedSuggestions": true,
-        "editor.suggest.insertMode": "insert",
-        "editor.semanticHighlighting.enabled": true,
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "xaver.clang-format",
-    },
-}
