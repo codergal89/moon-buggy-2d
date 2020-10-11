@@ -3,7 +3,6 @@
 [ext_resource path="res://scripts/scripts.gdnlib" type="GDNativeLibrary" id=100000]
 
 [resource]
-resource_name = "MainMenu"
-class_name = "MainMenu"
+resource_name = "LevelDescriptor"
+class_name = "LevelDescriptor"
 library = ExtResource( 100000 )
-
