@@ -20,7 +20,7 @@ namespace godot
     using iterator_category = std::random_access_iterator_tag;
 
     constexpr ArrayIterator(Array & array, difference_type position)
-        : m_array{array}
+        : m_array{&array}
         , m_position{position}
     {
     }
@@ -117,16 +117,16 @@ namespace godot
 
     auto operator*() const -> reference
     {
-      return m_array[m_position];
+      return (*m_array)[m_position];
     }
 
     auto operator->() const -> pointer
     {
-      return &m_array[m_position];
+      return &(*m_array)[m_position];
     }
 
   private:
-    Array & m_array;
+    Array * m_array;
     difference_type m_position;
   };
 
@@ -140,13 +140,13 @@ namespace godot
     using container_type = Array;
 
     explicit constexpr ArrayBackInsertIterator(Array & array)
-        : m_array{array}
+        : m_array{&array}
     {
     }
 
     auto operator=(Variant const & value) -> ArrayBackInsertIterator &
     {
-      m_array.push_back(value);
+      m_array->push_back(value);
       return *this;
     }
 
@@ -166,7 +166,7 @@ namespace godot
     }
 
   private:
-    Array & m_array;
+    Array * m_array;
   };
 
   auto inline constexpr begin(Array & array) -> ArrayIterator<Variant>
