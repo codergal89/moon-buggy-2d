@@ -6,4 +6,3 @@
 resource_name = "Map"
 class_name = "Map"
 library = ExtResource( 100000 )
-

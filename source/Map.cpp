@@ -21,6 +21,9 @@ namespace moon_buggy
   auto Map::_register_methods() -> void
   {
     godot::register_method("_ready", &Map::_ready);
+    godot::register_method("set_level", &Map::set_level);
+    godot::register_method("get_world_end", &Map::get_world_end);
+
     godot::register_property("tile_set", &Map::tile_set, decltype(Map::tile_set){});
   }
 
@@ -34,7 +37,7 @@ namespace moon_buggy
     ground->set_tileset(tile_set);
   }
 
-  auto Map::level(Level * level, std::uint64_t width, std::uint64_t height) -> void
+  auto Map::set_level(Level * level, std::uint64_t width, std::uint64_t height) -> void
   {
     ground->clear();
 
@@ -72,7 +75,7 @@ namespace moon_buggy
     });
   }
 
-  auto Map::world_end() -> std::int64_t
+  auto Map::get_world_end() -> std::int64_t
   {
     return static_cast<std::int64_t>(ground->map_to_world({static_cast<real_t>(end_tile), 0.f}).x);
   }

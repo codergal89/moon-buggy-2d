@@ -93,10 +93,10 @@ namespace moon_buggy
       current_level.reset(level_generator->generate_next());
     }
 
-    map->level(current_level.get(), window_width, window_height);
+    map->set_level(current_level.get(), window_width, window_height);
 
     scroll_camera->set_position(godot::Vector2{0.f, 0.f});
-    scroll_camera->set("limit_left", map->world_end());
+    scroll_camera->set("limit_left", map->get_world_end());
     auto scroll_speed = scroll_camera->get("speed");
 
     auto buggy = cast_to<Buggy>(buggy_scene->instance());
