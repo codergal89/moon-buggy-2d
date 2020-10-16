@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "HUD.hpp"
 #include "Level.hpp"
+#include "LevelComplete.hpp"
 #include "LevelDescriptor.hpp"
 #include "LevelGenerator.hpp"
 #include "MainMenu.hpp"
@@ -29,6 +30,7 @@ extern "C"
     godot::register_class<moon_buggy::Game>();
     godot::register_class<moon_buggy::HUD>();
     godot::register_class<moon_buggy::Level>();
+    godot::register_class<moon_buggy::LevelComplete>();
     godot::register_class<moon_buggy::LevelDescriptor>();
     godot::register_class<moon_buggy::LevelGenerator>();
     godot::register_class<moon_buggy::MainMenu>();
