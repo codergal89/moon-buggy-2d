@@ -31,14 +31,14 @@ class TestScript:
 	func test_has_get_world_end_function():
 		assert_has_method(instance, "get_world_end")
 
-class TestScene:
+class TestSceneSetup:
 	extends "res://addons/gut/test.gd"
 
+	const Map = preload("res://scripts/Map.gdns")
 	const Scene = preload("res://scenes/Map.tscn")
-	const Level = preload("res://scripts/Level.gdns")
 	const GroundTiles = preload("res://assets/tiles/ground_tiles.tres")
 
-	var instance
+	var instance: Map
 
 	func before_each():
 		instance = autofree(Scene.instance())
@@ -47,7 +47,7 @@ class TestScene:
 	func after_each():
 		remove_child(instance)
 
-	func _get_ground():
+	func tile_map() -> TileMap:
 		return instance.get_node("Ground")
 
 	func test_can_instantiate_map_scene():
@@ -57,7 +57,7 @@ class TestScene:
 		assert_eq(instance["tile_set"], GroundTiles)
 
 	func test_map_scene_has_a_node_called_Ground():
-		assert_not_null(_get_ground())
+		assert_not_null(tile_map())
 
 	func test_map_scene_has_a_child_of_type_TileMap():
 		var has_tile_map = false
@@ -67,23 +67,56 @@ class TestScene:
 		assert_true(has_tile_map)
 
 	func test_map_scene_has_a_TileMap_child_called_ground():
-		assert_true(_get_ground() is TileMap)
+		assert_true(tile_map() is TileMap)
 
 	func test_the_end_of_the_world_of_an_empty_map_is_at_zero():
 		assert_eq(instance.get_world_end(), 0)
 
 	func test_the_tile_map_for_an_empty_map_is_empty():
-		assert_true(_get_ground().get_used_cells().empty())
+		assert_true(tile_map().get_used_cells().empty())
 
-	func test_setting_an_empty_level_on_a_128_wide_screen_causes_8_tiles_to_be_used():
-		var level: Level = autofree(Level.new())
-		instance.set_level(level, 128, 128);
-		var ground: TileMap = _get_ground()
-		assert_eq(ground.get_used_cells().size(), 8)
+class TestSceneLevel:
+	extends "res://addons/gut/test.gd"
 
-	func test_setting_an_empty_level_causes_bottom_row_of_tiles_to_be_set_as_ground():
-		var level: Level = autofree(Level.new())
-		instance.set_level(level, 128, 128);
-		var ground: TileMap = _get_ground()
-		for i in range(4):
-			assert_eq(ground.get_cell(i, 3), 0)
+	const Map = preload("res://scripts/Map.gdns")
+	const Scene = preload("res://scenes/Map.tscn")
+	const Level = preload("res://scripts/Level.gdns")
+	const GroundTiles = preload("res://assets/tiles/ground_tiles.tres")
+
+	const screen_width: int = 128
+	const screen_height: int = 64
+	const tile_size: int = 32
+
+	var instance: Map
+	var tile_map: TileMap
+
+	func before_each():
+		instance = autofree(Scene.instance())
+		tile_map = instance.get_node("Ground")
+		add_child(instance)
+
+	func after_each():
+		remove_child(instance)
+
+	func set_empty_level():
+		instance.set_level(autofree(Level.new()), screen_width, screen_height)
+
+	func test_setting_an_empty_level_places_two_screen_widths_of_tiles():
+		set_empty_level()
+		var expected_number_of_ground_tiles: int = 2 * screen_width / tile_size
+		var used_cells = tile_map.get_used_cells()
+		assert_eq(used_cells.size(), expected_number_of_ground_tiles)
+
+	func test_setting_an_empty_level_places_only_ground_tiles():
+		set_empty_level()
+		var expected_tile: int = tile_map.tile_set.find_tile_by_name("ground")
+		for position in tile_map.get_used_cells():
+			var tile: int = tile_map.get_cellv(position)
+			assert_eq(tile, expected_tile)
+
+	func test_setting_no_level_causes_the_world_end_to_be_at_zero():
+		assert_eq(instance.get_world_end(), 0)
+
+	func test_setting_an_empty_level_causes_the_world_end_to_be_at_negative_screen_width():
+		set_empty_level()
+		assert_eq(instance.get_world_end(), -screen_width)
