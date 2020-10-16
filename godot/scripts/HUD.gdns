@@ -6,3 +6,4 @@
 resource_name = "HUD"
 class_name = "HUD"
 library = ExtResource( 100000 )
+script_class_name = "HUD"

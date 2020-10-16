@@ -9,13 +9,49 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Buggy",
+"language": "NativeScript",
+"path": "res://scripts/Buggy.gdns"
+}, {
 "base": "Node",
+"class": "Game",
+"language": "NativeScript",
+"path": "res://scripts/Game.gdns"
+}, {
+"base": "Control",
+"class": "HUD",
+"language": "NativeScript",
+"path": "res://scripts/HUD.gdns"
+}, {
+"base": "",
 "class": "LevelGenerator",
 "language": "NativeScript",
 "path": "res://scripts/LevelGenerator.gdns"
+}, {
+"base": "Control",
+"class": "MainMenu",
+"language": "NativeScript",
+"path": "res://scripts/MainMenu.gdns"
+}, {
+"base": "",
+"class": "Map",
+"language": "NativeScript",
+"path": "res://scripts/Map.gdns"
+}, {
+"base": "",
+"class": "ScrollCamera",
+"language": "NativeScript",
+"path": "res://scripts/ScrollCamera.gdns"
 } ]
 _global_script_class_icons={
-"LevelGenerator": ""
+"Buggy": "",
+"Game": "",
+"HUD": "",
+"LevelGenerator": "",
+"MainMenu": "",
+"Map": "",
+"ScrollCamera": ""
 }
 
 [application]
