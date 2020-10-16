@@ -6,4 +6,4 @@
 resource_name = "LevelComplete"
 class_name = "LevelComplete"
 library = ExtResource( 100000 )
-script_class_name = "LevelComplete"
+
