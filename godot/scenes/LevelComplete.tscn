@@ -51,3 +51,4 @@ margin_right = 656.0
 margin_bottom = 262.0
 custom_fonts/font = ExtResource( 3 )
 text = "Start Next Level"
+[connection signal="pressed" from="RowContainer/Button" to="." method="start_button_clicked"]

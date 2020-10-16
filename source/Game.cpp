@@ -53,11 +53,16 @@ namespace moon_buggy
     main_menu = get_typed_node<MainMenu>("GUI/MainMenu");
     main_menu->show();
 
+    level_complete_screen = get_typed_node<LevelComplete>("GUI/LevelComplete");
+    level_complete_screen->hide();
+
+    active_start_screen = main_menu;
+
     hud = get_typed_node<HUD>("GUI/HUD");
     hud->hide();
 
     restart_timer = get_typed_node<godot::Timer>("RestartTimer");
-    restart_timer->connect("timeout", main_menu, "show");
+    restart_timer->connect("timeout", level_complete_screen, "show");
     restart_timer->connect("timeout", hud, "hide");
 
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
@@ -69,6 +74,7 @@ namespace moon_buggy
   {
     scroll_camera->set_deferred("should_scroll", false);
     level_start_reason = start_reason::retry;
+    active_start_screen = main_menu;
 
     auto explosion = cast_to<godot::AnimatedSprite>(explosion_scene->instance());
     auto explosion_position = buggy->get_position();
@@ -76,7 +82,7 @@ namespace moon_buggy
     scroll_camera->add_child(explosion);
     explosion->set_position(explosion_position);
     explosion->connect("animation_finished", explosion, "queue_free");
-    explosion->connect("animation_finished", main_menu, "show");
+    explosion->connect("animation_finished", active_start_screen, "show");
     explosion->connect("animation_finished", hud, "hide");
     explosion->call_deferred("play");
 
@@ -89,6 +95,9 @@ namespace moon_buggy
     auto fireworks = cast_to<godot::Particles2D>(fireworks_scene->instance());
 
     level_start_reason = start_reason::start_next;
+    level_complete_screen->set_level_number(current_level_number);
+    active_start_screen = level_complete_screen;
+
     fireworks->set_deferred("emitting", true);
     fireworks->set_position(buggy->get_position());
     restart_timer->start();
@@ -118,7 +127,8 @@ namespace moon_buggy
 
   auto Game::start_level() -> void
   {
-    main_menu->hide();
+    active_start_screen->hide();
+
     hud->show();
     hud->set_level_number(current_level_number);
 

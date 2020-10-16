@@ -50,4 +50,5 @@ current = true
 [node name="KillZone" parent="ScrollCamera" instance=ExtResource( 9 )]
 position = Vector2( 360, 480 )
 [connection signal="start_game" from="GUI/MainMenu" to="." method="start_game"]
+[connection signal="start_next_level" from="GUI/LevelComplete" to="." method="start_game"]
 [connection signal="reached_end" from="ScrollCamera" to="." method="goal_reached"]

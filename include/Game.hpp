@@ -4,6 +4,7 @@
 #include "Buggy.hpp"
 #include "HUD.hpp"
 #include "Level.hpp"
+#include "LevelComplete.hpp"
 #include "LevelGenerator.hpp"
 #include "MainMenu.hpp"
 #include "Map.hpp"
@@ -12,6 +13,7 @@
 #include "TypedNodeCastMixin.hpp"
 
 #include <Area2D.hpp>
+#include <Control.hpp>
 #include <Godot.hpp>
 #include <Node.hpp>
 #include <PackedScene.hpp>
@@ -57,6 +59,8 @@ namespace moon_buggy
 
     godot::Timer * restart_timer;
     LevelGenerator * level_generator;
+    LevelComplete * level_complete_screen;
+    godot::Control * active_start_screen;
     Map * map;
     MainMenu * main_menu;
     ScrollCamera * scroll_camera;
