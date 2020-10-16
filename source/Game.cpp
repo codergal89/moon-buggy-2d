@@ -166,7 +166,9 @@ namespace moon_buggy
 
   auto to_reason(godot::String string) -> Game::start_reason
   {
-    auto found = find_if(cbegin(start_reason_strings), cend(start_reason_strings), [&](auto mapping) { return mapping.second == string; });
+    auto found = find_if(cbegin(start_reason_strings), cend(start_reason_strings), [&](auto mapping) {
+      return godot::String{mapping.second} == string;
+    });
     if (found != cend(start_reason_strings))
     {
       return found->first;
