@@ -59,6 +59,10 @@ _global_script_class_icons={
 config/name="Moon Buggy 2D"
 run/main_scene="res://scenes/Game.tscn"
 
+[debug]
+
+gdscript/warnings/integer_division=false
+
 [display]
 
 window/size/width=720

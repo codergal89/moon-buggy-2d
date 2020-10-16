@@ -10,6 +10,7 @@ namespace moon_buggy
   auto HUD::_register_methods() -> void
   {
     godot::register_method("_ready", &HUD::_ready);
+    godot::register_method("set_level_number", &HUD::set_level_number);
   }
 
   auto HUD::_init() -> void
