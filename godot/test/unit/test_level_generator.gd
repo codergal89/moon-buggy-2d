@@ -8,11 +8,8 @@ class TestLevelGeneratorParameters:
 	var instance: Generator
 
 	func before_each():
-		instance = Generator.new()
+		instance = autofree(Generator.new())
 
-	func after_each():
-		instance.free()
-	
 	func test_can_instanciate_level_generator():
 		assert_not_null(instance)
 
@@ -59,10 +56,7 @@ class TestLevelGeneratorLoadConfiguration:
 	var instance: Generator
 
 	func before_each():
-		instance = Generator.new()
-
-	func after_each():
-		instance.free()
+		instance = autofree(Generator.new())
 
 	func test_loading_from_a_non_existent_file_yields_zero_levels():
 		assert_eq(instance.load("res://THIS_FILE_MUST_NOT_EXIST"), 0)
@@ -89,22 +83,22 @@ class TestLevelGeneratorGenerateNext:
 	var instance: Generator
 
 	func before_each():
-		instance = Generator.new()
+		instance = autofree(Generator.new())
 		instance.load("res://test/resources/three_levels")
-
-	func after_each():
-		instance.free()
 
 	func test_can_generate_next_level_with_multiple_loaded_descriptors():
 		assert_not_null(autofree(instance.generate_next()))
 
 	func test_can_generate_next_as_much_as_the_number_of_loaded_descriptors():
+		var nulls: int = 0
 		for _i in range(instance.get_remaining_level_count()):
-			assert_not_null(autofree(instance.generate_next()))
+			if autofree(instance.generate_next()) == null:
+				nulls += 1
+		assert_eq(nulls, 0)
 
 	func test_generating_another_level_after_the_last_available_one_yields_null():
 		for _i in range(instance.get_remaining_level_count()):
-			assert_not_null(autofree(instance.generate_next()))
+			instance.generate_next().free()
 		assert_null(instance.generate_next())
 
 class TestLevelGeneratorPropertiesAfterLoad:
@@ -114,10 +108,7 @@ class TestLevelGeneratorPropertiesAfterLoad:
 	var instance: Generator
 
 	func before_each():
-		instance = Generator.new()
-
-	func after_each():
-		instance.free()
+		instance = autofree(Generator.new())
 
 	func test_generator_has_three_remaining_levels_after_loading_three_levels():
 		instance.load("res://test/resources/three_levels")
@@ -140,5 +131,5 @@ class TestLevelGeneratorPropertiesAfterLoad:
 	func test_generator_has_no_remaining_levels_after_loading_three_levels_and_generating_all():
 		instance.load("res://test/resources/three_levels")
 		for _i in range(3):
-			autofree(instance.generate_next())
+			instance.generate_next().free()
 		assert_false(instance.has_remaining_levels())

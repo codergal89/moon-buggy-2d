@@ -41,11 +41,7 @@ class TestSceneSetup:
 	var instance: Map
 
 	func before_each():
-		instance = autofree(Scene.instance())
-		add_child(instance)
-
-	func after_each():
-		remove_child(instance)
+		instance = add_child_autofree(Scene.instance())
 
 	func tile_map() -> TileMap:
 		return instance.get_node("Ground")
@@ -91,12 +87,8 @@ class TestSceneLevel:
 	var tile_map: TileMap
 
 	func before_each():
-		instance = autofree(Scene.instance())
+		instance = add_child_autofree(Scene.instance())
 		tile_map = instance.get_node("Ground")
-		add_child(instance)
-
-	func after_each():
-		remove_child(instance)
 
 	func set_empty_level():
 		instance.set_level(autofree(Level.new()), screen_width, screen_height)
@@ -110,9 +102,12 @@ class TestSceneLevel:
 	func test_setting_an_empty_level_places_only_ground_tiles():
 		set_empty_level()
 		var expected_tile: int = tile_map.tile_set.find_tile_by_name("ground")
+		var expected_cells: Array = []
+		var cells: Array = []
 		for position in tile_map.get_used_cells():
-			var tile: int = tile_map.get_cellv(position)
-			assert_eq(tile, expected_tile)
+			expected_cells.push_back(expected_tile)
+			cells.push_back(tile_map.get_cellv(position))
+		assert_eq(cells, expected_cells)
 
 	func test_setting_no_level_causes_the_world_end_to_be_at_zero():
 		assert_eq(instance.get_world_end(), 0)

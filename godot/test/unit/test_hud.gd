@@ -7,11 +7,7 @@ const LevelNumberPath = "RowContainer/TopRow/LevelNumber"
 var instance: HUD
 
 func before_each():
-	instance = autofree(Scene.instance())
-	add_child(instance)
-
-func after_each():
-	remove_child(instance)
+	instance = add_child_autofree(Scene.instance())
 
 func test_can_instantiate_hud():
 	assert_not_null(instance)
