@@ -15,6 +15,11 @@
 #include <TileMap.hpp>
 #include <Timer.hpp>
 
+#include <algorithm>
+#include <array>
+#include <iterator>
+#include <utility>
+
 namespace moon_buggy
 {
 
@@ -35,6 +40,8 @@ namespace moon_buggy
     auto settings = godot::ProjectSettings::get_singleton();
     window_height = settings->get_setting("display/window/size/height");
     window_width = settings->get_setting("display/window/size/width");
+
+    level_start_reason = start_reason::start_next;
   }
 
   auto Game::_ready() -> void
@@ -61,6 +68,7 @@ namespace moon_buggy
   auto Game::buggy_crashed(Buggy * buggy) -> void
   {
     scroll_camera->set_deferred("should_scroll", false);
+    level_start_reason = start_reason::retry;
 
     auto explosion = cast_to<godot::AnimatedSprite>(explosion_scene->instance());
     auto explosion_position = buggy->get_position();
@@ -80,6 +88,7 @@ namespace moon_buggy
     auto buggy = scroll_camera->get_typed_node<Buggy>("Buggy");
     auto fireworks = cast_to<godot::Particles2D>(fireworks_scene->instance());
 
+    level_start_reason = start_reason::start_next;
     fireworks->set_deferred("emitting", true);
     fireworks->set_position(buggy->get_position());
     restart_timer->start();
@@ -91,18 +100,29 @@ namespace moon_buggy
 
   auto Game::start_game() -> void
   {
-    main_menu->hide();
-    hud->show();
-
-    if (level_generator->has_remaining_levels())
+    switch (level_start_reason)
     {
-      current_level_number++;
-      current_level.reset(level_generator->generate_next());
+    case start_reason::start_next:
+      if (level_generator->has_remaining_levels())
+      {
+        current_level_number++;
+        current_level.reset(level_generator->generate_next());
+      }
+      break;
+    default:
+      break;
     }
 
-    map->set_level(current_level.get(), window_width, window_height);
+    start_level();
+  }
 
+  auto Game::start_level() -> void
+  {
+    main_menu->hide();
+    hud->show();
     hud->set_level_number(current_level_number);
+
+    map->set_level(current_level.get(), window_width, window_height);
 
     scroll_camera->set_position(godot::Vector2{0.f, 0.f});
     scroll_camera->set("limit_left", map->get_world_end());
@@ -117,6 +137,31 @@ namespace moon_buggy
     kill_zone->connect("body_entered", buggy, "kill_zone_entered");
 
     scroll_camera->set("should_scroll", true);
+  }
+
+  auto constexpr start_reason_strings = std::array{
+      std::pair{Game::start_reason::start_next, "start next"},
+      std::pair{Game::start_reason::retry, "retry"},
+  };
+
+  auto to_string(Game::start_reason reason) -> godot::String
+  {
+    auto found = find_if(cbegin(start_reason_strings), cend(start_reason_strings), [=](auto mapping) { return mapping.first == reason; });
+    if (found != cend(start_reason_strings))
+    {
+      return found->second;
+    }
+    return "INVALID_ENUM_CONSTANT";
+  }
+
+  auto to_reason(godot::String string) -> Game::start_reason
+  {
+    auto found = find_if(cbegin(start_reason_strings), cend(start_reason_strings), [&](auto mapping) { return mapping.second == string; });
+    if (found != cend(start_reason_strings))
+    {
+      return found->first;
+    }
+    return static_cast<Game::start_reason>(-1);
   }
 
 }  // namespace moon_buggy

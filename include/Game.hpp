@@ -16,6 +16,7 @@
 #include <Node.hpp>
 #include <PackedScene.hpp>
 #include <Ref.hpp>
+#include <String.hpp>
 #include <Timer.hpp>
 
 #include <cstddef>
@@ -28,6 +29,12 @@ namespace moon_buggy
       : godot::Node
       , TypedNodeCastMixin<Game>
   {
+    enum struct start_reason
+    {
+      start_next,
+      retry,
+    };
+
     auto static _register_methods() -> void;
 
     auto _init() -> void;
@@ -39,12 +46,14 @@ namespace moon_buggy
     auto buggy_crashed(Buggy * buggy) -> void;
     auto goal_reached() -> void;
     auto start_game() -> void;
+    auto start_level() -> void;
 
     std::uint64_t window_width{};
     std::uint64_t window_height{};
     int number_of_levels{};
     int current_level_number{};
     object_ptr<Level> current_level{};
+    start_reason level_start_reason{};
 
     godot::Timer * restart_timer;
     LevelGenerator * level_generator;
@@ -58,6 +67,9 @@ namespace moon_buggy
     godot::Ref<godot::PackedScene> explosion_scene{};
     godot::Ref<godot::PackedScene> fireworks_scene{};
   };
+
+  auto to_string(Game::start_reason reason) -> godot::String;
+  auto to_reason(godot::String string) -> Game::start_reason;
 
 }  // namespace moon_buggy
 
