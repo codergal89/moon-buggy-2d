@@ -11,7 +11,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="RowContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -22,37 +22,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopRow" type="HBoxContainer" parent="VBoxContainer"]
+[node name="TopRow" type="HBoxContainer" parent="RowContainer"]
 margin_right = 704.0
 margin_bottom = 26.0
 custom_constants/separation = 8
 
-[node name="Spacer" type="Control" parent="VBoxContainer/TopRow"]
+[node name="Spacer" type="Control" parent="RowContainer/TopRow"]
 margin_right = 604.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="Level" type="Label" parent="VBoxContainer/TopRow"]
+[node name="Level" type="Label" parent="RowContainer/TopRow"]
 margin_left = 612.0
 margin_right = 684.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 1 )
 text = "Level:"
 
-[node name="LevelNumber" type="Label" parent="VBoxContainer/TopRow"]
+[node name="LevelNumber" type="Label" parent="RowContainer/TopRow"]
 margin_left = 692.0
 margin_right = 704.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 1 )
 text = "0"
 
-[node name="Spacer" type="Control" parent="VBoxContainer"]
+[node name="Spacer" type="Control" parent="RowContainer"]
 margin_top = 30.0
 margin_right = 704.0
 margin_bottom = 460.0
 size_flags_vertical = 3
 
-[node name="BottomRow" type="HBoxContainer" parent="VBoxContainer"]
+[node name="BottomRow" type="HBoxContainer" parent="RowContainer"]
 margin_top = 464.0
 margin_right = 704.0
 margin_bottom = 464.0

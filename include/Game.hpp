@@ -2,6 +2,7 @@
 #define MOON_BUGGY_2D_GAME_HPP
 
 #include "Buggy.hpp"
+#include "HUD.hpp"
 #include "Level.hpp"
 #include "LevelGenerator.hpp"
 #include "MainMenu.hpp"
@@ -50,6 +51,7 @@ namespace moon_buggy
     Map * map;
     MainMenu * main_menu;
     ScrollCamera * scroll_camera;
+    HUD * hud;
     godot::Area2D * kill_zone;
 
     godot::Ref<godot::PackedScene> buggy_scene{};

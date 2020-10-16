@@ -5,6 +5,7 @@
 
 #include <Control.hpp>
 #include <Godot.hpp>
+#include <Label.hpp>
 
 namespace moon_buggy
 {
@@ -16,8 +17,14 @@ namespace moon_buggy
     auto static _register_methods() -> void;
 
     auto _init() -> void;
+    auto _ready() -> void;
+
+    auto set_level_number(int number) -> void;
 
     GODOT_CLASS(HUD, godot::Control)  // NOLINT
+
+  private:
+    godot::Label * level_number{};
   };
 
 }  // namespace moon_buggy

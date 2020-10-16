@@ -46,8 +46,12 @@ namespace moon_buggy
     main_menu = get_typed_node<MainMenu>("GUI/MainMenu");
     main_menu->show();
 
+    hud = get_typed_node<HUD>("GUI/HUD");
+    hud->hide();
+
     restart_timer = get_typed_node<godot::Timer>("RestartTimer");
     restart_timer->connect("timeout", main_menu, "show");
+    restart_timer->connect("timeout", hud, "hide");
 
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
     scroll_camera->set("should_scroll", true);
@@ -65,6 +69,7 @@ namespace moon_buggy
     explosion->set_position(explosion_position);
     explosion->connect("animation_finished", explosion, "queue_free");
     explosion->connect("animation_finished", main_menu, "show");
+    explosion->connect("animation_finished", hud, "hide");
     explosion->call_deferred("play");
 
     buggy->queue_free();
@@ -87,13 +92,17 @@ namespace moon_buggy
   auto Game::start_game() -> void
   {
     main_menu->hide();
+    hud->show();
 
     if (level_generator->has_remaining_levels())
     {
+      current_level_number++;
       current_level.reset(level_generator->generate_next());
     }
 
     map->set_level(current_level.get(), window_width, window_height);
+
+    hud->set_level_number(current_level_number);
 
     scroll_camera->set_position(godot::Vector2{0.f, 0.f});
     scroll_camera->set("limit_left", map->get_world_end());
