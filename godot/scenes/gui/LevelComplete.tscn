@@ -4,7 +4,6 @@
 [ext_resource path="res://scripts/gui/LevelComplete.gdns" type="Script" id=2]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
 
-
 [node name="LevelComplete" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,18 +29,19 @@ __meta__ = {
 margin_top = 154.0
 margin_right = 656.0
 margin_bottom = 180.0
+custom_constants/separation = 10
 alignment = 1
 
 [node name="Message" type="Label" parent="RowContainer/MessageContainer"]
-margin_left = 164.0
-margin_right = 464.0
+margin_left = 167.0
+margin_right = 455.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 1 )
-text = "You Have Completed Level "
+text = "You Have Completed Level"
 
 [node name="LevelNumber" type="Label" parent="RowContainer/MessageContainer"]
-margin_left = 468.0
-margin_right = 492.0
+margin_left = 465.0
+margin_right = 489.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 1 )
 text = "#0"
