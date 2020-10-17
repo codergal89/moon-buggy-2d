@@ -6,6 +6,7 @@ project("Moon Buggy 2D"
   DESCRIPTION "A 2D implementation of the classic Moon Buggy terminal game"
 )
 
+include("CTest")
 include("FetchContent")
 
 ### Conan
@@ -26,6 +27,13 @@ conan_cmake_run(CONANFILE "conanfile.txt"
   BUILD "missing"
   ${OS_SETTING}
   OUTPUT_QUIET
+)
+
+### Godot
+
+find_program(GODOT_EXE
+  NAMES "godot" "org.godotengine.Godot"
+  DOC "Godot engine executable"
 )
 
 ### Clang-tidy
@@ -105,12 +113,18 @@ if(NOT CMAKE_CROSSCOMPILING)
   )
 endif()
 
-### Export
+### GUT Tests
 
-find_program(GODOT_EXE
-  NAMES "godot" "org.godotengine.Godot"
-  DOC "Godot engine executable"
-)
+if(GODOT_EXE)
+  add_test(NAME "GUTTests"
+    COMMAND "${GODOT_EXE}"
+    "--verbose"
+    "--path" "${PROJECT_SOURCE_DIR}/godot"
+    "-s" "addons/gut/gut_cmdln.gd"
+  )
+endif()
+
+### Export
 
 if(GODOT_EXE)
   set(GODOT_EXPORT_PLATFORM "${CMAKE_SYSTEM_NAME}")
