@@ -1,7 +1,7 @@
 extends "res://addons/gut/test.gd"
 
-const HUD = preload("res://scripts/HUD.gdns")
-const Scene = preload("res://scenes/HUD.tscn")
+const HUD = preload("res://scripts/gui/HUD.gdns")
+const Scene = preload("res://scenes/gui/HUD.tscn")
 const LevelNumberPath = "RowContainer/TopRow/LevelNumber"
 
 var instance: HUD

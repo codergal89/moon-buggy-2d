@@ -4,7 +4,7 @@ extends "res://addons/gut/test.gd"
 class TestScript:
 	extends "res://addons/gut/test.gd"
 	
-	const Map = preload("res://scripts/Map.gdns")
+	const Map = preload("res://scripts/game/Map.gdns")
 	const GroundTiles = preload("res://assets/tiles/ground_tiles.tres")
 
 	var instance: Map
@@ -34,8 +34,8 @@ class TestScript:
 class TestSceneSetup:
 	extends "res://addons/gut/test.gd"
 
-	const Map = preload("res://scripts/Map.gdns")
-	const Scene = preload("res://scenes/Map.tscn")
+	const Map = preload("res://scripts/game/Map.gdns")
+	const Scene = preload("res://scenes/game/Map.tscn")
 	const GroundTiles = preload("res://assets/tiles/ground_tiles.tres")
 
 	var instance: Map
@@ -74,9 +74,9 @@ class TestSceneSetup:
 class TestSceneLevel:
 	extends "res://addons/gut/test.gd"
 
-	const Map = preload("res://scripts/Map.gdns")
-	const Scene = preload("res://scenes/Map.tscn")
-	const Level = preload("res://scripts/Level.gdns")
+	const Map = preload("res://scripts/game/Map.gdns")
+	const Scene = preload("res://scenes/game/Map.tscn")
+	const Level = preload("res://scripts/core/Level.gdns")
 	const GroundTiles = preload("res://assets/tiles/ground_tiles.tres")
 
 	const screen_width: int = 128

@@ -4,7 +4,7 @@ extends "res://addons/gut/test.gd"
 class TestLevelGeneratorParameters:
 	extends "res://addons/gut/test.gd"
 
-	const Generator = preload("res://scripts/LevelGenerator.gdns")
+	const Generator = preload("res://scripts/game/LevelGenerator.gdns")
 	var instance: Generator
 
 	func before_each():
@@ -52,7 +52,7 @@ class TestLevelGeneratorParameters:
 class TestLevelGeneratorLoadConfiguration:
 	extends "res://addons/gut/test.gd"
 
-	const Generator = preload("res://scripts/LevelGenerator.gdns")
+	const Generator = preload("res://scripts/game/LevelGenerator.gdns")
 	var instance: Generator
 
 	func before_each():
@@ -79,7 +79,7 @@ class TestLevelGeneratorLoadConfiguration:
 class TestLevelGeneratorGenerateNext:
 	extends "res://addons/gut/test.gd"
 
-	const Generator = preload("res://scripts/LevelGenerator.gdns")
+	const Generator = preload("res://scripts/game/LevelGenerator.gdns")
 	var instance: Generator
 
 	func before_each():
@@ -104,7 +104,7 @@ class TestLevelGeneratorGenerateNext:
 class TestLevelGeneratorPropertiesAfterLoad:
 	extends "res://addons/gut/test.gd"
 
-	const Generator = preload("res://scripts/LevelGenerator.gdns")
+	const Generator = preload("res://scripts/game/LevelGenerator.gdns")
 	var instance: Generator
 
 	func before_each():

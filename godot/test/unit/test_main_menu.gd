@@ -1,7 +1,7 @@
 extends "res://addons/gut/test.gd"
 
-const Scene = preload("res://scenes/MainMenu.tscn")
-const MainMenu = preload("res://scripts/MainMenu.gdns")
+const Scene = preload("res://scenes/gui/MainMenu.tscn")
+const MainMenu = preload("res://scripts/gui/MainMenu.gdns")
 
 func test_can_instantiate_main_menu():
 	assert_not_null(autofree(MainMenu.new()))
