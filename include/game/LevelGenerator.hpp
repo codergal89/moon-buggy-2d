@@ -1,10 +1,10 @@
 #ifndef MOON_BUGGY_2D_LEVEL_GENERATOR_HPP
 #define MOON_BUGGY_2D_LEVEL_GENERATOR_HPP
 
-#include "Level.hpp"
-#include "LevelDescriptor.hpp"
-#include "ObjectPointer.hpp"
-#include "TypedNodeCastMixin.hpp"
+#include "core/Level.hpp"
+#include "core/LevelDescriptor.hpp"
+#include "support/ObjectPointer.hpp"
+#include "support/TypedNodeCastMixin.hpp"
 
 #include <Godot.hpp>
 #include <Node.hpp>

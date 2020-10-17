@@ -1,16 +1,16 @@
 #ifndef MOON_BUGGY_2D_GAME_HPP
 #define MOON_BUGGY_2D_GAME_HPP
 
-#include "Buggy.hpp"
-#include "HUD.hpp"
-#include "Level.hpp"
-#include "LevelComplete.hpp"
-#include "LevelGenerator.hpp"
-#include "MainMenu.hpp"
-#include "Map.hpp"
-#include "ObjectPointer.hpp"
-#include "ScrollCamera.hpp"
-#include "TypedNodeCastMixin.hpp"
+#include "core/Level.hpp"
+#include "game/Buggy.hpp"
+#include "game/LevelGenerator.hpp"
+#include "game/Map.hpp"
+#include "game/ScrollCamera.hpp"
+#include "gui/HUD.hpp"
+#include "gui/LevelComplete.hpp"
+#include "gui/MainMenu.hpp"
+#include "support/ObjectPointer.hpp"
+#include "support/TypedNodeCastMixin.hpp"
 
 #include <Area2D.hpp>
 #include <Control.hpp>

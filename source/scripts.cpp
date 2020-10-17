@@ -1,13 +1,13 @@
-#include "Buggy.hpp"
-#include "Game.hpp"
-#include "HUD.hpp"
-#include "Level.hpp"
-#include "LevelComplete.hpp"
-#include "LevelDescriptor.hpp"
-#include "LevelGenerator.hpp"
-#include "MainMenu.hpp"
-#include "Map.hpp"
-#include "ScrollCamera.hpp"
+#include "core/Level.hpp"
+#include "core/LevelDescriptor.hpp"
+#include "game/Buggy.hpp"
+#include "game/Game.hpp"
+#include "game/LevelGenerator.hpp"
+#include "game/Map.hpp"
+#include "game/ScrollCamera.hpp"
+#include "gui/HUD.hpp"
+#include "gui/LevelComplete.hpp"
+#include "gui/MainMenu.hpp"
 
 #include <GDNative.hpp>
 

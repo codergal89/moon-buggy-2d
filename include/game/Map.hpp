@@ -1,8 +1,8 @@
 #ifndef MOON_BUGGY_2D_MAP_HPP
 #define MOON_BUGGY_2D_MAP_HPP
 
-#include "Level.hpp"
-#include "TypedNodeCastMixin.hpp"
+#include "core/Level.hpp"
+#include "support/TypedNodeCastMixin.hpp"
 
 #include <Godot.hpp>
 #include <Node2D.hpp>

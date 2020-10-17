@@ -1,7 +1,7 @@
 #ifndef MOON_BUGGY_2D_MAIN_MENU
 #define MOON_BUGGY_2D_MAIN_MENU
 
-#include "TypedNodeCastMixin.hpp"
+#include "support/TypedNodeCastMixin.hpp"
 
 #include <Button.hpp>
 #include <Control.hpp>

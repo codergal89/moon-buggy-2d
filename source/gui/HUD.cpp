@@ -1,4 +1,4 @@
-#include "HUD.hpp"
+#include "gui/HUD.hpp"
 
 #include <Godot.hpp>
 #include <Label.hpp>

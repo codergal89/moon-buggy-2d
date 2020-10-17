@@ -1,4 +1,4 @@
-#include "MainMenu.hpp"
+#include "gui/MainMenu.hpp"
 
 #include <Button.hpp>
 #include <Dictionary.hpp>

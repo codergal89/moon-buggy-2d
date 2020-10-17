@@ -1,7 +1,7 @@
 #ifndef MOON_BUGGY_2D_SCROLL_CAMERA_HPP
 #define MOON_BUGGY_2D_SCROLL_CAMERA_HPP
 
-#include "TypedNodeCastMixin.hpp"
+#include "support/TypedNodeCastMixin.hpp"
 
 #include <Area2D.hpp>
 #include <Camera2D.hpp>

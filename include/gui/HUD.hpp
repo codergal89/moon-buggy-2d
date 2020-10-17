@@ -1,7 +1,7 @@
-#ifndef MOON_BUGGY_2D_LEVEL_COMPLETE_HPP
-#define MOON_BUGGY_2D_LEVEL_COMPLETE_HPP
+#ifndef MOON_BUGGY_2D_HUD_HPP
+#define MOON_BUGGY_2D_HUD_HPP
 
-#include "TypedNodeCastMixin.hpp"
+#include "support/TypedNodeCastMixin.hpp"
 
 #include <Control.hpp>
 #include <Godot.hpp>
@@ -10,9 +10,9 @@
 namespace moon_buggy
 {
 
-  struct LevelComplete
+  struct HUD
       : godot::Control
-      , TypedNodeCastMixin<LevelComplete>
+      , TypedNodeCastMixin<HUD>
   {
     auto static _register_methods() -> void;
 
@@ -21,12 +21,10 @@ namespace moon_buggy
 
     auto set_level_number(int number) -> void;
 
-    GODOT_CLASS(LevelComplete, godot::Control)  // NOLINT
+    GODOT_CLASS(HUD, godot::Control)  // NOLINT
 
   private:
-    auto start_button_clicked() -> void;
-
-    godot::Label * level_number;
+    godot::Label * level_number{};
   };
 
 }  // namespace moon_buggy

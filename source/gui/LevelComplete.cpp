@@ -1,4 +1,4 @@
-#include "LevelComplete.hpp"
+#include "gui/LevelComplete.hpp"
 
 #include <Array.hpp>
 #include <Dictionary.hpp>

@@ -1,4 +1,4 @@
-#include "ScrollCamera.hpp"
+#include "game/ScrollCamera.hpp"
 
 #include <Area2D.hpp>
 #include <Defs.hpp>

@@ -1,7 +1,7 @@
-#include "Map.hpp"
+#include "game/Map.hpp"
 
-#include "ArrayIterator.hpp"
-#include "Level.hpp"
+#include "core/Level.hpp"
+#include "support/ArrayIterator.hpp"
 
 #include <Defs.hpp>
 #include <GodotGlobal.hpp>

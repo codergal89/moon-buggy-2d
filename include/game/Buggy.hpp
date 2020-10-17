@@ -1,7 +1,7 @@
 #ifndef MOON_BUGGY_2D_BUGGY_HPP
 #define MOON_BUGGY_2D_BUGGY_HPP
 
-#include "TypedNodeCastMixin.hpp"
+#include "support/TypedNodeCastMixin.hpp"
 
 #include <Defs.hpp>
 #include <Godot.hpp>

@@ -44,16 +44,17 @@ endif()
 
 add_library("scripts" SHARED
   "source/scripts.cpp"
-  "source/Buggy.cpp"
-  "source/Game.cpp"
-  "source/HUD.cpp"
-  "source/Level.cpp"
-  "source/LevelComplete.cpp"
-  "source/LevelDescriptor.cpp"
-  "source/LevelGenerator.cpp"
-  "source/MainMenu.cpp"
-  "source/Map.cpp"
-  "source/ScrollCamera.cpp"
+
+  "source/core/Level.cpp"
+  "source/core/LevelDescriptor.cpp"
+  "source/game/Buggy.cpp"
+  "source/game/Game.cpp"
+  "source/game/LevelGenerator.cpp"
+  "source/game/Map.cpp"
+  "source/game/ScrollCamera.cpp"
+  "source/gui/HUD.cpp"
+  "source/gui/LevelComplete.cpp"
+  "source/gui/MainMenu.cpp"
 )
 
 target_include_directories("scripts" PRIVATE

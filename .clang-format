@@ -57,7 +57,7 @@ FixNamespaceComments: true
 IncludeBlocks: Regroup
 IncludeCategories:
     # Local Headers
-    - Regex: '".+\.hpp"'
+    - Regex: '".+/.+\.hpp"'
       Priority: 100
     # General System Headers
     - Regex: '<([[:alnum:]._]/*)+\.(h|hpp)>'

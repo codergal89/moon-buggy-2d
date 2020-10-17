@@ -1,8 +1,8 @@
-#include "LevelGenerator.hpp"
+#include "game/LevelGenerator.hpp"
 
-#include "ArrayIterator.hpp"
-#include "Level.hpp"
-#include "LevelDescriptor.hpp"
+#include "core/Level.hpp"
+#include "core/LevelDescriptor.hpp"
+#include "support/ArrayIterator.hpp"
 
 #include <Array.hpp>
 #include <Defs.hpp>

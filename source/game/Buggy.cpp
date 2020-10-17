@@ -1,4 +1,4 @@
-#include "Buggy.hpp"
+#include "game/Buggy.hpp"
 
 #include <AnimatedSprite.hpp>
 #include <Camera2D.hpp>

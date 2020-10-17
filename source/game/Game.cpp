@@ -1,8 +1,8 @@
-#include "Game.hpp"
+#include "game/Game.hpp"
 
-#include "Buggy.hpp"
-#include "Level.hpp"
-#include "ScrollCamera.hpp"
+#include "core/Level.hpp"
+#include "game/Buggy.hpp"
+#include "game/ScrollCamera.hpp"
 
 #include <AnimatedSprite.hpp>
 #include <Camera2D.hpp>
