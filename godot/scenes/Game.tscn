@@ -40,6 +40,7 @@ script = ExtResource( 7 )
 visible = false
 
 [node name="BuggyCrashed" parent="GUI" instance=ExtResource( 14 )]
+visible = false
 
 [node name="HUD" parent="GUI" instance=ExtResource( 12 )]
 visible = false
