@@ -17,6 +17,9 @@
 
 [node name="Game" type="Node"]
 script = ExtResource( 8 )
+__meta__ = {
+"_edit_vertical_guides_": [ 963.41 ]
+}
 buggy_scene = ExtResource( 5 )
 explosion_scene = ExtResource( 10 )
 fireworks_scene = ExtResource( 4 )
