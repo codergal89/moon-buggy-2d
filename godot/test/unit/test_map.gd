@@ -93,19 +93,29 @@ class TestSceneLevel:
 	func set_empty_level():
 		instance.set_level(autofree(Level.new()), screen_width, screen_height)
 
-	func test_setting_an_empty_level_places_two_screen_widths_of_tiles():
+	func test_setting_an_empty_level_places_two_times_two_screen_widths_of_tiles():
 		set_empty_level()
-		var expected_number_of_ground_tiles: int = 2 * screen_width / tile_size
+		var expected_number_of_ground_tiles: int = 2 * 2 * screen_width / tile_size
 		var used_cells = tile_map.get_used_cells()
 		assert_eq(used_cells.size(), expected_number_of_ground_tiles)
 
-	func test_setting_an_empty_level_places_only_ground_tiles():
+	func test_setting_an_empty_level_places_ground_and_ground_layer1_tiles():
 		set_empty_level()
-		var expected_tile: int = tile_map.tile_set.find_tile_by_name("ground")
+		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground")
+		var layer1_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer1")
 		var expected_cells: Array = []
 		var cells: Array = []
-		for position in tile_map.get_used_cells():
-			expected_cells.push_back(expected_tile)
+
+		var used_cells: Array = tile_map.get_used_cells()
+		var used_cell_count: int = used_cells.size()
+
+		for i in range(used_cell_count / 2):
+			expected_cells.push_back(ground_tile)
+
+		for i in range(used_cell_count / 2):
+			expected_cells.push_back(layer1_tile)
+
+		for position in used_cells:
 			cells.push_back(tile_map.get_cellv(position))
 		assert_eq(cells, expected_cells)
 
