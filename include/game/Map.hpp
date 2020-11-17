@@ -20,6 +20,7 @@ namespace moon_buggy
       , TypedNodeCastMixin<Map>
   {
     auto static constexpr ground_tile_name{"ground"};
+    auto static constexpr ground_layer1_tile_name{"ground_layer1"};
     auto static constexpr hole_tile_name{"hole"};
     auto static constexpr left_shoulder_tile_name{"left_shoulder"};
     auto static constexpr right_shoulder_tile_name{"right_shoulder"};

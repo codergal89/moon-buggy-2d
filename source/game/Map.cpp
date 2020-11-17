@@ -75,10 +75,16 @@ namespace moon_buggy
     generate_n(back_inserter(tile_ids), x_tiles_per_screen, [&] { return ground_tile; });
 
     auto right = x_tiles_per_screen - 1;
-    auto bottom = y_tiles_per_screen - 1;
+    auto bottom = y_tiles_per_screen - 2;
     for_each(cbegin(tile_ids), cend(tile_ids), [x = 0, this, bottom, right](auto tile_id) mutable {
       ground->set_cell(right - x++, bottom, tile_id);
     });
+
+    auto ground_layer1_tile = tile_set->find_tile_by_name(ground_layer1_tile_name);
+    for (auto x{0}; x < 2 * x_tiles_per_screen + level->tiles.size(); ++x)
+    {
+      ground->set_cell(right - x, bottom + 1, ground_layer1_tile);
+    }
   }
 
   auto Map::get_world_end() -> std::int64_t
