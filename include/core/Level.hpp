@@ -13,7 +13,9 @@ namespace moon_buggy
     enum struct Tile
     {
       ground,
-      hole
+      hole,
+      left_shoulder,
+      right_shoulder,
     };
 
     auto static _register_methods() -> void;

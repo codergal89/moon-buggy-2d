@@ -126,7 +126,9 @@ namespace moon_buggy
       auto platform_length = random_number_generator->randi_range(descriptor->minimum_platform_length, descriptor->maximum_platform_length);
 
       std::generate_n(back_inserter(generated->tiles), platform_length, [] { return static_cast<int>(Level::Tile::ground); });
-      std::generate_n(back_inserter(generated->tiles), hole_length, [] { return static_cast<int>(Level::Tile::hole); });
+      generated->tiles.push_back(static_cast<int>(Level::Tile::right_shoulder));
+      std::generate_n(back_inserter(generated->tiles), hole_length - 2, [] { return static_cast<int>(Level::Tile::hole); });
+      generated->tiles.push_back(static_cast<int>(Level::Tile::left_shoulder));
     }
 
     return generated.release();

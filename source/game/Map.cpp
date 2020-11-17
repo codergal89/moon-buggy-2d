@@ -51,6 +51,8 @@ namespace moon_buggy
 
     auto ground_tile = tile_set->find_tile_by_name(ground_tile_name);
     auto hole_tile = tile_set->find_tile_by_name(hole_tile_name);
+    auto left_shoulder_tile = tile_set->find_tile_by_name(left_shoulder_tile_name);
+    auto right_shoulder_tile = tile_set->find_tile_by_name(right_shoulder_tile_name);
 
     generate_n(back_inserter(tile_ids), x_tiles_per_screen, [&] { return ground_tile; });
 
@@ -61,6 +63,10 @@ namespace moon_buggy
         return ground_tile;
       case Level::Tile::hole:
         return hole_tile;
+      case Level::Tile::left_shoulder:
+        return left_shoulder_tile;
+      case Level::Tile::right_shoulder:
+        return right_shoulder_tile;
       default:
         return static_cast<std::int64_t>(-1);
       }

@@ -21,6 +21,8 @@ namespace moon_buggy
   {
     auto static constexpr ground_tile_name{"ground"};
     auto static constexpr hole_tile_name{"hole"};
+    auto static constexpr left_shoulder_tile_name{"left_shoulder"};
+    auto static constexpr right_shoulder_tile_name{"right_shoulder"};
 
     auto static _register_methods() -> void;
 
