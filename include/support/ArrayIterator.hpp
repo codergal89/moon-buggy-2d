@@ -6,6 +6,7 @@
 
 #include <cstddef>
 #include <iterator>
+#include <type_traits>
 
 namespace godot
 {
@@ -16,16 +17,19 @@ namespace godot
     using value_type = ValueType;
     using difference_type = std::ptrdiff_t;
     using reference = value_type &;
+    using const_reference = value_type const &;
     using pointer = value_type *;
+    using const_pointer = value_type const *;
     using iterator_category = std::random_access_iterator_tag;
+    using container_type = std::conditional_t<std::is_const_v<ValueType>, Array const, Array>;
 
-    constexpr ArrayIterator(Array & array, difference_type position)
+    constexpr ArrayIterator(container_type & array, difference_type position)
         : m_array{&array}
         , m_position{position}
     {
     }
 
-    explicit constexpr ArrayIterator(Array & array)
+    explicit constexpr ArrayIterator(container_type & array)
         : ArrayIterator{array, 0}
     {
     }
@@ -115,7 +119,7 @@ namespace godot
       return result;
     }
 
-    auto operator*() const -> reference
+    auto operator*() const -> std::conditional_t<std::is_const_v<ValueType>, value_type, reference>
     {
       return (*m_array)[static_cast<int>(m_position)];
     }
@@ -126,7 +130,7 @@ namespace godot
     }
 
   private:
-    Array * m_array;
+    container_type * m_array;
     difference_type m_position;
   };
 
@@ -179,12 +183,12 @@ namespace godot
     return {array, array.size()};
   }
 
-  auto inline constexpr cbegin(Array & array) -> ArrayIterator<Variant const>
+  auto inline constexpr cbegin(Array const & array) -> ArrayIterator<Variant const>
   {
     return ArrayIterator<Variant const>{array};
   }
 
-  auto inline cend(Array & array) -> ArrayIterator<Variant const>
+  auto inline cend(Array const & array) -> ArrayIterator<Variant const>
   {
     return {array, array.size()};
   }

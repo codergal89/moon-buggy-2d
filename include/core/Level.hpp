@@ -12,10 +12,13 @@ namespace moon_buggy
   {
     enum struct Tile
     {
-      ground,
+      ground_layer1_border,
+      ground_surface,
       hole,
       left_shoulder,
+      long_stone1,
       right_shoulder,
+      small_stone1,
     };
 
     auto static _register_methods() -> void;

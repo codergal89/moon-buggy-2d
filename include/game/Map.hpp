@@ -11,6 +11,7 @@
 #include <TileSet.hpp>
 
 #include <cstdint>
+#include <map>
 
 namespace moon_buggy
 {
@@ -19,12 +20,6 @@ namespace moon_buggy
       : godot::Node2D
       , TypedNodeCastMixin<Map>
   {
-    auto static constexpr ground_tile_name{"ground"};
-    auto static constexpr ground_layer1_tile_name{"ground_layer1"};
-    auto static constexpr hole_tile_name{"hole"};
-    auto static constexpr left_shoulder_tile_name{"left_shoulder"};
-    auto static constexpr right_shoulder_tile_name{"right_shoulder"};
-
     auto static _register_methods() -> void;
 
     auto _init() -> void;
@@ -35,6 +30,10 @@ namespace moon_buggy
 
   private:
     GODOT_CLASS(Map, godot::Node2D)  // NOLINT
+
+    auto generate_surface(Level const & level, std::int64_t x_tiles_per_screen, std::int64_t bottom, std::int64_t right) const -> void;
+
+    std::map<Level::Tile, std::int64_t> m_tile_ids{};
 
     std::int64_t end_tile{};
 
