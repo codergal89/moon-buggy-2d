@@ -101,8 +101,8 @@ class TestSceneLevel:
 
 	func test_setting_an_empty_level_places_ground_and_ground_layer1_tiles():
 		set_empty_level()
-		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground")
-		var layer1_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer1")
+		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground_surface")
+		var layer1_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer1_border")
 		var expected_cells: Array = []
 		var cells: Array = []
 
