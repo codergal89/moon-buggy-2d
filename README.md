@@ -4,6 +4,8 @@
 
 Moon Buggy 2D is a 2D reimplementation of the classic [moon buggy](https://www.seehuhn.de/pages/moon-buggy) terminal game, using the [Godot](https://godotengine.org) game engine.
 
+![Main Menu](doc/main_menu.png)
+
 ## Asset Licenses
 
 All assets used in this project are licensed as follows:

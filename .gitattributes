@@ -3,4 +3,6 @@ godot/assets/**/*.ttf filter=lfs diff=lfs merge=lfs -text
 
 godot/addons/* linguist-vendored
 
+doc/**/*.png filter=lfs diff=lfs merge=lfs -text
+
 * text=auto
