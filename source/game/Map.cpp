@@ -5,6 +5,7 @@
 
 #include <Defs.hpp>
 #include <GodotGlobal.hpp>
+#include <RandomNumberGenerator.hpp>
 #include <Ref.hpp>
 #include <TileMap.hpp>
 #include <TileSet.hpp>
@@ -70,6 +71,17 @@ namespace moon_buggy
     for (auto x{0}; x < 2 * x_tiles_per_screen + level->tiles.size(); ++x)
     {
       ground->set_cell(right - x, bottom + 1, m_tile_ids[Level::Tile::ground_layer1_border]);
+    }
+
+    auto rng = godot::Ref<godot::RandomNumberGenerator>{};
+    rng.instance();
+
+    auto stones_layer1 = get_typed_node<godot::TileMap>("StonesLayer1");
+
+    for (auto i{0}; i < 25; ++i)
+    {
+      auto pos = rng->randi_range(right, end_tile);
+      stones_layer1->set_cell(pos, bottom + 1, m_tile_ids[Level::Tile::small_stone1]);
     }
   }
 
