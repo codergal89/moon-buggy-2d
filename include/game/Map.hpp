@@ -4,11 +4,12 @@
 #include "core/Level.hpp"
 #include "support/TypedNodeCastMixin.hpp"
 
+#include <Array.hpp>
 #include <Godot.hpp>
+#include <ImageTexture.hpp>
 #include <Node2D.hpp>
 #include <Ref.hpp>
 #include <TileMap.hpp>
-#include <TileSet.hpp>
 
 #include <cstdint>
 #include <map>
@@ -37,8 +38,8 @@ namespace moon_buggy
 
     std::int64_t end_tile{};
 
-    godot::Ref<godot::TileSet> tile_set{};
-
+    godot::Array ground_textures{};
+    godot::Ref<godot::ImageTexture> ground_texture{};
     godot::TileMap * ground{};
     godot::TileMap * holes{};
   };

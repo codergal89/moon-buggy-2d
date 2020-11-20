@@ -5,7 +5,7 @@ class TestScript:
 	extends "res://addons/gut/test.gd"
 	
 	const Map = preload("res://scripts/game/Map.gdns")
-	const GroundTiles = preload("res://assets/tiles/ground_tiles.tres")
+	const GroundTiles = preload("res://assets/tiles/moon_tiles_set.tres")
 
 	var instance: Map
 	
@@ -14,16 +14,6 @@ class TestScript:
 
 	func test_can_instantiate_map():
 		assert_not_null(instance)
-
-	func test_has_tile_set_property():
-		assert_exports(instance, "tile_set", TYPE_OBJECT)
-
-	func test_has_no_tileset_by_default():
-		assert_null(instance["tile_set"])
-
-	func test_can_assign_tileset():
-		instance["tile_set"] = GroundTiles
-		assert_eq(instance["tile_set"], GroundTiles)
 
 	func test_has_set_level_function():
 		assert_has_method(instance, "set_level")
@@ -36,7 +26,7 @@ class TestSceneSetup:
 
 	const Map = preload("res://scripts/game/Map.gdns")
 	const Scene = preload("res://scenes/game/Map.tscn")
-	const GroundTiles = preload("res://assets/tiles/ground_tiles.tres")
+	const GroundTiles = preload("res://assets/tiles/moon_tiles_set.tres")
 
 	var instance: Map
 
@@ -48,9 +38,6 @@ class TestSceneSetup:
 
 	func test_can_instantiate_map_scene():
 		assert_not_null(instance)
-
-	func test_map_scene_uses_ground_tiles_as_default_tileset():
-		assert_eq(instance["tile_set"], GroundTiles)
 
 	func test_map_scene_has_a_node_called_Ground():
 		assert_not_null(tile_map())
@@ -77,7 +64,7 @@ class TestSceneLevel:
 	const Map = preload("res://scripts/game/Map.gdns")
 	const Scene = preload("res://scenes/game/Map.tscn")
 	const Level = preload("res://scripts/core/Level.gdns")
-	const GroundTiles = preload("res://assets/tiles/ground_tiles.tres")
+	const GroundTiles = preload("res://assets/tiles/moon_tiles_set.tres")
 
 	const screen_width: int = 128
 	const screen_height: int = 64
