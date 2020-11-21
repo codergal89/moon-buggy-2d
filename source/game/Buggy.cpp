@@ -1,21 +1,11 @@
 #include "game/Buggy.hpp"
 
-#include <AnimatedSprite.hpp>
-#include <Camera2D.hpp>
-#include <CollisionShape2D.hpp>
-#include <Godot.hpp>
 #include <Input.hpp>
-#include <KinematicCollision2D.hpp>
 #include <Physics2DDirectBodyState.hpp>
-#include <ProjectSettings.hpp>
-#include <Shape2D.hpp>
-#include <Sprite.hpp>
+#include <Variant.hpp>
 #include <Vector2.hpp>
 
-#include <algorithm>
 #include <cmath>
-#include <functional>
-#include <iterator>
 
 namespace moon_buggy
 {

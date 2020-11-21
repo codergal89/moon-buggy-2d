@@ -1,14 +1,9 @@
-#ifndef MOON_BUGGY_2D_GAME_HPP
-#define MOON_BUGGY_2D_GAME_HPP
+#ifndef MOON_BUGGY_2D_GAME_GAME_HPP
+#define MOON_BUGGY_2D_GAME_GAME_HPP
 
-#include "core/Level.hpp"
-#include "game/Buggy.hpp"
-#include "game/LevelGenerator.hpp"
-#include "game/Map.hpp"
-#include "game/ScrollCamera.hpp"
-#include "gui/HUD.hpp"
-#include "gui/LevelComplete.hpp"
-#include "gui/MainMenu.hpp"
+#include "core/Fwd.hpp"
+#include "game/Fwd.hpp"
+#include "gui/Fwd.hpp"
 #include "support/ObjectPointer.hpp"
 #include "support/TypedNodeCastMixin.hpp"
 
@@ -27,6 +22,15 @@
 
 namespace moon_buggy
 {
+
+  struct Level;
+  struct Buggy;
+  struct LevelGenerator;
+  struct Map;
+  struct ScrollCamera;
+  struct HUD;
+  struct LevelComplete;
+  struct MainMenu;
 
   struct Game
       : godot::Node

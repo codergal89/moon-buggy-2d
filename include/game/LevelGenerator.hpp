@@ -1,7 +1,7 @@
-#ifndef MOON_BUGGY_2D_LEVEL_GENERATOR_HPP
-#define MOON_BUGGY_2D_LEVEL_GENERATOR_HPP
+#ifndef MOON_BUGGY_2D_GAME_LEVEL_GENERATOR_HPP
+#define MOON_BUGGY_2D_GAME_LEVEL_GENERATOR_HPP
 
-#include "core/Level.hpp"
+#include "core/Fwd.hpp"
 #include "core/LevelDescriptor.hpp"
 #include "support/ObjectPointer.hpp"
 #include "support/TypedNodeCastMixin.hpp"

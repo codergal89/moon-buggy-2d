@@ -1,6 +1,12 @@
 #include "game/Game.hpp"
 
 #include "game/Buggy.hpp"
+#include "game/LevelGenerator.hpp"
+#include "game/Map.hpp"
+#include "game/ScrollCamera.hpp"
+#include "gui/HUD.hpp"
+#include "gui/LevelComplete.hpp"
+#include "gui/MainMenu.hpp"
 
 #include <AnimatedSprite.hpp>
 #include <Defs.hpp>

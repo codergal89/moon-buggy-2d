@@ -1,5 +1,5 @@
-#ifndef MOON_BUGGY_2D_BUGGY_HPP
-#define MOON_BUGGY_2D_BUGGY_HPP
+#ifndef MOON_BUGGY_2D_GAME_BUGGY_HPP
+#define MOON_BUGGY_2D_GAME_BUGGY_HPP
 
 #include "support/TypedNodeCastMixin.hpp"
 
@@ -7,7 +7,6 @@
 #include <Godot.hpp>
 #include <Physics2DDirectBodyState.hpp>
 #include <RigidBody2D.hpp>
-#include <Vector2.hpp>
 
 namespace moon_buggy
 {

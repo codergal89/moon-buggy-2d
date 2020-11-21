@@ -1,5 +1,6 @@
 #include "game/Game.hpp"
 
+#include "game/Buggy.hpp"
 #include "game/LevelGenerator.hpp"
 #include "game/Map.hpp"
 #include "game/ScrollCamera.hpp"

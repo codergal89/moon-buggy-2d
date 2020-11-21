@@ -1,14 +1,11 @@
-#ifndef MOON_BUGGY_2D_MAP_HPP
-#define MOON_BUGGY_2D_MAP_HPP
+#ifndef MOON_BUGGY_2D_GAME_MAP_HPP
+#define MOON_BUGGY_2D_GAME_MAP_HPP
 
 #include "core/Level.hpp"
 #include "support/TypedNodeCastMixin.hpp"
 
-#include <Array.hpp>
 #include <Godot.hpp>
-#include <ImageTexture.hpp>
 #include <Node2D.hpp>
-#include <Ref.hpp>
 #include <TileMap.hpp>
 
 #include <cstdint>

@@ -1,7 +1,6 @@
 #include "game/LevelGenerator.hpp"
 
 #include "core/Level.hpp"
-#include "core/LevelDescriptor.hpp"
 #include "support/ArrayIterator.hpp"
 
 #include <Array.hpp>
@@ -13,10 +12,10 @@
 #include <JSONParseResult.hpp>
 #include <RandomNumberGenerator.hpp>
 #include <Ref.hpp>
+#include <String.hpp>
+#include <Variant.hpp>
 
 #include <algorithm>
-#include <cstdint>
-#include <iterator>
 #include <tuple>
 
 namespace moon_buggy

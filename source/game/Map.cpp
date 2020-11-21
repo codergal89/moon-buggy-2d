@@ -3,11 +3,7 @@
 #include "core/Level.hpp"
 #include "support/ArrayIterator.hpp"
 
-#include <Array.hpp>
 #include <Defs.hpp>
-#include <GodotGlobal.hpp>
-#include <Image.hpp>
-#include <ImageTexture.hpp>
 #include <RandomNumberGenerator.hpp>
 #include <Ref.hpp>
 #include <TileMap.hpp>
