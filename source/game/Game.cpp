@@ -49,6 +49,8 @@ namespace moon_buggy
 
   auto Game::_ready() -> void
   {
+    check_properties();
+
     level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
     number_of_levels = level_generator->load("res://config/levels.json");
     map = get_typed_node<Map>("Map");
@@ -71,6 +73,16 @@ namespace moon_buggy
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
     scroll_camera->set("should_scroll", true);
     kill_zone = scroll_camera->get_kill_zone();
+  }
+
+  auto Game::check_properties() -> void
+  {
+    CRASH_COND(!buggy_scene.is_valid());
+    CRASH_COND(!explosion_scene.is_valid());
+    CRASH_COND(!fireworks_scene.is_valid());
+
+    CRASH_COND(moon_tiles_images.empty());
+    CRASH_COND(!moon_tiles_texure.is_valid());
   }
 
   auto Game::buggy_crashed(Buggy * buggy) -> void

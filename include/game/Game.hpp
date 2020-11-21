@@ -47,6 +47,8 @@ namespace moon_buggy
   private:
     GODOT_CLASS(Game, godot::Node)  // NOLINT
 
+    auto check_properties() -> void;
+
     auto buggy_crashed(Buggy * buggy) -> void;
     auto goal_reached() -> void;
     auto start_game() -> void;
