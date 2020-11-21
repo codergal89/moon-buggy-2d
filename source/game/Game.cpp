@@ -152,14 +152,14 @@ namespace moon_buggy
     hud->set_level_number(current_level_number);
 
     map->set_level(current_level.get(), window_width, window_height);
+    auto surface_level = map->get_surface_level();
 
     scroll_camera->set_position(godot::Vector2{0.f, 0.f});
     scroll_camera->set("limit_left", map->get_world_end());
     auto scroll_speed = scroll_camera->get("speed");
 
     auto buggy = cast_to<Buggy>(buggy_scene->instance());
-    auto ground = map->get_typed_node<godot::TileMap>("Ground");
-    buggy->set_position({window_width / 2.f, window_height - 2 * ground->get_cell_size().y});
+    buggy->set_position({window_width / 2.f, static_cast<real_t>(surface_level)});
     buggy->set("base_speed", scroll_speed);
     buggy->connect("crashed", this, "buggy_crashed");
     scroll_camera->add_child(buggy);

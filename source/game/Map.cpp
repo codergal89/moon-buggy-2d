@@ -39,6 +39,7 @@ namespace moon_buggy
     godot::register_method("_ready", &Map::_ready);
     godot::register_method("set_level", &Map::set_level);
     godot::register_method("get_world_end", &Map::get_world_end);
+    godot::register_method("get_surface_level", &Map::get_surface_level);
   }
 
   auto Map::_init() -> void
@@ -92,8 +93,15 @@ namespace moon_buggy
     return static_cast<std::int64_t>(ground->map_to_world({static_cast<real_t>(end_tile), 0.f}).x);
   }
 
-  auto Map::generate_surface(Level const & level, std::int64_t x_tiles_per_screen, std::int64_t bottom, std::int64_t right) const -> void
+  auto Map::get_surface_level() const noexcept -> std::int64_t
   {
+    return surface_level;
+  }
+
+  auto Map::generate_surface(Level const & level, std::int64_t x_tiles_per_screen, std::int64_t bottom, std::int64_t right) -> void
+  {
+    surface_level = static_cast<std::int64_t>(ground->map_to_world({0.f, static_cast<real_t>(bottom)}).y);
+
     auto surface_tiles = std::vector<std::int64_t>{};
     surface_tiles.reserve(level.tiles.size() + 2 * x_tiles_per_screen);
 
