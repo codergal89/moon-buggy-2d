@@ -72,10 +72,10 @@ namespace moon_buggy
       {
         current_level_number++;
         current_level.reset(level_generator->generate_next());
-        auto texture_id = moon_tiles_image_rng->randi_range(0, moon_tiles_images.size() - 1);
-        moon_tiles_texure->set_data(moon_tiles_images[texture_id]);
-        space_texture->set_data(space_images[texture_id]);
-        stars_texture->set_data(stars_images[texture_id]);
+        auto theme_id = theme_rng->randi_range(0, moon_tiles_images.size() - 1);
+        moon_tiles_texure->set_data(moon_tiles_images[theme_id]);
+        space_texture->set_data(space_images[theme_id]);
+        stars_texture->set_data(stars_images[theme_id]);
       }
       break;
     default:

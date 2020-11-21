@@ -74,7 +74,7 @@ namespace moon_buggy
     HUD * hud;
     godot::Area2D * kill_zone;
 
-    godot::Ref<godot::RandomNumberGenerator> moon_tiles_image_rng{};
+    godot::Ref<godot::RandomNumberGenerator> theme_rng{};
 
     godot::Ref<godot::PackedScene> buggy_scene{};
     godot::Ref<godot::PackedScene> explosion_scene{};

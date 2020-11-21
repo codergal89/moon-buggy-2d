@@ -44,7 +44,7 @@ namespace moon_buggy
 
     level_start_reason = start_reason::start_next;
 
-    moon_tiles_image_rng.instance();
+    theme_rng.instance();
   }
 
   auto Game::_ready() -> void
