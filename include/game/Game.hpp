@@ -82,6 +82,12 @@ namespace moon_buggy
 
     godot::Ref<godot::ImageTexture> moon_tiles_texure{};
     godot::Array moon_tiles_images{};
+
+    godot::Ref<godot::ImageTexture> space_texture{};
+    godot::Array space_images{};
+
+    godot::Ref<godot::ImageTexture> stars_texture{};
+    godot::Array stars_images{};
   };
 
 }  // namespace moon_buggy

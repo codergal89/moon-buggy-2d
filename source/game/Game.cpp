@@ -28,6 +28,12 @@ namespace moon_buggy
 
     godot::register_property("moon_tiles_texture", &Game::moon_tiles_texure, {});
     godot::register_property("moon_tiles_images", &Game::moon_tiles_images, {});
+
+    godot::register_property("space_texture", &Game::space_texture, {});
+    godot::register_property("space_images", &Game::space_images, {});
+
+    godot::register_property("stars_texture", &Game::stars_texture, {});
+    godot::register_property("stars_images", &Game::stars_images, {});
   }
 
   auto Game::_init() -> void
