@@ -65,7 +65,7 @@ IncludeCategories:
     # STL Headers
     - Regex: '<[[:alnum:]._]+(?!\.(h|hpp))>'
       Priority: 400
-
+IncludeIsMainRegex: "(_private)?$"
       
 IndentCaseLabels: false
 IndentPPDirectives: None

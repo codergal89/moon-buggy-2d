@@ -13,18 +13,16 @@
 #include "support/TypedNodeCastMixin.hpp"
 
 #include <Area2D.hpp>
+#include <Array.hpp>
 #include <Control.hpp>
 #include <Godot.hpp>
-#include <Image.hpp>
 #include <ImageTexture.hpp>
 #include <Node.hpp>
 #include <PackedScene.hpp>
 #include <RandomNumberGenerator.hpp>
 #include <Ref.hpp>
-#include <String.hpp>
 #include <Timer.hpp>
 
-#include <cstddef>
 #include <cstdint>
 
 namespace moon_buggy
@@ -81,9 +79,6 @@ namespace moon_buggy
     godot::Ref<godot::ImageTexture> moon_tiles_texure{};
     godot::Array moon_tiles_images{};
   };
-
-  auto to_string(Game::start_reason reason) -> godot::String;
-  auto to_reason(godot::String string) -> Game::start_reason;
 
 }  // namespace moon_buggy
 
