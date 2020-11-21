@@ -38,8 +38,6 @@ namespace moon_buggy
 
     std::int64_t end_tile{};
 
-    godot::Array ground_textures{};
-    godot::Ref<godot::ImageTexture> ground_texture{};
     godot::TileMap * ground{};
     godot::TileMap * holes{};
   };

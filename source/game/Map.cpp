@@ -39,13 +39,6 @@ namespace moon_buggy
     godot::register_method("_ready", &Map::_ready);
     godot::register_method("set_level", &Map::set_level);
     godot::register_method("get_world_end", &Map::get_world_end);
-
-    godot::register_property("ground_textures",
-                             &Map::ground_textures,
-                             godot::Array{},
-                             GODOT_METHOD_RPC_MODE_DISABLED,
-                             GODOT_PROPERTY_USAGE_DEFAULT,
-                             GODOT_PROPERTY_HINT_RESOURCE_TYPE);
   }
 
   auto Map::_init() -> void
@@ -61,14 +54,6 @@ namespace moon_buggy
     transform(cbegin(level_tile_names), cend(level_tile_names), inserter(map_tile_ids, begin(map_tile_ids)), [&](auto const & mapping) {
       return std::pair{mapping.first, tile_set->find_tile_by_name(mapping.second)};
     });
-
-    std::for_each(cbegin(ground_textures), cend(ground_textures), [](auto texture) {
-      CRASH_COND(!static_cast<godot::Ref<godot::Image>>(texture).is_valid());
-    });
-
-    auto tile_texture = tile_set->tile_get_texture(map_tile_ids[Level::Tile::ground_surface]);
-    ground_texture = static_cast<godot::Ref<godot::ImageTexture>>(tile_texture);
-    CRASH_COND(!ground_texture.is_valid());
   }
 
   auto Map::set_level(Level * level, std::uint64_t width, std::uint64_t height) -> void
