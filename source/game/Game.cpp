@@ -45,6 +45,7 @@ namespace moon_buggy
     level_start_reason = start_reason::start_next;
 
     theme_rng.instance();
+    theme_rng->randomize();
   }
 
   auto Game::_ready() -> void
