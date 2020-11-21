@@ -58,7 +58,7 @@ namespace moon_buggy
     auto tile_set = ground->get_tileset();
     CRASH_COND(!tile_set.is_valid());
 
-    transform(cbegin(level_tile_names), cend(level_tile_names), inserter(m_tile_ids, begin(m_tile_ids)), [&](auto const & mapping) {
+    transform(cbegin(level_tile_names), cend(level_tile_names), inserter(map_tile_ids, begin(map_tile_ids)), [&](auto const & mapping) {
       return std::pair{mapping.first, tile_set->find_tile_by_name(mapping.second)};
     });
 
@@ -66,7 +66,7 @@ namespace moon_buggy
       CRASH_COND(!static_cast<godot::Ref<godot::Image>>(texture).is_valid());
     });
 
-    auto tile_texture = tile_set->tile_get_texture(m_tile_ids[Level::Tile::ground_surface]);
+    auto tile_texture = tile_set->tile_get_texture(map_tile_ids[Level::Tile::ground_surface]);
     ground_texture = static_cast<godot::Ref<godot::ImageTexture>>(tile_texture);
     CRASH_COND(!ground_texture.is_valid());
   }
@@ -87,7 +87,7 @@ namespace moon_buggy
 
     for (auto x{0}; x < 2 * x_tiles_per_screen + level->tiles.size(); ++x)
     {
-      ground->set_cell(right - x, bottom + 1, m_tile_ids[Level::Tile::ground_layer1_border]);
+      ground->set_cell(right - x, bottom + 1, map_tile_ids[Level::Tile::ground_layer1_border]);
     }
 
     auto rng = godot::Ref<godot::RandomNumberGenerator>{};
@@ -98,7 +98,7 @@ namespace moon_buggy
     for (auto i{0}; i < 25; ++i)
     {
       auto pos = rng->randi_range(right, end_tile);
-      stones_layer1->set_cell(pos, bottom + 1, m_tile_ids[Level::Tile::small_stone1]);
+      stones_layer1->set_cell(pos, bottom + 1, map_tile_ids[Level::Tile::small_stone1]);
     }
   }
 
@@ -112,13 +112,13 @@ namespace moon_buggy
     auto surface_tiles = std::vector<std::int64_t>{};
     surface_tiles.reserve(level.tiles.size() + 2 * x_tiles_per_screen);
 
-    generate_n(back_inserter(surface_tiles), x_tiles_per_screen, [&] { return m_tile_ids.at(Level::Tile::ground_surface); });
+    generate_n(back_inserter(surface_tiles), x_tiles_per_screen, [&] { return map_tile_ids.at(Level::Tile::ground_surface); });
 
     transform(cbegin(level.tiles), cend(level.tiles), back_inserter(surface_tiles), [&](auto tile) {
-      return m_tile_ids.at(static_cast<Level::Tile>(static_cast<int>(tile)));
+      return map_tile_ids.at(static_cast<Level::Tile>(static_cast<int>(tile)));
     });
 
-    generate_n(back_inserter(surface_tiles), x_tiles_per_screen, [&] { return m_tile_ids.at(Level::Tile::ground_surface); });
+    generate_n(back_inserter(surface_tiles), x_tiles_per_screen, [&] { return map_tile_ids.at(Level::Tile::ground_surface); });
 
     for_each(cbegin(surface_tiles), cend(surface_tiles), [x = 0, this, bottom, right](auto tile_id) mutable {
       ground->set_cell(right - x++, bottom, tile_id);

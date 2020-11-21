@@ -34,7 +34,7 @@ namespace moon_buggy
 
     auto generate_surface(Level const & level, std::int64_t x_tiles_per_screen, std::int64_t bottom, std::int64_t right) const -> void;
 
-    std::map<Level::Tile, std::int64_t> m_tile_ids{};
+    std::map<Level::Tile, std::int64_t> map_tile_ids{};
 
     std::int64_t end_tile{};
 
