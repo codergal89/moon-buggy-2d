@@ -52,30 +52,26 @@ namespace moon_buggy
   {
     check_properties();
 
-    randomize_theme();
-
-    level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
-    number_of_levels = level_generator->load("res://config/levels.json");
-    map = get_typed_node<Map>("Map");
-
-    main_menu = get_typed_node<MainMenu>("GUI/MainMenu");
-    main_menu->show();
-
+    hud = get_typed_node<HUD>("GUI/HUD");
     level_complete_screen = get_typed_node<LevelComplete>("GUI/LevelComplete");
-    level_complete_screen->hide();
+    level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
+    main_menu = get_typed_node<MainMenu>("GUI/MainMenu");
+    map = get_typed_node<Map>("Map");
+    restart_timer = get_typed_node<godot::Timer>("RestartTimer");
+    scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
 
+    number_of_levels = level_generator->load("res://config/levels.json");
     active_start_screen = main_menu;
 
-    hud = get_typed_node<HUD>("GUI/HUD");
+    main_menu->show();
+    level_complete_screen->hide();
     hud->hide();
-
-    restart_timer = get_typed_node<godot::Timer>("RestartTimer");
     restart_timer->connect("timeout", level_complete_screen, "show");
     restart_timer->connect("timeout", hud, "hide");
-
-    scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
     scroll_camera->set("should_scroll", true);
     kill_zone = scroll_camera->get_kill_zone();
+
+    randomize_theme();
   }
 
 }  // namespace moon_buggy
