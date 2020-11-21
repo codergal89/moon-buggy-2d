@@ -51,6 +51,7 @@ namespace moon_buggy
     GODOT_CLASS(Game, godot::Node)  // NOLINT
 
     auto check_properties() -> void;
+    auto randomize_theme() -> void;
 
     auto buggy_crashed(Buggy * buggy) -> void;
     auto goal_reached() -> void;
