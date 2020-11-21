@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/stars_blue.png-87712e7b98433d29d52d99695eb4017e.image"
+
+[deps]
+
+source_file="res://assets/backgrounds/stars_blue.png"
+dest_files=[ "res://.import/stars_blue.png-87712e7b98433d29d52d99695eb4017e.image" ]
+
+[params]
+

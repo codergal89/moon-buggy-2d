@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/stars_purple.png-a9f023729804637264b4d8d0e4c3eb7e.image"
+
+[deps]
+
+source_file="res://assets/backgrounds/stars_purple.png"
+dest_files=[ "res://.import/stars_purple.png-a9f023729804637264b4d8d0e4c3eb7e.image" ]
+
+[params]
+

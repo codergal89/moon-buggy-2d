@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/space_purple.png-8733d522ffa71a4cfbcf1a9e2104dc7a.image"
+
+[deps]
+
+source_file="res://assets/backgrounds/space_purple.png"
+dest_files=[ "res://.import/space_purple.png-8733d522ffa71a4cfbcf1a9e2104dc7a.image" ]
+
+[params]
+
