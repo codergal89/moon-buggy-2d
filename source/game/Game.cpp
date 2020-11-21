@@ -33,6 +33,9 @@ namespace moon_buggy
     godot::register_property("buggy_scene", &Game::buggy_scene, godot::Ref<godot::PackedScene>{});
     godot::register_property("explosion_scene", &Game::explosion_scene, godot::Ref<godot::PackedScene>{});
     godot::register_property("fireworks_scene", &Game::fireworks_scene, godot::Ref<godot::PackedScene>{});
+
+    godot::register_property("moon_tiles_texture", &Game::moon_tiles_texure, {});
+    godot::register_property("moon_tiles_images", &Game::moon_tiles_images, {});
   }
 
   auto Game::_init() -> void

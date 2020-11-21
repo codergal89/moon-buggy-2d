@@ -15,6 +15,8 @@
 #include <Area2D.hpp>
 #include <Control.hpp>
 #include <Godot.hpp>
+#include <Image.hpp>
+#include <ImageTexture.hpp>
 #include <Node.hpp>
 #include <PackedScene.hpp>
 #include <Ref.hpp>
@@ -70,6 +72,9 @@ namespace moon_buggy
     godot::Ref<godot::PackedScene> buggy_scene{};
     godot::Ref<godot::PackedScene> explosion_scene{};
     godot::Ref<godot::PackedScene> fireworks_scene{};
+
+    godot::Ref<godot::ImageTexture> moon_tiles_texure{};
+    godot::Array moon_tiles_images{};
   };
 
   auto to_string(Game::start_reason reason) -> godot::String;
