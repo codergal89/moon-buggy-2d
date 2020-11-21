@@ -19,6 +19,7 @@
 #include <ImageTexture.hpp>
 #include <Node.hpp>
 #include <PackedScene.hpp>
+#include <RandomNumberGenerator.hpp>
 #include <Ref.hpp>
 #include <String.hpp>
 #include <Timer.hpp>
@@ -70,6 +71,8 @@ namespace moon_buggy
     ScrollCamera * scroll_camera;
     HUD * hud;
     godot::Area2D * kill_zone;
+
+    godot::Ref<godot::RandomNumberGenerator> moon_tiles_image_rng{};
 
     godot::Ref<godot::PackedScene> buggy_scene{};
     godot::Ref<godot::PackedScene> explosion_scene{};

@@ -45,6 +45,8 @@ namespace moon_buggy
     window_width = settings->get_setting("display/window/size/width");
 
     level_start_reason = start_reason::start_next;
+
+    moon_tiles_image_rng.instance();
   }
 
   auto Game::_ready() -> void
@@ -131,6 +133,8 @@ namespace moon_buggy
       {
         current_level_number++;
         current_level.reset(level_generator->generate_next());
+        auto texture_id = moon_tiles_image_rng->randi_range(0, moon_tiles_images.size() - 1);
+        moon_tiles_texure->set_data(moon_tiles_images[texture_id]);
       }
       break;
     default:
