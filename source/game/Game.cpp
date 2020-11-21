@@ -52,6 +52,8 @@ namespace moon_buggy
   {
     check_properties();
 
+    randomize_theme();
+
     level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
     number_of_levels = level_generator->load("res://config/levels.json");
     map = get_typed_node<Map>("Map");
