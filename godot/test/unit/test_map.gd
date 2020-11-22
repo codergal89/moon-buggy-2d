@@ -96,10 +96,10 @@ class TestSceneLevel:
 		var used_cells: Array = tile_map.get_used_cells()
 		var used_cell_count: int = used_cells.size()
 
-		for i in range(used_cell_count / 2):
+		for _i in range(used_cell_count / 2):
 			expected_cells.push_back(ground_tile)
 
-		for i in range(used_cell_count / 2):
+		for _i in range(used_cell_count / 2):
 			expected_cells.push_back(layer1_tile)
 
 		for position in used_cells:
