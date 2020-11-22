@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Moon Buggy 2D",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}/godot",
+            "port": 6007,
+            "address": "127.0.0.1",
+            "launch_game_instance": true,
+            "launch_scene": false
+        }
+    ]
+}

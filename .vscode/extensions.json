@@ -5,5 +5,6 @@
         "twxs.cmake",
         "bierner.github-markdown-preview",
         "xaver.clang-format",
+        "geequlim.godot-tools"
     ]
 }
