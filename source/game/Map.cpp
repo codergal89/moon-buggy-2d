@@ -61,13 +61,13 @@ namespace moon_buggy
     auto x_tiles_per_screen = static_cast<std::int64_t>((width + cell_size.x - 1) / cell_size.x);
     auto y_tiles_per_screen = static_cast<std::int64_t>((height + cell_size.y - 1) / cell_size.y);
 
-    end_tile = -(level->tiles.size() + x_tiles_per_screen);
+    end_tile = -(level->surface_tiles.size() + x_tiles_per_screen);
     auto bottom = y_tiles_per_screen - 2;
     auto right = x_tiles_per_screen - 1;
 
     generate_surface(*level, x_tiles_per_screen, bottom, right);
 
-    for (auto x{0}; x < 2 * x_tiles_per_screen + level->tiles.size(); ++x)
+    for (auto x{0}; x < 2 * x_tiles_per_screen + level->surface_tiles.size(); ++x)
     {
       ground->set_cell(right - x, bottom + 1, map_tile_ids[Level::Tile::ground_layer1_border]);
     }
@@ -99,11 +99,11 @@ namespace moon_buggy
     surface_level = static_cast<std::int64_t>(ground->map_to_world({0.f, static_cast<real_t>(bottom)}).y);
 
     auto surface_tiles = std::vector<std::int64_t>{};
-    surface_tiles.reserve(level.tiles.size() + 2 * x_tiles_per_screen);
+    surface_tiles.reserve(level.surface_tiles.size() + 2 * x_tiles_per_screen);
 
     generate_n(back_inserter(surface_tiles), x_tiles_per_screen, [&] { return map_tile_ids.at(Level::Tile::ground_surface); });
 
-    transform(cbegin(level.tiles), cend(level.tiles), back_inserter(surface_tiles), [&](auto tile) {
+    transform(cbegin(level.surface_tiles), cend(level.surface_tiles), back_inserter(surface_tiles), [&](auto tile) {
       return map_tile_ids.at(static_cast<Level::Tile>(static_cast<int>(tile)));
     });
 

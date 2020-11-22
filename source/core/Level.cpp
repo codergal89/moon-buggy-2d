@@ -7,7 +7,7 @@ namespace moon_buggy
 
   auto Level::_register_methods() -> void
   {
-    godot::register_property("tiles", &Level::tiles, {});
+    godot::register_property("surface_tiles", &Level::surface_tiles, {});
   }
 
   auto Level::_init() -> void

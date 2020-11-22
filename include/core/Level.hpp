@@ -25,7 +25,7 @@ namespace moon_buggy
 
     auto _init() -> void;
 
-    godot::Array tiles{};
+    godot::Array surface_tiles{};
 
     GODOT_CLASS(Level, godot::Object)  // NOLINT
   };
