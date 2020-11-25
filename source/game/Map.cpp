@@ -61,7 +61,7 @@ namespace moon_buggy
     auto x_tiles_per_screen = static_cast<std::int64_t>((width + cell_size.x - 1) / cell_size.x);
     auto y_tiles_per_screen = static_cast<std::int64_t>((height + cell_size.y - 1) / cell_size.y);
 
-    end_tile = -(level->surface_tiles.size() + x_tiles_per_screen);
+    world_end = -(level->surface_tiles.size() + x_tiles_per_screen);
     auto bottom = y_tiles_per_screen - 2;
     auto right = x_tiles_per_screen - 1;
 
@@ -79,14 +79,14 @@ namespace moon_buggy
 
     for (auto i{0}; i < 25; ++i)
     {
-      auto pos = rng->randi_range(right, end_tile);
+      auto pos = rng->randi_range(right, world_end);
       stones_layer1->set_cell(pos, bottom + 1, map_tile_ids[Level::Tile::small_stone1]);
     }
   }
 
   auto Map::get_world_end() -> std::int64_t
   {
-    return static_cast<std::int64_t>(ground->map_to_world({static_cast<real_t>(end_tile), 0.f}).x);
+    return static_cast<std::int64_t>(ground->map_to_world({static_cast<real_t>(world_end), 0.f}).x);
   }
 
   auto Map::get_surface_level() const noexcept -> std::int64_t

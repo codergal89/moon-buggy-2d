@@ -35,7 +35,7 @@ namespace moon_buggy
     std::map<Level::Tile, std::int64_t> map_tile_ids{};
 
     std::int64_t surface_level{};
-    std::int64_t end_tile{};
+    std::int64_t world_end{};
 
     godot::TileMap * ground{};
     godot::TileMap * holes{};
