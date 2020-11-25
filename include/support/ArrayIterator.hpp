@@ -11,128 +11,228 @@
 namespace godot
 {
 
-  template<typename ValueType>
+  template<bool IsConstIterator>
   struct ArrayIterator
   {
-    using value_type = ValueType;
-    using difference_type = std::ptrdiff_t;
-    using reference = value_type &;
-    using const_reference = value_type const &;
-    using pointer = value_type *;
-    using const_pointer = value_type const *;
     using iterator_category = std::random_access_iterator_tag;
-    using container_type = std::conditional_t<std::is_const_v<ValueType>, Array const, Array>;
+    using difference_type = int;
+    using value_type = godot::Variant;
+    using pointer = std::conditional_t<IsConstIterator, value_type const *, value_type *>;
+    using reference = std::conditional_t<IsConstIterator, value_type const &, value_type &>;
 
-    constexpr ArrayIterator(container_type & array, difference_type position)
-        : m_array{&array}
-        , m_position{position}
+    using array_type = std::conditional_t<IsConstIterator, Array const, Array>;
+
+    constexpr ArrayIterator() = default;
+    constexpr ArrayIterator(ArrayIterator const &) = default;
+    constexpr ArrayIterator(ArrayIterator &&) = default;
+    auto constexpr operator=(ArrayIterator const &) -> ArrayIterator & = default;
+    auto constexpr operator=(ArrayIterator &&) -> ArrayIterator & = default;
+
+    explicit constexpr ArrayIterator(array_type & array, difference_type position = 0)
+        : array{const_cast<Array *>(&array)}
+        , size{array.size()}
+        , position{position}
     {
     }
 
-    explicit constexpr ArrayIterator(container_type & array)
-        : ArrayIterator{array, 0}
+    auto operator*() const noexcept -> reference
     {
+      return (*array)[position];
     }
 
-    ArrayIterator(ArrayIterator const & other) = default;
-
-    auto operator+=(difference_type n) -> ArrayIterator &
+    auto operator->() const noexcept -> pointer
     {
-      m_position += n;
+      return &array[position];
+    }
+
+    auto operator[](difference_type index) const noexcept -> reference
+    {
+      return *(*this + index);
+    }
+
+    auto constexpr operator++() noexcept -> ArrayIterator &
+    {
+      ++position;
       return *this;
     }
 
-    auto operator+(difference_type n) const -> ArrayIterator
+    auto constexpr operator--() noexcept -> ArrayIterator &
     {
-      auto result = *this;
-      return result += n;
+      --position;
+      return *this;
     }
 
-    auto operator-=(difference_type n) -> ArrayIterator &
+    auto constexpr operator+=(difference_type difference) noexcept -> ArrayIterator &
     {
-      return *this += -n;
+      position += difference;
+      return *this;
     }
 
-    auto operator-(difference_type n) const -> ArrayIterator
+    auto constexpr operator-=(difference_type difference) noexcept -> ArrayIterator &
     {
-      return *this + -n;
+      position -= difference;
+      return *this;
     }
 
-    auto operator-(ArrayIterator const & other) const -> difference_type
+    template<bool OtherIsConstIterator>
+    auto constexpr operator-(ArrayIterator<OtherIsConstIterator> const & other) const noexcept -> difference_type
     {
-      return m_position - other.m_position;
+      return position - other.position;
     }
 
-    auto operator<(ArrayIterator const & other) const -> bool
+    template<bool OtherIsConstIterator>
+    auto constexpr operator==(ArrayIterator<OtherIsConstIterator> const & other) const noexcept -> bool
     {
-      return m_position < other.m_position;
+      return (!other.array && position == size) || (!array && other.position == other.size) || position == other.position;
     }
 
-    auto operator>(ArrayIterator const & other) const -> bool
-    {
-      return other < *this;
-    }
-
-    auto operator<=(ArrayIterator const & other) const -> bool
-    {
-      return !(*this > other);
-    }
-
-    auto operator>=(ArrayIterator const & other) const -> bool
-    {
-      return !(*this < other);
-    }
-
-    auto operator==(ArrayIterator const & other) const -> bool
-    {
-      return (*this >= other) && (other >= *this);
-    }
-
-    auto operator!=(ArrayIterator const & other) const -> bool
+    template<bool OtherIsConstIterator>
+    auto constexpr operator!=(ArrayIterator<OtherIsConstIterator> const & other) const noexcept -> bool
     {
       return !(*this == other);
     }
 
-    auto operator--() -> ArrayIterator &
+    template<bool OtherIsConstIterator>
+    auto constexpr operator<(ArrayIterator<OtherIsConstIterator> const & other) const noexcept -> bool
     {
-      --m_position;
-      return *this;
-    }
-
-    auto operator--(int) -> ArrayIterator
-    {
-      auto result = *this;
-      --*this;
-      return result;
-    }
-
-    auto operator++() -> ArrayIterator &
-    {
-      ++m_position;
-      return *this;
-    }
-
-    auto operator++(int) -> ArrayIterator
-    {
-      auto result = *this;
-      ++*this;
-      return result;
-    }
-
-    auto operator*() const -> std::conditional_t<std::is_const_v<ValueType>, value_type, reference>
-    {
-      return (*m_array)[static_cast<int>(m_position)];
-    }
-
-    auto operator->() const -> pointer
-    {
-      return &(*m_array)[static_cast<int>(m_position)];
+      return !(*this == other);
     }
 
   private:
-    container_type * m_array;
-    difference_type m_position;
+    Array * array;
+    difference_type size;
+    difference_type position;
   };
+
+  template<typename ArrayType>
+  ArrayIterator(ArrayType &) -> ArrayIterator<std::is_const_v<std::remove_reference_t<ArrayType>>>;
+
+  template<typename ArrayType>
+  ArrayIterator(ArrayType &, int) -> ArrayIterator<std::is_const_v<std::remove_reference_t<ArrayType>>>;
+
+  template<bool IsConstIterator>
+  auto constexpr operator++(ArrayIterator<IsConstIterator> & it, int) noexcept -> ArrayIterator<IsConstIterator>
+  {
+    auto copy = it;
+    ++it;
+    return copy;
+  }
+
+  template<bool IsConstIterator>
+  auto constexpr operator--(ArrayIterator<IsConstIterator> & it, int) noexcept -> ArrayIterator<IsConstIterator>
+  {
+    auto copy = it;
+    --it;
+    return copy;
+  }
+
+  template<bool IsConstIterator>
+  auto constexpr operator+(ArrayIterator<IsConstIterator> const & it,
+                           typename ArrayIterator<IsConstIterator>::difference_type difference) noexcept -> ArrayIterator<IsConstIterator>
+  {
+    auto copy = it;
+    return copy += difference;
+  }
+
+  template<bool IsConstIterator>
+  auto constexpr operator+(typename ArrayIterator<IsConstIterator>::difference_type difference,
+                           ArrayIterator<IsConstIterator> const & it) noexcept -> ArrayIterator<IsConstIterator>
+  {
+    auto copy = it;
+    return copy += difference;
+  }
+
+  template<bool IsConstIterator>
+  auto constexpr operator-(ArrayIterator<IsConstIterator> const & it,
+                           typename ArrayIterator<IsConstIterator>::difference_type difference) noexcept -> ArrayIterator<IsConstIterator>
+  {
+    auto copy = it;
+    return copy -= difference;
+  }
+
+  template<bool LhsIsConstIterator, bool RhsIsConstIterator>
+  auto constexpr operator<(ArrayIterator<LhsIsConstIterator> const & lhs, ArrayIterator<RhsIsConstIterator> const & rhs) noexcept -> bool
+  {
+    return (rhs - lhs) > 0;
+  }
+
+  template<bool LhsIsConstIterator, bool RhsIsConstIterator>
+  auto constexpr operator>(ArrayIterator<LhsIsConstIterator> const & lhs, ArrayIterator<RhsIsConstIterator> const & rhs) noexcept -> bool
+  {
+    return rhs < lhs;
+  }
+
+  template<bool LhsIsConstIterator, bool RhsIsConstIterator>
+  auto constexpr operator<=(ArrayIterator<LhsIsConstIterator> const & lhs, ArrayIterator<RhsIsConstIterator> const & rhs) noexcept -> bool
+  {
+    return !(lhs > rhs);
+  }
+
+  template<bool LhsIsConstIterator, bool RhsIsConstIterator>
+  auto constexpr operator>=(ArrayIterator<LhsIsConstIterator> const & lhs, ArrayIterator<RhsIsConstIterator> const & rhs) noexcept -> bool
+  {
+    return !(lhs < rhs);
+  }
+
+  auto inline constexpr begin(Array & array)
+  {
+    return ArrayIterator{array};
+  }
+
+  auto inline end(Array & array)
+  {
+    return ArrayIterator{array, array.size()};
+  }
+
+  auto inline constexpr begin(Array const & array)
+  {
+    return ArrayIterator{array};
+  }
+
+  auto inline end(Array const & array)
+  {
+    return ArrayIterator{array, array.size()};
+  }
+
+  auto inline rbegin(Array & array)
+  {
+    return std::reverse_iterator{ArrayIterator{array, array.size()}};
+  }
+
+  auto inline constexpr rend(Array & array)
+  {
+    return std::reverse_iterator{ArrayIterator{array}};
+  }
+
+  auto inline rbegin(Array const & array)
+  {
+    return std::reverse_iterator{ArrayIterator{array, array.size()}};
+  }
+
+  auto inline constexpr rend(Array const & array)
+  {
+    return std::reverse_iterator{ArrayIterator{array}};
+  }
+
+  auto inline constexpr cbegin(Array const & array)
+  {
+    return ArrayIterator{array};
+  }
+
+  auto inline cend(Array const & array)
+  {
+    return ArrayIterator{array, array.size()};
+  }
+
+  auto inline crbegin(Array const & array)
+  {
+    return std::reverse_iterator{ArrayIterator{array, array.size()}};
+  }
+
+  auto inline constexpr crend(Array const & array)
+  {
+    return std::reverse_iterator{ArrayIterator{array}};
+  }
 
   struct ArrayBackInsertIterator
   {
@@ -144,13 +244,13 @@ namespace godot
     using container_type = Array;
 
     explicit constexpr ArrayBackInsertIterator(Array & array)
-        : m_array{&array}
+        : array{array}
     {
     }
 
     auto operator=(Variant const & value) -> ArrayBackInsertIterator &
     {
-      m_array->push_back(value);
+      array.push_back(value);
       return *this;
     }
 
@@ -170,28 +270,8 @@ namespace godot
     }
 
   private:
-    Array * m_array;
+    Array & array;
   };
-
-  auto inline constexpr begin(Array & array) -> ArrayIterator<Variant>
-  {
-    return ArrayIterator<Variant>{array};
-  }
-
-  auto inline end(Array & array) -> ArrayIterator<Variant>
-  {
-    return {array, array.size()};
-  }
-
-  auto inline constexpr cbegin(Array const & array) -> ArrayIterator<Variant const>
-  {
-    return ArrayIterator<Variant const>{array};
-  }
-
-  auto inline cend(Array const & array) -> ArrayIterator<Variant const>
-  {
-    return {array, array.size()};
-  }
 
   auto inline constexpr back_inserter(Array & array) -> ArrayBackInsertIterator
   {
