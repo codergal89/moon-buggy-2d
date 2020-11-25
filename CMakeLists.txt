@@ -152,3 +152,16 @@ if(GODOT_EXE)
     SOURCES "${PROJECT_SOURCE_DIR}/godot/project.godot"
   )
 endif()
+
+### Run
+
+if(GODOT_EXE)
+  add_custom_target("run"
+    COMMAND "${GODOT_EXE}"
+    "--path"
+    "${PROJECT_SOURCE_DIR}/godot"
+    "${PROJECT_SOURCE_DIR}/godot/scenes/Game.tscn"
+    DEPENDS "scripts"
+    SOURCES "${PROJECT_SOURCE_DIR}/godot/project.godot"
+  )
+endif()
