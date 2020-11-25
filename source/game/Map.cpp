@@ -4,6 +4,7 @@
 #include "support/ArrayIterator.hpp"
 
 #include <Defs.hpp>
+#include <Node.hpp>
 #include <RandomNumberGenerator.hpp>
 #include <Ref.hpp>
 #include <TileMap.hpp>
@@ -30,6 +31,16 @@ namespace moon_buggy
       std::pair{Level::Tile::small_stone1, "small_stone1"},
   };
 
+  auto constexpr stone_tiles = std::array{
+      std::pair{
+          "Small",
+          std::array{
+              Level::Tile::small_stone1,
+              Level::Tile::long_stone1,
+          },
+      },
+  };
+
   auto Map::_register_methods() -> void
   {
     godot::register_method("_ready", &Map::_ready);
@@ -51,6 +62,10 @@ namespace moon_buggy
     transform(cbegin(level_tile_names), cend(level_tile_names), inserter(map_tile_ids, begin(map_tile_ids)), [&](auto const & mapping) {
       return std::pair{mapping.first, tile_set->find_tile_by_name(mapping.second)};
     });
+
+    auto stone_layers_node = get_typed_node<godot::Node>("StoneLayers");
+    stone_layers = stone_layers_node->get_children();
+    CRASH_COND(std::any_of(cbegin(stone_layers), cend(stone_layers), [](auto layer) { return !cast_to<godot::TileMap>(layer); }));
   }
 
   auto Map::set_level(Level * level, std::uint64_t width, std::uint64_t height) -> void
@@ -67,21 +82,11 @@ namespace moon_buggy
     auto right = x_tiles_per_screen - 1;
 
     generate_surface(*level, x_tiles_per_screen, bottom, right);
+    generate_stones(right, last_tile, bottom);
 
     for (auto x{0}; x < 2 * x_tiles_per_screen + level->surface_tiles.size(); ++x)
     {
       ground->set_cell(right - x, bottom + 1, map_tile_ids[Level::Tile::ground_layer1_border]);
-    }
-
-    auto rng = godot::Ref<godot::RandomNumberGenerator>{};
-    rng.instance();
-
-    auto stones_layer1 = get_typed_node<godot::TileMap>("StonesLayer1");
-
-    for (auto i{0}; i < 25; ++i)
-    {
-      auto pos = rng->randi_range(right, world_end);
-      stones_layer1->set_cell(pos, bottom + 1, map_tile_ids[Level::Tile::small_stone1]);
     }
   }
 
@@ -112,6 +117,33 @@ namespace moon_buggy
 
     for_each(cbegin(surface_tiles), cend(surface_tiles), [x = 0, this, bottom, right](auto tile_id) mutable {
       ground->set_cell(right - x++, bottom, tile_id);
+    });
+  }
+
+  auto Map::generate_stones(std::int64_t right, std::int64_t last_tile, std::int64_t bottom) -> void
+  {
+    auto rng = godot::Ref<godot::RandomNumberGenerator>{};
+    rng.instance();
+    rng->randomize();
+
+    std::for_each(cbegin(stone_layers), cend(stone_layers), [&](auto entry) {
+      auto layer = cast_to<godot::TileMap>(entry);
+      auto name = layer->get_name();
+      auto stone_kind_mapping = std::find_if(cbegin(stone_tiles), cend(stone_tiles), [&](auto entry) { return entry.first == name; });
+      if (stone_kind_mapping == cend(stone_tiles))
+      {
+        WARN_PRINT(godot::String{"Unknown stone layer: {0}"}.format(godot::Array::make(name)));
+        return;
+      }
+
+      auto const & candidate_tiles = stone_kind_mapping->second;
+
+      for (auto i{0}; i < 12; ++i)
+      {
+        auto pos = rng->randi_range(right, last_tile);
+        auto tile = candidate_tiles[rng->randi_range(0, candidate_tiles.size() - 1)];
+        layer->set_cell(pos, bottom, map_tile_ids.at(tile));
+      }
     });
   }
 

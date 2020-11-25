@@ -4,6 +4,7 @@
 #include "core/Level.hpp"
 #include "support/TypedNodeCastMixin.hpp"
 
+#include <Array.hpp>
 #include <Godot.hpp>
 #include <Node2D.hpp>
 #include <TileMap.hpp>
@@ -31,6 +32,7 @@ namespace moon_buggy
     GODOT_CLASS(Map, godot::Node2D)  // NOLINT
 
     auto generate_surface(Level const & level, std::int64_t x_tiles_per_screen, std::int64_t bottom, std::int64_t right) -> void;
+    auto generate_stones(std::int64_t right, std::int64_t last_tile, std::int64_t bottom) -> void;
 
     std::map<Level::Tile, std::int64_t> map_tile_ids{};
 
@@ -38,6 +40,7 @@ namespace moon_buggy
     std::int64_t world_end{};
 
     godot::TileMap * ground{};
+    godot::Array stone_layers{};
   };
 
 }  // namespace moon_buggy
