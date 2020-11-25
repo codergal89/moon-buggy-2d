@@ -23,6 +23,13 @@ namespace moon_buggy
 
   namespace
   {
+    auto constexpr default_minimum_hole_length{3};
+    auto constexpr default_maximum_hole_length{10};
+    auto constexpr default_minimum_platform_length{5};
+    auto constexpr default_maximum_platform_length{15};
+    auto constexpr default_minimum_segments{4};
+    auto constexpr default_maximum_segments{32};
+
     auto check_json_parse_result(godot::Ref<godot::JSONParseResult> result) -> bool
     {
       if (result->get_error() != godot::Error::OK)
@@ -67,6 +74,13 @@ namespace moon_buggy
   {
     random_number_generator.instance();
     random_number_generator->randomize();
+
+    minimum_hole_length = default_minimum_hole_length;
+    maximum_hole_length = default_maximum_hole_length;
+    minimum_platform_length = default_minimum_platform_length;
+    maximum_platform_length = default_maximum_platform_length;
+    minimum_segments = default_minimum_segments;
+    maximum_segments = default_maximum_segments;
   }
 
   auto LevelGenerator::load(godot::String descriptor_file_path) -> int
