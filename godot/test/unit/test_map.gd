@@ -69,6 +69,7 @@ class TestSceneLevel:
 	const screen_width: int = 128
 	const screen_height: int = 64
 	const tile_size: int = 32
+	const x_tiles_per_screen: int = screen_width / tile_size
 
 	var instance: Map
 	var tile_map: TileMap
@@ -80,27 +81,133 @@ class TestSceneLevel:
 	func set_empty_level():
 		instance.set_level(autofree(Level.new()), screen_width, screen_height)
 
-	func test_setting_an_empty_level_places_two_times_two_screen_widths_of_tiles():
+	func test_setting_an_empty_level_places_seven_times_two_screen_widths_of_tiles():
 		set_empty_level()
-		var expected_number_of_ground_tiles: int = 2 * 2 * screen_width / tile_size
+		var expected_number_of_ground_tiles: int = 2 * 7 * screen_width / tile_size
 		var used_cells = tile_map.get_used_cells()
 		assert_eq(used_cells.size(), expected_number_of_ground_tiles)
 
-	func test_setting_an_empty_level_places_ground_and_ground_layer1_tiles():
+	func test_setting_an_empty_level_places_two_screen_widths_of_ground_surface_tiles():
 		set_empty_level()
 		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground_surface")
-		var layer1_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer1_border")
 		var expected_cells: Array = []
 		var cells: Array = []
 
-		var used_cells: Array = tile_map.get_used_cells()
+		var slice_start: int = 0 * 2 * x_tiles_per_screen
+		var slice_end: int = slice_start + 2 * x_tiles_per_screen - 1
+		var used_cells: Array = tile_map.get_used_cells().slice(slice_start, slice_end)
 		var used_cell_count: int = used_cells.size()
 
-		for _i in range(used_cell_count / 2):
+		for _i in range(used_cell_count):
 			expected_cells.push_back(ground_tile)
 
-		for _i in range(used_cell_count / 2):
-			expected_cells.push_back(layer1_tile)
+		for position in used_cells:
+			cells.push_back(tile_map.get_cellv(position))
+		assert_eq(cells, expected_cells)
+
+	func test_setting_an_empty_level_places_two_screen_widths_of_ground_layer1_border_tiles():
+		set_empty_level()
+		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer1_border")
+		var expected_cells: Array = []
+		var cells: Array = []
+
+		var slice_start: int = 1 * 2 * x_tiles_per_screen
+		var slice_end: int = slice_start + 2 * x_tiles_per_screen - 1
+		var used_cells: Array = tile_map.get_used_cells().slice(slice_start, slice_end)
+		var used_cell_count: int = used_cells.size()
+
+		for _i in range(used_cell_count):
+			expected_cells.push_back(ground_tile)
+
+		for position in used_cells:
+			cells.push_back(tile_map.get_cellv(position))
+		assert_eq(cells, expected_cells)
+
+	func test_setting_an_empty_level_places_two_screen_widths_of_ground_layer1_tiles():
+		set_empty_level()
+		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer1")
+		var expected_cells: Array = []
+		var cells: Array = []
+
+		var slice_start: int = 2 * 2 * x_tiles_per_screen
+		var slice_end: int = slice_start + 2 * x_tiles_per_screen - 1
+		var used_cells: Array = tile_map.get_used_cells().slice(slice_start, slice_end)
+		var used_cell_count: int = used_cells.size()
+
+		for _i in range(used_cell_count):
+			expected_cells.push_back(ground_tile)
+
+		for position in used_cells:
+			cells.push_back(tile_map.get_cellv(position))
+		assert_eq(cells, expected_cells)
+	
+	func test_setting_an_empty_level_places_two_screen_widths_of_ground_layer2_border_tiles():
+		set_empty_level()
+		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer2_border")
+		var expected_cells: Array = []
+		var cells: Array = []
+
+		var slice_start: int = 3 * 2 * x_tiles_per_screen
+		var slice_end: int = slice_start + 2 * x_tiles_per_screen - 1
+		var used_cells: Array = tile_map.get_used_cells().slice(slice_start, slice_end)
+		var used_cell_count: int = used_cells.size()
+
+		for _i in range(used_cell_count):
+			expected_cells.push_back(ground_tile)
+
+		for position in used_cells:
+			cells.push_back(tile_map.get_cellv(position))
+		assert_eq(cells, expected_cells)
+
+	func test_setting_an_empty_level_places_two_screen_widths_of_ground_layer2_tiles():
+		set_empty_level()
+		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer2")
+		var expected_cells: Array = []
+		var cells: Array = []
+
+		var slice_start: int = 4 * 2 * x_tiles_per_screen
+		var slice_end: int = slice_start + 2 * x_tiles_per_screen - 1
+		var used_cells: Array = tile_map.get_used_cells().slice(slice_start, slice_end)
+		var used_cell_count: int = used_cells.size()
+
+		for _i in range(used_cell_count):
+			expected_cells.push_back(ground_tile)
+
+		for position in used_cells:
+			cells.push_back(tile_map.get_cellv(position))
+		assert_eq(cells, expected_cells)
+	
+	func test_setting_an_empty_level_places_two_screen_widths_of_ground_layer3_border_tiles():
+		set_empty_level()
+		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer3_border")
+		var expected_cells: Array = []
+		var cells: Array = []
+
+		var slice_start: int = 5 * 2 * x_tiles_per_screen
+		var slice_end: int = slice_start + 2 * x_tiles_per_screen - 1
+		var used_cells: Array = tile_map.get_used_cells().slice(slice_start, slice_end)
+		var used_cell_count: int = used_cells.size()
+
+		for _i in range(used_cell_count):
+			expected_cells.push_back(ground_tile)
+
+		for position in used_cells:
+			cells.push_back(tile_map.get_cellv(position))
+		assert_eq(cells, expected_cells)
+
+	func test_setting_an_empty_level_places_two_screen_widths_of_ground_layer3_tiles():
+		set_empty_level()
+		var ground_tile: int = tile_map.tile_set.find_tile_by_name("ground_layer3")
+		var expected_cells: Array = []
+		var cells: Array = []
+
+		var slice_start: int = 6 * 2 * x_tiles_per_screen
+		var slice_end: int = slice_start + 2 * x_tiles_per_screen - 1
+		var used_cells: Array = tile_map.get_used_cells().slice(slice_start, slice_end)
+		var used_cell_count: int = used_cells.size()
+
+		for _i in range(used_cell_count):
+			expected_cells.push_back(ground_tile)
 
 		for position in used_cells:
 			cells.push_back(tile_map.get_cellv(position))

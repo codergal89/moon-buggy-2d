@@ -23,12 +23,26 @@ namespace moon_buggy
 
   auto constexpr level_tile_names = std::array{
       std::pair{Level::Tile::ground_layer1_border, "ground_layer1_border"},
+      std::pair{Level::Tile::ground_layer1, "ground_layer1"},
+      std::pair{Level::Tile::ground_layer2_border, "ground_layer2_border"},
+      std::pair{Level::Tile::ground_layer2, "ground_layer2"},
+      std::pair{Level::Tile::ground_layer3_border, "ground_layer3_border"},
+      std::pair{Level::Tile::ground_layer3, "ground_layer3"},
       std::pair{Level::Tile::ground_surface, "ground_surface"},
       std::pair{Level::Tile::hole, "hole"},
       std::pair{Level::Tile::left_shoulder, "left_shoulder"},
       std::pair{Level::Tile::long_stone1, "long_stone1"},
       std::pair{Level::Tile::right_shoulder, "right_shoulder"},
       std::pair{Level::Tile::small_stone1, "small_stone1"},
+  };
+
+  auto constexpr ground_layers = std::array{
+      Level::Tile::ground_layer1_border,
+      Level::Tile::ground_layer1,
+      Level::Tile::ground_layer2_border,
+      Level::Tile::ground_layer2,
+      Level::Tile::ground_layer3_border,
+      Level::Tile::ground_layer3,
   };
 
   auto constexpr stone_tiles = std::array{
@@ -78,16 +92,12 @@ namespace moon_buggy
 
     auto last_tile = -(level->surface_tiles.size() + x_tiles_per_screen);
     world_end = static_cast<std::int64_t>(ground->map_to_world({static_cast<real_t>(last_tile), 0.f}).x);
-    auto bottom = y_tiles_per_screen - 2;
+    auto bottom = y_tiles_per_screen - 1 - ground_layers.size();
     auto right = x_tiles_per_screen - 1;
 
     generate_surface(*level, x_tiles_per_screen, bottom, right);
+    generate_layers(*level, x_tiles_per_screen, bottom, right);
     generate_stones(right, last_tile, bottom);
-
-    for (auto x{0}; x < 2 * x_tiles_per_screen + level->surface_tiles.size(); ++x)
-    {
-      ground->set_cell(right - x, bottom + 1, map_tile_ids[Level::Tile::ground_layer1_border]);
-    }
   }
 
   auto Map::get_world_end() -> std::int64_t
@@ -117,6 +127,17 @@ namespace moon_buggy
 
     for_each(cbegin(surface_tiles), cend(surface_tiles), [x = 0, this, bottom, right](auto tile_id) mutable {
       ground->set_cell(right - x++, bottom, tile_id);
+    });
+  }
+
+  auto Map::generate_layers(Level const & level, std::int64_t x_tiles_per_screen, std::int64_t bottom, std::int64_t right) -> void
+  {
+    std::for_each(cbegin(ground_layers), cend(ground_layers), [&](auto layer) {
+      ++bottom;
+      for (auto x{0}; x < 2 * x_tiles_per_screen + level.surface_tiles.size(); ++x)
+      {
+        ground->set_cell(right - x, bottom, map_tile_ids[layer]);
+      }
     });
   }
 

@@ -13,6 +13,11 @@ namespace moon_buggy
     enum struct Tile
     {
       ground_layer1_border,
+      ground_layer1,
+      ground_layer2_border,
+      ground_layer2,
+      ground_layer3_border,
+      ground_layer3,
       ground_surface,
       hole,
       left_shoulder,
