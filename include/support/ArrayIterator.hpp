@@ -244,13 +244,13 @@ namespace godot
     using container_type = Array;
 
     explicit constexpr ArrayBackInsertIterator(Array & array)
-        : array{array}
+        : array{&array}
     {
     }
 
     auto operator=(Variant const & value) -> ArrayBackInsertIterator &
     {
-      array.push_back(value);
+      array->push_back(value);
       return *this;
     }
 
@@ -270,7 +270,7 @@ namespace godot
     }
 
   private:
-    Array & array;
+    Array * array;
   };
 
   auto inline constexpr back_inserter(Array & array) -> ArrayBackInsertIterator

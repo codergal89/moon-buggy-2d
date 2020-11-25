@@ -129,7 +129,8 @@ namespace moon_buggy
     std::for_each(cbegin(stone_layers), cend(stone_layers), [&](auto entry) {
       auto layer = cast_to<godot::TileMap>(entry);
       auto name = layer->get_name();
-      auto stone_kind_mapping = std::find_if(cbegin(stone_tiles), cend(stone_tiles), [&](auto entry) { return entry.first == name; });
+      auto stone_kind_mapping =
+          std::find_if(cbegin(stone_tiles), cend(stone_tiles), [&](auto entry) { return godot::String{entry.first} == name; });
       if (stone_kind_mapping == cend(stone_tiles))
       {
         WARN_PRINT(godot::String{"Unknown stone layer: {0}"}.format(godot::Array::make(name)));
