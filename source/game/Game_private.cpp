@@ -28,7 +28,7 @@ namespace moon_buggy
 
   auto Game::randomize_theme() -> void
   {
-    auto theme_id = theme_rng->randi_range(0, moon_tiles_images.size() - 1);
+    auto theme_id = static_cast<int>(theme_rng->randi_range(0, moon_tiles_images.size() - 1));
     moon_tiles_texure->set_data(moon_tiles_images[theme_id]);
     space_texture->set_data(space_images[theme_id]);
     stars_texture->set_data(stars_images[theme_id]);
