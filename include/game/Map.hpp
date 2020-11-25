@@ -38,7 +38,6 @@ namespace moon_buggy
     std::int64_t world_end{};
 
     godot::TileMap * ground{};
-    godot::TileMap * holes{};
   };
 
 }  // namespace moon_buggy
