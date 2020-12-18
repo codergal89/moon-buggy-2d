@@ -3,6 +3,7 @@
 
 #include "support/TypedNodeCastMixin.hpp"
 
+#include <AnimatedSprite.hpp>
 #include <Defs.hpp>
 #include <Godot.hpp>
 #include <Physics2DDirectBodyState.hpp>
@@ -30,10 +31,14 @@ namespace moon_buggy
     GODOT_CLASS(Buggy, godot::RigidBody2D)  // NOLINT
 
     auto _integrate_forces(godot::Physics2DDirectBodyState * state) -> void;
+    auto _process(real_t frame_time) -> void;
 
     auto update_collision_state(godot::Physics2DDirectBodyState const * state) -> void;
     auto update_drive_speed() -> void;
     [[nodiscard]] auto should_jump() const -> bool;
+
+    auto update_animation() -> void;
+    auto animation_played() -> void;
 
     auto stop() -> void;
 
@@ -49,7 +54,12 @@ namespace moon_buggy
 
     bool can_drive{};
     bool is_on_floor{};
+    bool was_on_floor{};
+    bool landed{};
+    bool jumped_off{};
     bool bumped_into_something{};
+
+    godot::AnimatedSprite * sprite;
   };
 
 }  // namespace moon_buggy

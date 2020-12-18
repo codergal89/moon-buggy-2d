@@ -1,5 +1,6 @@
 #include "game/Buggy.hpp"
 
+#include <AnimatedSprite.hpp>
 #include <Input.hpp>
 #include <Physics2DDirectBodyState.hpp>
 #include <Variant.hpp>
@@ -14,6 +15,8 @@ namespace moon_buggy
   {
     godot::register_method("_ready", &Buggy::_ready);
     godot::register_method("_integrate_forces", &Buggy::_integrate_forces);
+    godot::register_method("_process", &Buggy::_process);
+    godot::register_method("animation_played", &Buggy::animation_played);
     godot::register_method("kill_zone_entered", &Buggy::kill_zone_entered);
 
     godot::register_property("acceleration", &Buggy::acceleration, default_acceleration);
@@ -32,6 +35,17 @@ namespace moon_buggy
   auto Buggy::_ready() -> void
   {
     can_drive = true;
+
+    sprite = get_typed_node<godot::AnimatedSprite>("Sprite");
+    sprite->set_animation("idle");
+    sprite->connect("animation_finished", this, "animation_played");
+    sprite->play();
+  }
+
+  auto Buggy::_process(real_t frame_time) -> void
+  {
+    static_cast<void>(frame_time);
+    update_animation();
   }
 
   auto Buggy::_integrate_forces(godot::Physics2DDirectBodyState * state) -> void
@@ -100,6 +114,42 @@ namespace moon_buggy
   {
     auto input = godot::Input::get_singleton();
     return is_on_floor && input->is_action_pressed("player_jump");
+  }
+
+  auto Buggy::update_animation() -> void
+  {
+    if (is_on_floor && !was_on_floor)
+    {
+      was_on_floor = true;
+      sprite->set_animation("land");
+    }
+    else if (is_on_floor && landed)
+    {
+      landed = false;
+      sprite->set_animation("move");
+    }
+    else if (!is_on_floor && was_on_floor)
+    {
+      was_on_floor = false;
+      sprite->set_animation("jump_off");
+    }
+    else if (!is_on_floor && jumped_off)
+    {
+      jumped_off = false;
+      sprite->set_animation("fly");
+    }
+  }
+
+  auto Buggy::animation_played() -> void
+  {
+    if (sprite->get_animation() == "land")
+    {
+      landed = true;
+    }
+    else if (sprite->get_animation() == "jump_off")
+    {
+      jumped_off = true;
+    }
   }
 
   auto Buggy::stop() -> void

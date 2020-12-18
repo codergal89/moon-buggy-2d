@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/buggy_idle.png-e52fcc29c0baf22fc7bcd7d9687328c6.stex"
+path="res://.import/buggy_jump_start.png-90784cee28439566c33c5d05edf5fb3d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/frames/buggy_idle.png"
-dest_files=[ "res://.import/buggy_idle.png-e52fcc29c0baf22fc7bcd7d9687328c6.stex" ]
+source_file="res://assets/sprites/buggy_jump_start.png"
+dest_files=[ "res://.import/buggy_jump_start.png-90784cee28439566c33c5d05edf5fb3d.stex" ]
 
 [params]
 

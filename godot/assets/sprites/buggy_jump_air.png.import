@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/buggy_jump_land.png-43a1fa449d67ed6582007bb48b031f61.stex"
+path="res://.import/buggy_jump_air.png-5819df7b076461f6c7a2bda1983adebb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/frames/buggy_jump_land.png"
-dest_files=[ "res://.import/buggy_jump_land.png-43a1fa449d67ed6582007bb48b031f61.stex" ]
+source_file="res://assets/sprites/buggy_jump_air.png"
+dest_files=[ "res://.import/buggy_jump_air.png-5819df7b076461f6c7a2bda1983adebb.stex" ]
 
 [params]
 
