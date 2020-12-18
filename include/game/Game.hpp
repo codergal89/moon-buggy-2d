@@ -23,15 +23,6 @@
 namespace moon_buggy
 {
 
-  struct Level;
-  struct Buggy;
-  struct LevelGenerator;
-  struct Map;
-  struct ScrollCamera;
-  struct HUD;
-  struct LevelComplete;
-  struct MainMenu;
-
   struct Game
       : godot::Node
       , TypedNodeCastMixin<Game>
