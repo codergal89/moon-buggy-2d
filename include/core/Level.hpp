@@ -21,9 +21,18 @@ namespace moon_buggy
       ground_surface,
       hole,
       left_shoulder,
+      large_stone1,
+      large_stone2,
+      large_stone3,
       long_stone1,
+      long_stone2,
+      medium_stone1,
+      medium_stone2,
+      medium_stone3,
       right_shoulder,
       small_stone1,
+      small_stone2,
+      small_stone3,
     };
 
     auto static _register_methods() -> void;

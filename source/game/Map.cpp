@@ -32,8 +32,14 @@ namespace moon_buggy
       std::pair{Level::Tile::hole, "hole"},
       std::pair{Level::Tile::left_shoulder, "left_shoulder"},
       std::pair{Level::Tile::long_stone1, "long_stone1"},
+      std::pair{Level::Tile::long_stone2, "long_stone2"},
+      std::pair{Level::Tile::medium_stone1, "medium_stone1"},
+      std::pair{Level::Tile::medium_stone2, "medium_stone2"},
+      std::pair{Level::Tile::medium_stone3, "medium_stone3"},
       std::pair{Level::Tile::right_shoulder, "right_shoulder"},
       std::pair{Level::Tile::small_stone1, "small_stone1"},
+      std::pair{Level::Tile::small_stone2, "small_stone2"},
+      std::pair{Level::Tile::small_stone3, "small_stone3"},
   };
 
   auto constexpr ground_layers = std::array{
@@ -50,7 +56,16 @@ namespace moon_buggy
           "Small",
           std::array{
               Level::Tile::small_stone1,
-              Level::Tile::long_stone1,
+              Level::Tile::small_stone2,
+              Level::Tile::small_stone3,
+          },
+      },
+      std::pair{
+          "Medium",
+          std::array{
+              Level::Tile::medium_stone1,
+              Level::Tile::medium_stone2,
+              Level::Tile::medium_stone3,
           },
       },
   };
@@ -160,11 +175,12 @@ namespace moon_buggy
 
       auto const & candidate_tiles = stone_kind_mapping->second;
 
-      for (auto i{0}; i < 12; ++i)
+      for (auto i{0}; i < 24; ++i)
       {
         auto pos = rng->randi_range(right, last_tile);
+        auto layer_number = rng->randi_range(1, 5);
         auto tile = candidate_tiles[rng->randi_range(0, candidate_tiles.size() - 1)];
-        layer->set_cell(pos, bottom, map_tile_ids.at(tile));
+        layer->set_cell(pos, bottom + layer_number, map_tile_ids.at(tile));
       }
     });
   }
