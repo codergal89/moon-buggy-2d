@@ -55,26 +55,39 @@ class TestLevelGeneratorLoadConfiguration:
 	const Generator = preload("res://scripts/game/LevelGenerator.gdns")
 	var instance: Generator
 
+	func load_descriptors(path: String):
+		instance.level_descriptor_source = path
+		add_child(instance)
+
 	func before_each():
 		instance = autofree(Generator.new())
 
+	func after_each():
+		remove_child(instance)
+
 	func test_loading_from_a_non_existent_file_yields_zero_levels():
-		assert_eq(instance.load("res://THIS_FILE_MUST_NOT_EXIST"), 0)
+		load_descriptors("res://THIS_FILE_MUST_NOT_EXIST")
+		assert_eq(instance.get_remaining_level_count(), 0)
 
 	func test_loading_invalid_json_file_yields_zero_levels():
-		assert_eq(instance.load("res://test/resources/invalid_levels"), 0)
+		load_descriptors("res://test/resources/invalid_levels")
+		assert_eq(instance.get_remaining_level_count(), 0)
 
 	func test_loading_a_json_file_with_an_empty_list_yields_zero_levels():
-		assert_eq(instance.load("res://test/resources/empty_levels"), 0)
+		load_descriptors("res://test/resources/empty_levels")
+		assert_eq(instance.get_remaining_level_count(), 0)
 
 	func test_loading_a_json_file_with_a_single_entry_yields_one_level():
-		assert_eq(instance.load("res://test/resources/single_level"), 1)
+		load_descriptors("res://test/resources/single_level")
+		assert_eq(instance.get_remaining_level_count(), 1)
 
 	func test_loading_a_json_file_with_a_three_entries_yields_three_levels():
-		assert_eq(instance.load("res://test/resources/three_levels"), 3)
+		load_descriptors("res://test/resources/three_levels")
+		assert_eq(instance.get_remaining_level_count(), 3)
 
 	func test_loading_a_json_file_mixed_with_invalid_entry_yields_two_levels():
-		assert_eq(instance.load("res://test/resources/levels_with_invalid"), 2)
+		load_descriptors("res://test/resources/levels_with_invalid")
+		assert_eq(instance.get_remaining_level_count(), 2)
 
 class TestLevelGeneratorGenerateNext:
 	extends "res://addons/gut/test.gd"
@@ -84,7 +97,11 @@ class TestLevelGeneratorGenerateNext:
 
 	func before_each():
 		instance = autofree(Generator.new())
-		instance.load("res://test/resources/three_levels")
+		instance.level_descriptor_source = "res://test/resources/three_levels"
+		add_child(instance)
+
+	func after_each():
+		remove_child(instance)
 
 	func test_can_generate_next_level_with_multiple_loaded_descriptors():
 		assert_not_null(autofree(instance.generate_next()))
@@ -109,27 +126,27 @@ class TestLevelGeneratorPropertiesAfterLoad:
 
 	func before_each():
 		instance = autofree(Generator.new())
+		instance.level_descriptor_source = "res://test/resources/three_levels"
+		add_child(instance)
+	
+	func after_each():
+		remove_child(instance)
 
 	func test_generator_has_three_remaining_levels_after_loading_three_levels():
-		instance.load("res://test/resources/three_levels")
 		assert_eq(instance.get_remaining_level_count(), 3)
 
 	func test_generator_has_two_remaining_levels_after_loading_three_levels_and_generating_one():
-		instance.load("res://test/resources/three_levels")
 		autofree(instance.generate_next())
 		assert_eq(instance.get_remaining_level_count(), 2)
 
 	func test_generator_has_remaining_levels_after_loading_three_levels():
-		instance.load("res://test/resources/three_levels")
 		assert_true(instance.has_remaining_levels())
 
 	func test_generator_has_remaining_levels_after_loading_three_levels_and_generating_one():
-		instance.load("res://test/resources/three_levels")
 		autofree(instance.generate_next())
 		assert_true(instance.has_remaining_levels())
 
 	func test_generator_has_no_remaining_levels_after_loading_three_levels_and_generating_all():
-		instance.load("res://test/resources/three_levels")
 		for _i in range(3):
 			instance.generate_next().free()
 		assert_false(instance.has_remaining_levels())

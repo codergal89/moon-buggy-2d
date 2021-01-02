@@ -57,11 +57,18 @@ namespace moon_buggy
 
   auto LevelGenerator::_register_methods() -> void
   {
-    godot::register_method("load", &LevelGenerator::load);
+    godot::register_method("_ready", &LevelGenerator::_ready);
     godot::register_method("generate_next", &LevelGenerator::generate_next);
     godot::register_method("get_remaining_level_count", &LevelGenerator::get_remaining_level_count);
     godot::register_method("has_remaining_levels", &LevelGenerator::has_remaining_levels);
 
+    godot::register_property("level_descriptor_source",
+                             &LevelGenerator::level_descriptor_source,
+                             {},
+                             GODOT_METHOD_RPC_MODE_DISABLED,
+                             GODOT_PROPERTY_USAGE_DEFAULT,
+                             GODOT_PROPERTY_HINT_FILE,
+                             "*.json");
     godot::register_property("minimum_hole_length", &LevelGenerator::minimum_hole_length, default_minimum_hole_length);
     godot::register_property("maximum_hole_length", &LevelGenerator::maximum_hole_length, default_maximum_hole_length);
     godot::register_property("minimum_platform_length", &LevelGenerator::minimum_platform_length, default_minimum_platform_length);
@@ -81,6 +88,12 @@ namespace moon_buggy
     maximum_platform_length = default_maximum_platform_length;
     minimum_segments = default_minimum_segments;
     maximum_segments = default_maximum_segments;
+  }
+
+  auto LevelGenerator::_ready() -> void
+  {
+    CRASH_COND(level_descriptor_source.empty());
+    load(level_descriptor_source);
   }
 
   auto LevelGenerator::load(godot::String descriptor_file_path) -> int

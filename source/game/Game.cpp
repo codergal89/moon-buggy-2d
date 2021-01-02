@@ -60,7 +60,7 @@ namespace moon_buggy
     restart_timer = get_typed_node<godot::Timer>("RestartTimer");
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
 
-    number_of_levels = level_generator->load("res://config/levels.json");
+    number_of_levels = level_generator->get_remaining_level_count();
     active_start_screen = main_menu;
 
     main_menu->show();

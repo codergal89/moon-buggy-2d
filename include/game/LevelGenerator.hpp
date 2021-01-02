@@ -10,6 +10,7 @@
 #include <Node.hpp>
 #include <RandomNumberGenerator.hpp>
 #include <Ref.hpp>
+#include <String.hpp>
 
 #include <queue>
 
@@ -23,8 +24,8 @@ namespace moon_buggy
     auto static _register_methods() -> void;
 
     auto _init() -> void;
+    auto _ready() -> void;
 
-    auto load(godot::String descriptor_file_path) -> int;
     auto generate_next() -> Level *;
     [[nodiscard]] auto get_remaining_level_count() const -> int;
     [[nodiscard]] auto has_remaining_levels() const -> bool;
@@ -32,8 +33,12 @@ namespace moon_buggy
     GODOT_CLASS(LevelGenerator, godot::Node)  // NOLINT
 
   private:
+    auto load(godot::String descriptor_file_path) -> int;
+
     godot::Ref<godot::RandomNumberGenerator> random_number_generator{};
     std::queue<object_ptr<LevelDescriptor>> level_descriptors{};
+
+    godot::String level_descriptor_source{};
 
     int minimum_hole_length;
     int maximum_hole_length;

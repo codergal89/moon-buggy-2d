@@ -47,6 +47,7 @@ one_shot = true
 
 [node name="LevelGenerator" type="Node" parent="."]
 script = ExtResource( 7 )
+level_descriptor_source = "res://config/levels.json"
 
 [node name="Map" parent="." instance=ExtResource( 1 )]
 
