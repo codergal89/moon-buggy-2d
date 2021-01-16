@@ -97,6 +97,7 @@ target_compile_options("scripts" PRIVATE
   $<$<CXX_COMPILER_ID:GNU,Clang>:-Wextra>
   $<$<CXX_COMPILER_ID:GNU,Clang>:-Werror>
   $<$<CXX_COMPILER_ID:GNU,Clang>:-pedantic-errors>
+  $<$<CXX_COMPILER_ID:MSVC>:/W4>
   $<$<CXX_COMPILER_ID:MSVC>:/experimental:external>
   $<$<CXX_COMPILER_ID:MSVC>:/external:anglebrackets>
   $<$<CXX_COMPILER_ID:MSVC>:/external:W0>
