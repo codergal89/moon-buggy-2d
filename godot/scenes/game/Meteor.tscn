@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/frames/meteor_animations.tres" type="SpriteFrames" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.9064
+
+[node name="Meteor" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 16
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 36.7794, -39.0572 )
+frames = ExtResource( 1 )
+animation = "fly"
+
+[node name="MeteorShape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
