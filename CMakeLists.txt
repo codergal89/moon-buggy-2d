@@ -36,13 +36,13 @@ FetchContent_Declare("BoostSML"
   GIT_TAG "v1.1.3"
 )
 
-set(SML_BUILD_BENCHMARKS NO CACHE BOOL "")
-set(SML_BUILD_EXAMPLES NO CACHE BOOL "")
-set(SML_BUILD_TESTS NO CACHE BOOL "")
-set(SML_BUILD_DOCS NO CACHE BOOL "")
-set(SML_USE_EXCEPTIONS NO CACHE BOOL "")
+FetchContent_Populate("BoostSML")
 
-FetchContent_MakeAvailable("BoostSML")
+add_library("sml" INTERFACE)
+
+target_include_directories("sml" SYSTEM INTERFACE
+  $<BUILD_INTERFACE:${boostsml_SOURCE_DIR}/include>
+)
 
 ### Godot
 
