@@ -233,11 +233,13 @@ namespace moon_buggy
 
   auto Game::stop_meteors() -> void
   {
-    auto timer = get_typed_node<godot::Timer>("MeteorSpawnTimer");
-    timer->stop();
-    remove_child(timer);
+    if (auto timer = get_typed_node<godot::Timer>("MeteorSpawnTimer"))
+    {
+      timer->stop();
+      remove_child(timer);
 
-    get_tree()->call_group("meteors", "queue_free");
+      get_tree()->call_group("meteors", "queue_free");
+    }
   }
 
   auto Game::spawn_meteor() -> void
