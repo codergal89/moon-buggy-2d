@@ -3,6 +3,7 @@
 
 namespace moon_buggy
 {
+  struct GUI;
   struct HUD;
   struct LevelComplete;
   struct MainMenu;

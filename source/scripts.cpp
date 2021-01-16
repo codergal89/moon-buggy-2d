@@ -6,6 +6,7 @@
 #include "game/Map.hpp"
 #include "game/Meteor.hpp"
 #include "game/ScrollCamera.hpp"
+#include "gui/GUI.hpp"
 #include "gui/HUD.hpp"
 #include "gui/LevelComplete.hpp"
 #include "gui/MainMenu.hpp"
@@ -29,6 +30,7 @@ extern "C"
     godot::Godot::nativescript_init(handle);
     godot::register_class<moon_buggy::Buggy>();
     godot::register_class<moon_buggy::Game>();
+    godot::register_class<moon_buggy::GUI>();
     godot::register_class<moon_buggy::HUD>();
     godot::register_class<moon_buggy::Level>();
     godot::register_class<moon_buggy::LevelComplete>();

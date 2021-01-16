@@ -77,6 +77,7 @@ add_library("scripts" SHARED
   "source/game/Meteor.cpp"
   "source/game/Meteor_private.cpp"
   "source/game/ScrollCamera.cpp"
+  "source/gui/GUI.cpp"
   "source/gui/HUD.cpp"
   "source/gui/LevelComplete.cpp"
   "source/gui/MainMenu.cpp"
