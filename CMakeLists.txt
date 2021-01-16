@@ -29,6 +29,21 @@ conan_cmake_run(CONANFILE "conanfile.txt"
   OUTPUT_QUIET
 )
 
+### Boost SML
+
+FetchContent_Declare("BoostSML"
+  GIT_REPOSITORY "https://github.com/boost-ext/sml"
+  GIT_TAG "v1.1.3"
+)
+
+set(SML_BUILD_BENCHMARKS NO CACHE BOOL "")
+set(SML_BUILD_EXAMPLES NO CACHE BOOL "")
+set(SML_BUILD_TESTS NO CACHE BOOL "")
+set(SML_BUILD_DOCS NO CACHE BOOL "")
+set(SML_USE_EXCEPTIONS NO CACHE BOOL "")
+
+FetchContent_MakeAvailable("BoostSML")
+
 ### Godot
 
 find_program(GODOT_EXE
@@ -74,6 +89,7 @@ target_include_directories("scripts" PRIVATE
 
 target_link_libraries("scripts" PRIVATE
   "CONAN_PKG::godot-cpp"
+  "sml"
 )
 
 target_compile_options("scripts" PRIVATE
