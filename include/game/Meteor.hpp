@@ -20,6 +20,8 @@ namespace moon_buggy
     auto _ready() -> void;
 
   private:
+    auto on_screen_exited() -> void;
+
     GODOT_CLASS(Meteor, godot::RigidBody2D)  // NOLINT
 
     godot::AnimatedSprite * sprite;

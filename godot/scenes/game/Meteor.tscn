@@ -11,10 +11,17 @@ collision_layer = 4
 collision_mask = 16
 script = ExtResource( 2 )
 
+[node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0, -52.0278 )
+scale = Vector2( 2.04232, 7.13081 )
+
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 36.7794, -39.0572 )
+position = Vector2( -0.0483208, 0.0234947 )
+rotation = -0.785397
 frames = ExtResource( 1 )
 animation = "fly"
+offset = Vector2( 37.7751, -37.7797 )
 
 [node name="MeteorShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+[connection signal="screen_exited" from="VisibilityNotifier" to="." method="on_screen_exited"]
