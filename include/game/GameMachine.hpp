@@ -17,6 +17,14 @@ namespace moon_buggy
   struct readied_up {};
   struct retry_requested {};
 
+  auto constexpr init = boost::sml::state<struct init>;
+  auto constexpr in_main_menu = boost::sml::state<struct in_main_menu>;
+  auto constexpr level_running = boost::sml::state<struct level_running>;
+  auto constexpr crashed = boost::sml::state<struct crashed>;
+  auto constexpr success_animation_playing = boost::sml::state<struct success_animation_playing>;
+  auto constexpr level_finished = boost::sml::state<struct level_finished>;
+  auto constexpr last_level_finished = boost::sml::state<struct last_level_finished>;
+
   auto constexpr has_next_level = [](Game & game){ return static_cast<bool>(game.call("has_next_level")); };
 
   auto constexpr play_success_animation = [](Game & game){ game.call("play_success_animation"); };
@@ -35,19 +43,19 @@ namespace moon_buggy
 
       // clang-format off
       return make_transition_table(
-        *"init"_s                     + event<readied_up>                               / show_main_menu             = "in_main_menu"_s,
+        *init                     + event<readied_up>                               / show_main_menu             = in_main_menu,
 
-        "in_main_menu"_s              + event<game_start_requested> [ has_next_level ]  / start_next_level           = "level_running"_s,
+        in_main_menu              + event<game_start_requested> [ has_next_level ]  / start_next_level           = level_running,
 
-        "level_running"_s             + event<crash_occured>                                                         = "crashed"_s,
-        "level_running"_s             + event<reached_goal>                             / play_success_animation     = "success_animation_playing"_s,
+        level_running             + event<crash_occured>                                                         = crashed,
+        level_running             + event<reached_goal>                             / play_success_animation     = success_animation_playing,
 
-        "crashed"_s                   + event<retry_requested>                          / restart_level              = "level_running"_s,
+        crashed                   + event<retry_requested>                          / restart_level              = level_running,
 
-        "success_animation_playing"_s + event<animation_finished>   [ has_next_level ]  / show_level_complete_screen = "level_finished"_s,
-        "success_animation_playing"_s + event<animation_finished>   [ !has_next_level ] / show_main_menu             = "last_level_finished"_s,
+        success_animation_playing + event<animation_finished>   [ has_next_level ]  / show_level_complete_screen = level_finished,
+        success_animation_playing + event<animation_finished>   [ !has_next_level ] / show_main_menu             = last_level_finished,
         
-        "level_finished"_s            + event<next_level_requested>                     / start_next_level           = "level_running"_s
+        level_finished            + event<next_level_requested>                     / start_next_level           = level_running
       );
       // clang-format on
     }
