@@ -62,7 +62,6 @@ namespace moon_buggy
     /// Internal Functions
     auto check_properties() -> void;
     auto randomize_theme() -> void;
-    auto hide_ui() -> void;
     auto start_level() -> void;
     auto start_meteors() -> void;
     auto stop_meteors() -> void;
@@ -89,14 +88,11 @@ namespace moon_buggy
 
     godot::Timer * restart_timer;
     LevelGenerator * level_generator;
-    LevelComplete * level_complete_screen;
     Map * map;
     ScrollCamera * scroll_camera;
     godot::Area2D * kill_zone;
 
-    godot::CanvasLayer * gui;
-    HUD * hud;
-    MainMenu * main_menu;
+    GUI * gui;
 
     godot::Ref<godot::RandomNumberGenerator> theme_rng{};
     godot::Ref<godot::RandomNumberGenerator> meteor_rng{};

@@ -7,9 +7,7 @@
 #include "game/Map.hpp"
 #include "game/Meteor.hpp"
 #include "game/ScrollCamera.hpp"
-#include "gui/HUD.hpp"
-#include "gui/LevelComplete.hpp"
-#include "gui/MainMenu.hpp"
+#include "gui/GUI.hpp"
 #include "support/ArrayIterator.hpp"
 
 #include <AnimatedSprite.hpp>
@@ -22,10 +20,6 @@
 #include <SceneTree.hpp>
 #include <Timer.hpp>
 #include <Vector2.hpp>
-
-#include <algorithm>
-#include <cmath>
-#include <iterator>
 
 namespace moon_buggy
 {
@@ -86,10 +80,7 @@ namespace moon_buggy
   {
     check_properties();
 
-    gui = get_typed_node<godot::CanvasLayer>("GUI");
-    hud = get_typed_node<HUD>("GUI/HUD");
-    level_complete_screen = get_typed_node<LevelComplete>("GUI/LevelComplete");
-    main_menu = get_typed_node<MainMenu>("GUI/MainMenu");
+    gui = get_typed_node<GUI>("GUI");
 
     level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
 
@@ -107,26 +98,21 @@ namespace moon_buggy
 
   auto Game::show_buggy_crashed_screen() -> void
   {
-    hide_ui();
   }
 
   auto Game::show_hud() -> void
   {
-    hide_ui();
-    hud->show();
+    gui->call("show_hud");
   }
 
   auto Game::show_level_complete_screen() -> void
   {
-    hide_ui();
-    level_complete_screen->set_level_number(current_level_number);
-    level_complete_screen->show();
+    gui->call("show_level_complete_screen");
   }
 
   auto Game::show_main_menu() -> void
   {
-    hide_ui();
-    main_menu->show();
+    gui->call("show_main_menu");
     scroll_camera->set("should_scroll", true);
   }
 
@@ -213,16 +199,10 @@ namespace moon_buggy
     stars_texture->set_data(stars_images[theme_id]);
   }
 
-  auto Game::hide_ui() -> void
-  {
-    auto gui_layers = gui->get_children();
-    std::for_each(begin(gui_layers), end(gui_layers), [](auto layer) { cast_to<godot::Control>(layer)->hide(); });
-  }
-
   auto Game::start_level() -> void
   {
     show_hud();
-    hud->set_level_number(current_level_number);
+    gui->call("set_level_number", current_level_number);
 
     map->set_level(current_level.get(), window_width, window_height);
     auto surface_level = map->get_surface_level();
