@@ -1,5 +1,6 @@
 #include "game/Game.hpp"
 
+#include "core/Constants.hpp"
 #include "game/Buggy.hpp"
 #include "game/GameMachine.hpp"
 #include "game/LevelGenerator.hpp"
@@ -31,11 +32,11 @@ namespace moon_buggy
 
   namespace
   {
-    auto constexpr absolute_meteor_angle_limit = M_PI_2 - (15.0 * M_PI) / 180.0;
-    auto constexpr minimum_meteor_angle = real_t{-absolute_meteor_angle_limit};
-    auto constexpr maximum_meteor_angle = real_t{absolute_meteor_angle_limit};
-    auto constexpr minimum_meteor_speed = real_t{300.0};
-    auto constexpr maximum_meteor_speed = real_t{500.0};
+    auto constexpr absolute_meteor_angle_limit = pi / 2 - (15.0 * pi) / 180.0;
+    auto constexpr minimum_meteor_angle = static_cast<real_t>(-absolute_meteor_angle_limit);
+    auto constexpr maximum_meteor_angle = static_cast<real_t>(absolute_meteor_angle_limit);
+    auto constexpr minimum_meteor_speed = static_cast<real_t>(300.0);
+    auto constexpr maximum_meteor_speed = static_cast<real_t>(500.0);
   }  // namespace
 
   auto Game::_register_methods() -> void
