@@ -21,6 +21,7 @@ namespace moon_buggy
     CRASH_COND(!buggy_scene.is_valid());
     CRASH_COND(!explosion_scene.is_valid());
     CRASH_COND(!fireworks_scene.is_valid());
+    CRASH_COND(!meteor_scene.is_valid());
 
     CRASH_COND(moon_tiles_images.empty());
     CRASH_COND(!moon_tiles_texure.is_valid());
