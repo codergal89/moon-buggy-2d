@@ -34,12 +34,12 @@ buggy_scene = ExtResource( 5 )
 explosion_scene = ExtResource( 10 )
 fireworks_scene = ExtResource( 4 )
 meteor_scene = ExtResource( 24 )
-moon_tiles_texture = ExtResource( 15 )
 moon_tiles_images = [ ExtResource( 16 ), ExtResource( 17 ) ]
-space_texture = ExtResource( 19 )
+moon_tiles_texture = ExtResource( 15 )
 space_images = [ ExtResource( 21 ), ExtResource( 20 ) ]
-stars_texture = ExtResource( 18 )
+space_texture = ExtResource( 19 )
 stars_images = [ ExtResource( 22 ), ExtResource( 23 ) ]
+stars_texture = ExtResource( 18 )
 
 [node name="RestartTimer" type="Timer" parent="."]
 wait_time = 1.25
@@ -56,6 +56,7 @@ level_descriptor_source = "res://config/levels.json"
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" parent="GUI" instance=ExtResource( 11 )]
+visible = false
 
 [node name="LevelComplete" parent="GUI" instance=ExtResource( 13 )]
 visible = false
@@ -74,6 +75,6 @@ current = true
 
 [node name="KillZone" parent="ScrollCamera" instance=ExtResource( 9 )]
 position = Vector2( 360, 480 )
-[connection signal="start_game" from="GUI/MainMenu" to="." method="start_game"]
-[connection signal="start_next_level" from="GUI/LevelComplete" to="." method="start_game"]
-[connection signal="reached_end" from="ScrollCamera" to="." method="goal_reached"]
+[connection signal="start_game" from="GUI/MainMenu" to="." method="on_game_start_requested"]
+[connection signal="start_next_level" from="GUI/LevelComplete" to="." method="on_next_level_requested"]
+[connection signal="reached_end" from="ScrollCamera" to="." method="on_goal_reached"]

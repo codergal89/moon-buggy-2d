@@ -72,7 +72,6 @@ add_library("scripts" SHARED
   "source/core/LevelDescriptor.cpp"
   "source/game/Buggy.cpp"
   "source/game/Game.cpp"
-  "source/game/Game_private.cpp"
   "source/game/LevelGenerator.cpp"
   "source/game/Map.cpp"
   "source/game/Meteor.cpp"
