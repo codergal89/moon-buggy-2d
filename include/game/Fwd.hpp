@@ -8,6 +8,7 @@ namespace moon_buggy
   struct LevelGenerator;
   struct Map;
   struct Meteor;
+  struct Meteors;
   struct ScrollCamera;
 }  // namespace moon_buggy
 

@@ -65,13 +65,11 @@ namespace moon_buggy
     auto start_level() -> void;
     auto start_meteors() -> void;
     auto stop_meteors() -> void;
-    auto spawn_meteor() -> void;
 
     /// Exported Properties
     godot::Ref<godot::PackedScene> buggy_scene{};
     godot::Ref<godot::PackedScene> explosion_scene{};
     godot::Ref<godot::PackedScene> fireworks_scene{};
-    godot::Ref<godot::PackedScene> meteor_scene{};
 
     godot::Array moon_tiles_images{};
     godot::Ref<godot::ImageTexture> moon_tiles_texure{};
@@ -91,11 +89,11 @@ namespace moon_buggy
     Map * map;
     ScrollCamera * scroll_camera;
     godot::Area2D * kill_zone;
+    Meteors * meteors;
 
     GUI * gui;
 
     godot::Ref<godot::RandomNumberGenerator> theme_rng{};
-    godot::Ref<godot::RandomNumberGenerator> meteor_rng{};
 
     std::shared_ptr<boost::sml::sm<GameMachine>> state_machine{};
   };

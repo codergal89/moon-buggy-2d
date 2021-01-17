@@ -13,8 +13,6 @@ namespace moon_buggy
   {
     auto default_entry_angle = real_t{0.0f};
     auto default_entry_speed = real_t{250.f};
-
-    auto constexpr group = "meteors";
   }  // namespace
 
   auto Meteor::_register_methods() -> void
@@ -31,8 +29,6 @@ namespace moon_buggy
   {
     entry_angle = default_entry_angle;
     entry_speed = default_entry_speed;
-
-    add_to_group(group);
   }
 
   auto Meteor::_ready() -> void

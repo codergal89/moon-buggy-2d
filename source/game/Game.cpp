@@ -5,7 +5,7 @@
 #include "game/GameMachine.hpp"
 #include "game/LevelGenerator.hpp"
 #include "game/Map.hpp"
-#include "game/Meteor.hpp"
+#include "game/Meteors.hpp"
 #include "game/ScrollCamera.hpp"
 #include "gui/GUI.hpp"
 #include "support/ArrayIterator.hpp"
@@ -24,15 +24,6 @@
 namespace moon_buggy
 {
 
-  namespace
-  {
-    auto constexpr absolute_meteor_angle_limit = pi / 2 - (15.0 * pi) / 180.0;
-    auto constexpr minimum_meteor_angle = static_cast<real_t>(-absolute_meteor_angle_limit);
-    auto constexpr maximum_meteor_angle = static_cast<real_t>(absolute_meteor_angle_limit);
-    auto constexpr minimum_meteor_speed = static_cast<real_t>(300.0);
-    auto constexpr maximum_meteor_speed = static_cast<real_t>(500.0);
-  }  // namespace
-
   auto Game::_register_methods() -> void
   {
     godot::register_method("_ready", &Game::_ready);
@@ -41,7 +32,6 @@ namespace moon_buggy
     godot::register_method("on_game_start_requested", &Game::on_game_start_requested);
     godot::register_method("on_next_level_requested", &Game::on_next_level_requested);
     godot::register_method("on_goal_reached", &Game::on_goal_reached);
-    godot::register_method("on_meteor_spawn_timer_expired", &Game::on_meteor_spawn_timer_expired);
     godot::register_method("on_success_animation_played", &Game::on_success_animation_played);
     godot::register_method("play_success_animation", &Game::play_success_animation);
     godot::register_method("show_buggy_crashed_screen", &Game::show_buggy_crashed_screen);
@@ -52,7 +42,6 @@ namespace moon_buggy
     godot::register_property("buggy_scene", &Game::buggy_scene, {});
     godot::register_property("explosion_scene", &Game::explosion_scene, {});
     godot::register_property("fireworks_scene", &Game::fireworks_scene, {});
-    godot::register_property("meteor_scene", &Game::meteor_scene, {});
     godot::register_property("moon_tiles_images", &Game::moon_tiles_images, {});
     godot::register_property("moon_tiles_texture", &Game::moon_tiles_texure, {});
     godot::register_property("space_images", &Game::space_images, {});
@@ -71,9 +60,6 @@ namespace moon_buggy
 
     theme_rng.instance();
     theme_rng->randomize();
-
-    meteor_rng.instance();
-    meteor_rng->randomize();
   }
 
   auto Game::_ready() -> void
@@ -88,6 +74,7 @@ namespace moon_buggy
     restart_timer = get_typed_node<godot::Timer>("RestartTimer");
     scroll_camera = get_typed_node<ScrollCamera>("ScrollCamera");
     kill_zone = scroll_camera->get_kill_zone();
+    meteors = scroll_camera->get_typed_node<Meteors>("Meteors");
 
     randomize_theme();
 
@@ -161,13 +148,6 @@ namespace moon_buggy
     state_machine->process_event(game_start_requested{});
   }
 
-  auto Game::on_meteor_spawn_timer_expired() -> void
-  {
-    spawn_meteor();
-    auto timer = get_typed_node<godot::Timer>("MeteorSpawnTimer");
-    timer->start(meteor_rng->randf_range(0.5f, 1.5f));
-  }
-
   auto Game::on_next_level_requested() -> void
   {
     state_machine->process_event(next_level_requested{});
@@ -185,7 +165,6 @@ namespace moon_buggy
     CRASH_COND(!buggy_scene.is_valid());
     CRASH_COND(!explosion_scene.is_valid());
     CRASH_COND(!fireworks_scene.is_valid());
-    CRASH_COND(!meteor_scene.is_valid());
 
     CRASH_COND(moon_tiles_images.empty());
     CRASH_COND(!moon_tiles_texure.is_valid());
@@ -223,39 +202,12 @@ namespace moon_buggy
 
   auto Game::start_meteors() -> void
   {
-    auto timer = godot::Timer::_new();
-    add_child(timer);
-    timer->set_name("MeteorSpawnTimer");
-    timer->set_one_shot(true);
-    timer->connect("timeout", this, "on_meteor_spawn_timer_expired");
-    timer->start(0);
+    meteors->call("start");
   }
 
   auto Game::stop_meteors() -> void
   {
-    if (auto timer = get_typed_node<godot::Timer>("MeteorSpawnTimer"))
-    {
-      timer->stop();
-      remove_child(timer);
-
-      get_tree()->call_group("meteors", "queue_free");
-    }
-  }
-
-  auto Game::spawn_meteor() -> void
-  {
-    auto live_meteors = get_tree()->get_nodes_in_group("meteors");
-    if (live_meteors.size() >= 3)
-    {
-      return;
-    }
-
-    auto meteor = cast_to<Meteor>(meteor_scene->instance());
-    meteor->set_position(godot::Vector2{meteor_rng->randf_range(-128.f, window_width + 128.f), 0.f});
-
-    meteor->set("entry_angle", meteor_rng->randf_range(minimum_meteor_angle, maximum_meteor_angle));
-    meteor->set("entry_speed", meteor_rng->randf_range(minimum_meteor_speed, maximum_meteor_speed));
-    scroll_camera->add_child(meteor);
+    meteors->call("stop");
   }
 
 }  // namespace moon_buggy
