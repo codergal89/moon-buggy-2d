@@ -21,7 +21,7 @@ __meta__ = {
 [node name="RowContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 31.4702
+margin_left = 32.0
 margin_top = 32.0
 margin_right = -32.5298
 margin_bottom = -32.0
@@ -33,28 +33,28 @@ __meta__ = {
 
 [node name="MessageContainer" type="HBoxContainer" parent="RowContainer"]
 margin_top = 154.0
-margin_right = 656.0
+margin_right = 655.0
 margin_bottom = 180.0
 custom_constants/separation = 10
 alignment = 1
 
 [node name="Message" type="Label" parent="RowContainer/MessageContainer"]
-margin_left = 167.0
-margin_right = 455.0
+margin_left = 166.0
+margin_right = 454.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 1 )
 text = "You Have Completed Level"
 
 [node name="LevelNumber" type="Label" parent="RowContainer/MessageContainer"]
-margin_left = 465.0
-margin_right = 489.0
+margin_left = 464.0
+margin_right = 488.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 1 )
 text = "#0"
 
 [node name="Button" type="Button" parent="RowContainer"]
 margin_top = 212.0
-margin_right = 656.0
+margin_right = 655.0
 margin_bottom = 262.0
 custom_fonts/font = ExtResource( 3 )
 shortcut = SubResource( 2 )
