@@ -75,7 +75,6 @@ add_library("scripts" SHARED
   "source/game/LevelGenerator.cpp"
   "source/game/Map.cpp"
   "source/game/Meteor.cpp"
-  "source/game/Meteor_private.cpp"
   "source/game/ScrollCamera.cpp"
   "source/gui/BuggyCrashed.cpp"
   "source/gui/GUI.cpp"
