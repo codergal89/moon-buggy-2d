@@ -3,6 +3,7 @@
 
 namespace moon_buggy
 {
+  struct BuggyCrashed;
   struct GUI;
   struct HUD;
   struct LevelComplete;

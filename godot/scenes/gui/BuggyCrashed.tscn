@@ -1,8 +1,62 @@
-[gd_scene format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/fonts/hud_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scripts/gui/BuggyCrashed.gdns" type="Script" id=3]
+
+[sub_resource type="InputEventAction" id=1]
+action = "ui_accept"
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
 
 [node name="BuggyCrashed" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="RowContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -32.0
+custom_constants/separation = 32
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageContainer" type="HBoxContainer" parent="RowContainer"]
+margin_top = 154.0
+margin_right = 656.0
+margin_bottom = 180.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Message" type="Label" parent="RowContainer/MessageContainer"]
+margin_left = 137.0
+margin_right = 209.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "Oh no!"
+
+[node name="CrashReason" type="Label" parent="RowContainer/MessageContainer"]
+margin_left = 219.0
+margin_right = 519.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "You fell into a crater..."
+
+[node name="Button" type="Button" parent="RowContainer"]
+margin_top = 212.0
+margin_right = 656.0
+margin_bottom = 262.0
+custom_fonts/font = ExtResource( 2 )
+shortcut = SubResource( 2 )
+text = "Retry This Level"
+[connection signal="pressed" from="RowContainer/Button" to="." method="retry_button_clicked"]
