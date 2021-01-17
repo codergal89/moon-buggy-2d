@@ -5,6 +5,7 @@
 #include "game/LevelGenerator.hpp"
 #include "game/Map.hpp"
 #include "game/Meteor.hpp"
+#include "game/Meteors.hpp"
 #include "game/ScrollCamera.hpp"
 #include "gui/BuggyCrashed.hpp"
 #include "gui/GUI.hpp"
@@ -41,6 +42,7 @@ extern "C"
     godot::register_class<moon_buggy::MainMenu>();
     godot::register_class<moon_buggy::Map>();
     godot::register_class<moon_buggy::Meteor>();
+    godot::register_class<moon_buggy::Meteors>();
     godot::register_class<moon_buggy::ScrollCamera>();
   }
 }
