@@ -42,16 +42,16 @@ namespace moon_buggy
     set_linear_velocity(direction_down.rotated(entry_angle) * entry_speed);
   }
 
-  auto Meteor::on_screen_exited() -> void
-  {
-    queue_free();
-  }
-
   auto Meteor::_integrate_forces(godot::Physics2DDirectBodyState * body_state) -> void
   {
     auto velocity = body_state->get_linear_velocity().normalized();
     auto angle = velocity.angle_to(direction_down);
     set_rotation(-angle);
+  }
+
+  auto Meteor::on_screen_exited() -> void
+  {
+    queue_free();
   }
 
 }  // namespace moon_buggy
