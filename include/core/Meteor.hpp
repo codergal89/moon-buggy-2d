@@ -1,5 +1,5 @@
-#ifndef MOON_BUGGY_2D_GAME_METEOR_HPP
-#define MOON_BUGGY_2D_GAME_METEOR_HPP
+#ifndef MOON_BUGGY_2D_CORE_METEOR_HPP
+#define MOON_BUGGY_2D_CORE_METEOR_HPP
 
 #include "support/TypedNodeCastMixin.hpp"
 

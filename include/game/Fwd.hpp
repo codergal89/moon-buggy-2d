@@ -7,8 +7,6 @@ namespace moon_buggy
   struct Game;
   struct LevelGenerator;
   struct Map;
-  struct Meteor;
-  struct Meteors;
 }  // namespace moon_buggy
 
 #endif

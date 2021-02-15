@@ -1,4 +1,4 @@
-#include "game/Meteor.hpp"
+#include "core/Meteor.hpp"
 
 #include "core/Constants.hpp"
 

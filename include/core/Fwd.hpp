@@ -6,6 +6,7 @@ namespace moon_buggy
   struct Level;
   struct LevelDescriptor;
   struct ScrollCamera;
+  struct Meteor;
 }  // namespace moon_buggy
 
 #endif

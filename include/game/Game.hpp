@@ -45,7 +45,7 @@ namespace moon_buggy
     Buggy * buggy{};
     LevelGenerator * level_generator{};
     Map * map{};
-    Meteors * meteors{};
+    // Meteors * meteors{};
     godot::Timer * restart_timer{};
 
     // auto show_buggy_crashed_screen() -> void;

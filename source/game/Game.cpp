@@ -67,7 +67,7 @@ namespace moon_buggy
     buggy = get_typed_node<Buggy>("Buggy");
     level_generator = get_typed_node<LevelGenerator>("LevelGenerator");
     map = get_typed_node<Map>("Map");
-    meteors = get_typed_node<Meteors>("Meteors");
+    // meteors = get_typed_node<Meteors>("Meteors");
     restart_timer = get_typed_node<godot::Timer>("RestartTimer");
 
     // check_properties();
