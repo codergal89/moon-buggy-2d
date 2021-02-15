@@ -13,7 +13,7 @@ length = 10.0
 length = 10.0
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 9.31866
+radius = 11.7954
 height = 63.7025
 
 [node name="Buggy" type="RigidBody2D"]
@@ -28,20 +28,23 @@ contact_monitor = true
 script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -44.1471 )
+position = Vector2( 0, -44 )
 frames = ExtResource( 1 )
-animation = "move"
+animation = "idle"
 flip_h = true
 
 [node name="FrontWheelShape" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -26.8352, -10 )
 shape = SubResource( 2 )
 
 [node name="RearWheelShape" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 19, -10 )
 shape = SubResource( 3 )
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
-position = Vector2( -3.99425, -13.7955 )
+visible = false
+position = Vector2( -4, -12 )
 rotation = 1.5708
 shape = SubResource( 4 )

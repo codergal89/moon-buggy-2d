@@ -20,6 +20,7 @@ namespace moon_buggy
     godot::register_method("_ready", &Meteor::_ready);
     godot::register_method("_integrate_forces", &Meteor::_integrate_forces);
     godot::register_method("on_screen_exited", &Meteor::on_screen_exited);
+    godot::register_method("on_body_entered", &Meteor::on_body_entered);
 
     godot::register_property("entry_angle", &Meteor::entry_angle, default_entry_angle);
     godot::register_property("entry_speed", &Meteor::entry_speed, default_entry_speed);
@@ -52,6 +53,14 @@ namespace moon_buggy
   auto Meteor::on_screen_exited() -> void
   {
     queue_free();
+  }
+
+  auto Meteor::on_body_entered(godot::Node * body) -> void
+  {
+    (void)body;
+    set_linear_velocity({});
+    set_deferred("mode", godot::RigidBody2D::Mode::MODE_STATIC);
+    set_deferred("sleeping", true);
   }
 
 }  // namespace moon_buggy

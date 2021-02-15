@@ -9,7 +9,6 @@ namespace moon_buggy
   struct Map;
   struct Meteor;
   struct Meteors;
-  struct ScrollCamera;
 }  // namespace moon_buggy
 
 #endif

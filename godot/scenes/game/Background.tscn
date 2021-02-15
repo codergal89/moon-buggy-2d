@@ -7,7 +7,7 @@
 
 [node name="Space" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.2, 0 )
-motion_mirroring = Vector2( 1024, 0 )
+motion_mirroring = Vector2( 1024, 0.001 )
 
 [node name="TextureRect" type="TextureRect" parent="Space"]
 margin_right = 1024.0
@@ -19,7 +19,7 @@ __meta__ = {
 
 [node name="Stars" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.18, 0 )
-motion_mirroring = Vector2( 1024, 0 )
+motion_mirroring = Vector2( 1024, 0.001 )
 
 [node name="TextureRect" type="TextureRect" parent="Stars"]
 margin_right = 40.0

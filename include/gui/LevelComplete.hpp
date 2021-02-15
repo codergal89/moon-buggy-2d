@@ -17,15 +17,16 @@ namespace moon_buggy
     auto static _register_methods() -> void;
 
     auto _init() -> void;
-    auto _ready() -> void;
-
-    auto set_level_number(int number) -> void;
-
-    GODOT_CLASS(LevelComplete, godot::Control)  // NOLINT
 
   private:
-    auto start_button_clicked() -> void;
+    GODOT_CLASS(LevelComplete, godot::Control)
 
+    // Exported Methods
+    auto start_button_clicked() -> void;
+    auto set_level_number(int number) -> void;
+    auto _ready() -> void;
+
+    // Internal Variables
     godot::Label * level_number;
   };
 

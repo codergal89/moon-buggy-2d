@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/tiles/moon_tiles_set.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/game/Map.gdns" type="Script" id=2]
 
-[node name="Map" type="Node"]
+[node name="Map" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Ground" type="TileMap" parent="."]

@@ -9,7 +9,11 @@ radius = 15.9064
 [node name="Meteor" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 24
+contacts_reported = 1
+contact_monitor = true
 script = ExtResource( 2 )
+entry_angle = null
+entry_speed = null
 
 [node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 0, -52.0278 )
@@ -24,4 +28,5 @@ offset = Vector2( 37.7751, -37.7797 )
 
 [node name="MeteorShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+[connection signal="body_entered" from="." to="." method="on_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier" to="." method="on_screen_exited"]

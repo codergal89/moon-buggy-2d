@@ -46,6 +46,7 @@ namespace moon_buggy
   {
     static_cast<void>(frame_time);
     update_animation();
+    godot::Godot::print("pos: {0}", get_position());
   }
 
   auto Buggy::_integrate_forces(godot::Physics2DDirectBodyState * state) -> void

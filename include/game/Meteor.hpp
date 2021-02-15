@@ -6,6 +6,7 @@
 #include <AnimatedSprite.hpp>
 #include <Defs.hpp>
 #include <Godot.hpp>
+#include <Node.hpp>
 #include <Physics2DDirectBodyState.hpp>
 #include <RigidBody2D.hpp>
 
@@ -26,6 +27,7 @@ namespace moon_buggy
 
     auto _integrate_forces(godot::Physics2DDirectBodyState * body_state) -> void;
     auto on_screen_exited() -> void;
+    auto on_body_entered(godot::Node * body) -> void;
 
     real_t entry_angle{};
     real_t entry_speed{};
