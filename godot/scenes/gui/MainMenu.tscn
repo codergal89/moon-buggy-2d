@@ -1,18 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/fonts/monogram.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/gui/MainMenu.gdns" type="Script" id=2]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scripts/core/MeteorSpawner.gdns" type="Script" id=4]
+[ext_resource path="res://scenes/core/Meteor.tscn" type="PackedScene" id=5]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -64, 0, 0, 0, 0, 0, 784, 0 )
+}
+
+[sub_resource type="DynamicFont" id=2]
 size = 72
 font_data = ExtResource( 1 )
 
-[sub_resource type="InputEventAction" id=2]
+[sub_resource type="InputEventAction" id=3]
 action = "ui_accept"
 
-[sub_resource type="ShortCut" id=3]
-shortcut = SubResource( 2 )
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -21,6 +28,14 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MeteorSpawnerPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="Spawner" type="PathFollow2D" parent="MeteorSpawnerPath"]
+position = Vector2( -64, 0 )
+script = ExtResource( 4 )
+meteor_scene = ExtResource( 5 )
 
 [node name="RowContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -39,7 +54,7 @@ __meta__ = {
 margin_top = 138.0
 margin_right = 656.0
 margin_bottom = 195.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Moon Buggy"
 align = 1
 autowrap = true
@@ -55,9 +70,10 @@ margin_bottom = 277.0
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 shortcut_in_tooltip = false
-shortcut = SubResource( 3 )
+shortcut = SubResource( 4 )
 text = "Start"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="visibility_changed" from="." to="." method="on_visibility_changed"]
 [connection signal="pressed" from="RowContainer/StartButton" to="." method="start_button_clicked"]

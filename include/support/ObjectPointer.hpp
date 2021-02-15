@@ -16,12 +16,12 @@ namespace moon_buggy
   };
 
   template<typename ObjectType>
-  using object_ptr = std::unique_ptr<ObjectType, object_deleter<ObjectType>>;
+  using ObjectPointer = std::unique_ptr<ObjectType, object_deleter<ObjectType>>;
 
   template<typename ObjectType>
-  auto make_object_ptr(ObjectType * object) -> object_ptr<ObjectType>
+  auto make_object_ptr(ObjectType * object) -> ObjectPointer<ObjectType>
   {
-    return object_ptr<ObjectType>{object};
+    return ObjectPointer<ObjectType>{object};
   }
 
 }  // namespace moon_buggy

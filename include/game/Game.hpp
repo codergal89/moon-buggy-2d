@@ -89,7 +89,7 @@ namespace moon_buggy
     // std::uint64_t window_width{};
     // std::uint64_t window_height{};
     // int current_level_number{};
-    // object_ptr<Level> current_level{};
+    // ObjectPointer<Level> current_level{};
 
     // godot::Timer * restart_timer;
     // LevelGenerator * level_generator;

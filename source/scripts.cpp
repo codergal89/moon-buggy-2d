@@ -1,12 +1,12 @@
 #include "core/Level.hpp"
 #include "core/LevelDescriptor.hpp"
 #include "core/Meteor.hpp"
+#include "core/MeteorSpawner.hpp"
 #include "core/ScrollCamera.hpp"
 #include "game/Buggy.hpp"
 #include "game/Game.hpp"
 #include "game/LevelGenerator.hpp"
 #include "game/Map.hpp"
-// #include "game/Meteors.hpp"
 #include "gui/BuggyCrashed.hpp"
 #include "gui/GUI.hpp"
 #include "gui/HUD.hpp"
@@ -42,7 +42,7 @@ extern "C"
     godot::register_class<moon_buggy::MainMenu>();
     godot::register_class<moon_buggy::Map>();
     godot::register_class<moon_buggy::Meteor>();
-    // godot::register_class<moon_buggy::Meteors>();
+    godot::register_class<moon_buggy::MeteorSpawner>();
     godot::register_class<moon_buggy::ScrollCamera>();
   }
 }

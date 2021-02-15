@@ -36,7 +36,7 @@ namespace moon_buggy
     auto load(godot::String descriptor_file_path) -> int;
 
     godot::Ref<godot::RandomNumberGenerator> random_number_generator{};
-    std::queue<object_ptr<LevelDescriptor>> level_descriptors{};
+    std::queue<ObjectPointer<LevelDescriptor>> level_descriptors{};
 
     godot::String level_descriptor_source{};
 

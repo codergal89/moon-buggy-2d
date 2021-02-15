@@ -3,6 +3,6 @@
 [ext_resource path="res://scripts/scripts.gdnlib" type="GDNativeLibrary" id=100000]
 
 [resource]
-resource_name = "Meteors"
-class_name = "Meteors"
+resource_name = "MeteorSpawner"
+class_name = "MeteorSpawner"
 library = ExtResource( 100000 )

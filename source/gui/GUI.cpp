@@ -1,5 +1,6 @@
 #include "gui/GUI.hpp"
 
+#include "core/MeteorSpawner.hpp"
 #include "core/ScrollCamera.hpp"
 #include "gui/BuggyCrashed.hpp"
 #include "gui/HUD.hpp"
