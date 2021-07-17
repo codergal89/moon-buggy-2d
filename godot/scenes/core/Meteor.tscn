@@ -25,5 +25,5 @@ offset = Vector2( 37.7751, -37.7797 )
 
 [node name="MeteorShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-[connection signal="screen_entered" from="VisibilityNotifier" to="." method="on_screen_entered"]
+
 [connection signal="screen_exited" from="VisibilityNotifier" to="." method="on_screen_exited"]

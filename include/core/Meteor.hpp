@@ -26,9 +26,7 @@ namespace moon_buggy
     GODOT_CLASS(Meteor, godot::RigidBody2D)  // NOLINT
 
     auto _integrate_forces(godot::Physics2DDirectBodyState * body_state) -> void;
-    auto on_screen_entered() -> void;
     auto on_screen_exited() -> void;
-    auto on_body_entered(godot::Node * body) -> void;
 
     real_t entry_angle{};
     real_t entry_speed{};
