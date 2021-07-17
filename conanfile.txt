@@ -1,2 +1,2 @@
 [requires]
-godot-cpp/cci.3.2-20200130
+godot-cpp/cci.3.3-20210525
