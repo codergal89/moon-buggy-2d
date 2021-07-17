@@ -4,6 +4,7 @@
 #include "support/TypedNodeCastMixin.hpp"
 
 #include <Godot.hpp>
+#include <Node.hpp>
 #include <PackedScene.hpp>
 #include <PathFollow2D.hpp>
 #include <RandomNumberGenerator.hpp>
@@ -14,7 +15,7 @@ namespace moon_buggy
 {
 
   struct MeteorSpawner
-      : godot::PathFollow2D
+      : godot::Node
       , TypedNodeCastMixin<MeteorSpawner>
   {
     auto static _register_methods() -> void;
@@ -22,7 +23,7 @@ namespace moon_buggy
     auto _init() -> void;
 
   private:
-    GODOT_CLASS(MeteorSpawner, godot::PathFollow2D)
+    GODOT_CLASS(MeteorSpawner, godot::Node)
 
     /// Exported Methods
     auto _ready() -> void;
@@ -42,9 +43,12 @@ namespace moon_buggy
     godot::Ref<godot::PackedScene> meteor_scene{};
 
     /// Internal Variables
-    godot::Timer * spawn_timer{};
-    godot::Ref<godot::RandomNumberGenerator> rng{};
     unsigned live_meteor_limit{};
+    godot::Node * meteors{};
+    godot::Ref<godot::RandomNumberGenerator> rng{};
+    godot::Timer * spawn_timer{};
+    godot::PathFollow2D * spawn_point{};
+    godot::PathFollow2D * target_point{};
   };
 
 }  // namespace moon_buggy

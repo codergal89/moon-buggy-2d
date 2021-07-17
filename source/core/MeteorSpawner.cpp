@@ -5,9 +5,12 @@
 
 #include <Array.hpp>
 #include <Godot.hpp>
+#include <Node.hpp>
+#include <PathFollow2D.hpp>
 #include <SceneTree.hpp>
 #include <String.hpp>
 #include <Timer.hpp>
+#include <Viewport.hpp>
 
 #include <algorithm>
 
@@ -23,8 +26,6 @@ namespace moon_buggy
     auto constexpr maximum_live_meteor_limit = 16u;
 
     auto constexpr absolute_meteor_angle_limit = pi / 2 - (15.0 * pi) / 180.0;
-    auto constexpr minimum_meteor_angle = static_cast<real_t>(-absolute_meteor_angle_limit);
-    auto constexpr maximum_meteor_angle = static_cast<real_t>(absolute_meteor_angle_limit);
     auto constexpr minimum_meteor_speed = static_cast<real_t>(300.0);
     auto constexpr maximum_meteor_speed = static_cast<real_t>(500.0);
   }  // namespace
@@ -62,12 +63,17 @@ namespace moon_buggy
 
   auto MeteorSpawner::_ready() -> void
   {
+    meteors = get_typed_node<godot::Node>("Meteors");
+    spawn_point = get_typed_node<godot::PathFollow2D>("SpawnPath/Point");
+    target_point = get_typed_node<godot::PathFollow2D>("TargetPath/Point");
+
     CRASH_COND(!meteor_scene.is_valid());
+
+    start();
   }
 
   auto MeteorSpawner::on_spawn_timer_expired() -> void
   {
-    set_unit_offset(rng->randf());
     spawn_meteor();
     spawn_timer->start(rng->randf_range(0.5f, 1.5f));
   }
@@ -93,25 +99,31 @@ namespace moon_buggy
     spawn_timer->stop();
     if (clear)
     {
-      get_tree()->call_group(meteor_group_name, "queue_free");
+      meteors->propagate_call("queue_free");
     }
   }
 
   auto MeteorSpawner::spawn_meteor() -> void
   {
-    auto live_meteors = get_tree()->get_nodes_in_group(meteor_group_name);
-    if (static_cast<unsigned>(live_meteors.size()) >= live_meteor_limit)
+    auto live_meteors = meteors->get_children().size();
+    if (static_cast<unsigned>(live_meteors) >= live_meteor_limit)
     {
       return;
     }
 
-    auto meteor = cast_to<Meteor>(meteor_scene->instance());
-    meteor->set_position(get_position());
+    spawn_point->set_unit_offset(rng->randf());
+    target_point->set_unit_offset(rng->randf());
 
-    meteor->set("entry_angle", rng->randf_range(minimum_meteor_angle, maximum_meteor_angle));
+    auto spawn_location = spawn_point->get_position();
+    auto target_location = target_point->get_position();
+    auto trajectory = spawn_location - target_location;
+
+    auto meteor = cast_to<Meteor>(meteor_scene->instance());
+    meteor->set_position(spawn_location);
+
+    meteor->set("entry_angle", -trajectory.angle_to({0.f, -1.f}));
     meteor->set("entry_speed", rng->randf_range(minimum_meteor_speed, maximum_meteor_speed));
-    meteor->add_to_group(meteor_group_name);
-    add_child(meteor);
+    meteors->add_child(meteor);
   }
 
 }  // namespace moon_buggy
