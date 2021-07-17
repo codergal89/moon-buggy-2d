@@ -14,8 +14,7 @@ contact_monitor = true
 script = ExtResource( 2 )
 
 [node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0, -52.0278 )
-scale = Vector2( 2.04232, 7.13081 )
+rect = Rect2( -20, -120, 40, 140 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.0483208, 0.0234947 )
@@ -26,5 +25,5 @@ offset = Vector2( 37.7751, -37.7797 )
 
 [node name="MeteorShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-[connection signal="body_entered" from="." to="." method="on_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier" to="." method="on_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier" to="." method="on_screen_exited"]

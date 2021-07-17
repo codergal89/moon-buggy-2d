@@ -19,6 +19,7 @@ namespace moon_buggy
   {
     godot::register_method("_ready", &Meteor::_ready);
     godot::register_method("_integrate_forces", &Meteor::_integrate_forces);
+    godot::register_method("on_screen_entered", &Meteor::on_screen_entered);
     godot::register_method("on_screen_exited", &Meteor::on_screen_exited);
     godot::register_method("on_body_entered", &Meteor::on_body_entered);
 
@@ -41,6 +42,8 @@ namespace moon_buggy
     sprite->play();
 
     set_linear_velocity(direction_down.rotated(entry_angle) * entry_speed);
+
+    godot::Godot::print("{0} added to tree at {1}", this, get_position());
   }
 
   auto Meteor::_integrate_forces(godot::Physics2DDirectBodyState * body_state) -> void
@@ -50,17 +53,22 @@ namespace moon_buggy
     set_rotation(-angle);
   }
 
+  auto Meteor::on_screen_entered() -> void
+  {
+    godot::Godot::print("{0} entered the screen.", this);
+  }
+
   auto Meteor::on_screen_exited() -> void
   {
+    godot::Godot::print("{0} exited the screen.", this);
     queue_free();
   }
 
   auto Meteor::on_body_entered(godot::Node * body) -> void
   {
     (void)body;
-    set_linear_velocity({});
-    set_deferred("mode", godot::RigidBody2D::Mode::MODE_STATIC);
-    set_deferred("sleeping", true);
+    // set_linear_velocity({});
+    // set_deferred("mode", godot::RigidBody2D::Mode::MODE_STATIC);
   }
 
 }  // namespace moon_buggy
