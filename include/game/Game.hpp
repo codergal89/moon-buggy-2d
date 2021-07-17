@@ -28,6 +28,8 @@ namespace moon_buggy
 
     /// Exported Methods
     auto _ready() -> void;
+    
+    auto on_start() -> void;
 
     /// Internal Variables
     LevelGenerator * level_generator{};

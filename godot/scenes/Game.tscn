@@ -31,7 +31,6 @@ follow_viewport_enable = true
 script = ExtResource( 25 )
 
 [node name="MainMenu" parent="GUI" instance=ExtResource( 11 )]
-visible = false
 
 [node name="LevelComplete" parent="GUI" instance=ExtResource( 13 )]
 visible = false
@@ -41,3 +40,5 @@ visible = false
 
 [node name="HUD" parent="GUI" instance=ExtResource( 12 )]
 visible = false
+
+[connection signal="start_game" from="GUI/MainMenu" to="Game" method="on_start"]

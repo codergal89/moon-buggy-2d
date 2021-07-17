@@ -90,4 +90,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="RowContainer/StartButton" to="." method="start_button_clicked"]
+[connection signal="pressed" from="RowContainer/StartButton" to="." method="on_start_button_clicked"]
