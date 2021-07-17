@@ -1,13 +1,12 @@
 #ifndef MOON_BUGGY_2D_MAIN_MENU
 #define MOON_BUGGY_2D_MAIN_MENU
 
-#include "core/Fwd.hpp"
 #include "support/TypedNodeCastMixin.hpp"
 
-#include <Button.hpp>
 #include <Control.hpp>
 #include <Godot.hpp>
-#include <Label.hpp>
+#include <Defs.hpp>
+#include <ParallaxBackground.hpp>
 
 namespace moon_buggy
 {
@@ -21,16 +20,19 @@ namespace moon_buggy
     auto _init() -> void;
 
   private:
-    GODOT_CLASS(MainMenu, godot::Control)  // NOLINT
+    GODOT_CLASS(MainMenu, godot::Control)  // NOLINT (modernize-trailing-return-type)
 
     /// Exported Methods
+    auto _process(real_t delta) -> void;
     auto _ready() -> void;
 
     auto on_start_button_clicked() -> void;
-    auto on_visibility_changed() -> void;
+
+    /// Exported Properties
+    real_t background_scroll_speed;
 
     /// Internal Variables
-    MeteorSpawner * meteor_spawner{};
+    godot::ParallaxBackground *  background;
   };
 
 }  // namespace moon_buggy

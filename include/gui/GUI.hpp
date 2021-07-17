@@ -1,12 +1,12 @@
 #ifndef MOON_BUGGY_2D_GUI_GUI_HPP
 #define MOON_BUGGY_2D_GUI_GUI_HPP
 
-#include "core/Fwd.hpp"
 #include "gui/Fwd.hpp"
 #include "support/TypedNodeCastMixin.hpp"
 
 #include <Camera2D.hpp>
 #include <CanvasLayer.hpp>
+#include <Defs.hpp>
 #include <Godot.hpp>
 
 namespace moon_buggy
@@ -39,7 +39,6 @@ namespace moon_buggy
     HUD * hud;
     LevelComplete * level_complete_screen;
     MainMenu * main_menu;
-    ScrollCamera * scroll_camera;
   };
 
 }  // namespace moon_buggy

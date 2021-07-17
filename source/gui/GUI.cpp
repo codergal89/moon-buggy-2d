@@ -37,15 +37,11 @@ namespace moon_buggy
     hud = get_typed_node<HUD>();
     level_complete_screen = get_typed_node<LevelComplete>();
     main_menu = get_typed_node<MainMenu>();
-    scroll_camera = get_typed_node<ScrollCamera>();
 
     CRASH_COND(!buggy_crashed_screen);
     CRASH_COND(!hud);
     CRASH_COND(!level_complete_screen);
     CRASH_COND(!main_menu);
-    CRASH_COND(!scroll_camera);
-
-    show_main_menu();
   }
 
   auto GUI::show_buggy_crashed_screen() -> void
@@ -71,8 +67,6 @@ namespace moon_buggy
   {
     hide_all_layers();
     main_menu->show();
-    scroll_camera->set("should_scroll", true);
-    scroll_camera->make_current();
   }
 
   auto GUI::hide_all_layers() -> void
