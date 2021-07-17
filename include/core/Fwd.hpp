@@ -8,6 +8,8 @@ namespace moon_buggy
   struct ScrollCamera;
   struct Meteor;
   struct MeteorSpawner;
+
+  enum struct Theme;
 }  // namespace moon_buggy
 
 #endif

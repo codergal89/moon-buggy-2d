@@ -17,5 +17,5 @@ func test_invoking_on_start_button_clicked_emits_start_game():
 
 func test_button_pressed_signal_is_connected_to_start_button_clicked():
 	var scene: MainMenu = add_child_autofree(Scene.instance())
-	var start_button: Button = scene.get_node("RowContainer/StartButton")
+	var start_button: Button = scene.get_node("UI/RowContainer/StartButton")
 	assert_connected(start_button, scene, "pressed", "on_start_button_clicked")
