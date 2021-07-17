@@ -3,6 +3,7 @@
 #include "core/Meteor.hpp"
 #include "core/MeteorSpawner.hpp"
 #include "core/ScrollCamera.hpp"
+#include "core/Space.hpp"
 #include "game/Buggy.hpp"
 #include "game/Game.hpp"
 #include "game/LevelGenerator.hpp"
@@ -44,5 +45,6 @@ extern "C"
     godot::register_class<moon_buggy::Meteor>();
     godot::register_class<moon_buggy::MeteorSpawner>();
     godot::register_class<moon_buggy::ScrollCamera>();
+    godot::register_class<moon_buggy::Space>();
   }
 }

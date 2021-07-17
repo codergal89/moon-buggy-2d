@@ -73,6 +73,7 @@ add_library("scripts" SHARED
   "source/core/Meteor.cpp"
   "source/core/MeteorSpawner.cpp"
   "source/core/ScrollCamera.cpp"
+  "source/core/Space.cpp"
   "source/game/Buggy.cpp"
   "source/game/Game.cpp"
   "source/game/LevelGenerator.cpp"

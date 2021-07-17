@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/fonts/monogram.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/gui/MainMenu.gdns" type="Script" id=2]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/backgrounds/stars.tres" type="Texture" id=4]
-[ext_resource path="res://assets/backgrounds/space.tres" type="Texture" id=5]
+[ext_resource path="res://scenes/core/Space.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/core/MeteorSpawner.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
@@ -25,33 +24,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="ParallaxBackground" parent="."]
+[node name="Background" type="CanvasLayer" parent="."]
 
-[node name="Space" type="ParallaxLayer" parent="Background"]
-motion_scale = Vector2( 0.2, 0 )
-motion_mirroring = Vector2( 1024, 0.001 )
-
-[node name="Image" type="TextureRect" parent="Background/Space"]
-texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Stars" type="ParallaxLayer" parent="Background"]
-motion_scale = Vector2( 0.15, 0 )
-motion_mirroring = Vector2( 1024, 0.001 )
-
-[node name="TextureRect" type="TextureRect" parent="Background/Stars"]
-margin_right = 1024.0
-margin_bottom = 480.0
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Space" parent="Background" instance=ExtResource( 4 )]
+enable_autoscrolling = true
 
 [node name="Meteors" parent="Background" instance=ExtResource( 6 )]
 
-[node name="RowContainer" type="VBoxContainer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="RowContainer" type="VBoxContainer" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
@@ -64,7 +46,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="RowContainer"]
+[node name="Title" type="Label" parent="UI/RowContainer"]
 margin_top = 138.0
 margin_right = 656.0
 margin_bottom = 195.0
@@ -77,7 +59,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartButton" type="Button" parent="RowContainer"]
+[node name="StartButton" type="Button" parent="UI/RowContainer"]
 margin_top = 227.0
 margin_right = 656.0
 margin_bottom = 277.0
@@ -90,4 +72,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="RowContainer/StartButton" to="." method="on_start_button_clicked"]
+[connection signal="pressed" from="UI/RowContainer/StartButton" to="." method="on_start_button_clicked"]
