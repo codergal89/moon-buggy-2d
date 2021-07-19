@@ -67,6 +67,7 @@ endif()
 
 add_library("scripts" SHARED
   "source/scripts.cpp"
+  "source/MoonBuggy2D.cpp"
 
   "source/core/Level.cpp"
   "source/core/LevelDescriptor.cpp"

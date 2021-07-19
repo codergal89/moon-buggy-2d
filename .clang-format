@@ -56,6 +56,9 @@ FixNamespaceComments: true
 
 IncludeBlocks: Regroup
 IncludeCategories:
+    # Main Game Header
+    - Regex: '"MoonBuggy2D.hpp'
+      Priority: 10
     # Local Headers
     - Regex: '".+/.+\.hpp"'
       Priority: 100

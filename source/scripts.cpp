@@ -1,3 +1,5 @@
+#include "MoonBuggy2D.hpp"
+
 #include "core/Level.hpp"
 #include "core/LevelDescriptor.hpp"
 #include "core/Meteor.hpp"
@@ -31,6 +33,7 @@ extern "C"
   auto GDN_EXPORT godot_nativescript_init(void * handle) -> void
   {
     godot::Godot::nativescript_init(handle);
+    godot::register_class<moon_buggy::MoonBuggy2D>();
     godot::register_class<moon_buggy::Buggy>();
     godot::register_class<moon_buggy::BuggyCrashed>();
     godot::register_class<moon_buggy::Game>();
