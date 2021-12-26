@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/fonts/monogram.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/gui/MainMenu.gdns" type="Script" id=2]
 [ext_resource path="res://assets/fonts/button_font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://scenes/core/Space.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/core/MeteorSpawner.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
@@ -20,9 +19,6 @@ shortcut = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="Background" type="CanvasLayer" parent="."]
-
-[node name="Space" parent="Background" instance=ExtResource( 4 )]
-enable_autoscrolling = true
 
 [node name="Meteors" parent="Background" instance=ExtResource( 6 )]
 

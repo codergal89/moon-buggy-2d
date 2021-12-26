@@ -28,9 +28,6 @@ namespace moon_buggy
     auto _ready() -> void;
 
     auto on_start_button_clicked() -> void;
-
-    /// Internal Variables
-    godot::Ref<godot::RandomNumberGenerator> theme_rng;
   };
 
 }  // namespace moon_buggy
