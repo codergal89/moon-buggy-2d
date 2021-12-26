@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/gui/GUI.gdns" type="Script" id=1]
 [ext_resource path="res://scenes/gui/MainMenu.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/game/Game.gdns" type="Script" id=4]
 [ext_resource path="res://scripts/game/LevelGenerator.gdns" type="Script" id=5]
 [ext_resource path="res://scenes/game/Map.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/gui/HUD.tscn" type="PackedScene" id=7]
 
 [node name="MoonBuggy2D" type="Node"]
 script = ExtResource( 3 )
@@ -30,4 +31,5 @@ level_descriptor_source = "res://config/levels.json"
 [node name="GUI" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
 script = ExtResource( 1 )
+hud = ExtResource( 7 )
 main_menu = ExtResource( 2 )

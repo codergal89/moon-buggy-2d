@@ -19,7 +19,15 @@ namespace moon_buggy
   {
     godot::register_method("_ready", &GUI::_ready);
     godot::register_method("show_main_menu", &GUI::show_main_menu);
+    godot::register_method("show_hud", &GUI::show_hud);
 
+    godot::register_property("hud",
+                             &GUI::hud,
+                             {},
+                             GODOT_METHOD_RPC_MODE_DISABLED,
+                             GODOT_PROPERTY_USAGE_DEFAULT,
+                             GODOT_PROPERTY_HINT_FILE,
+                             "*.tscn");
     godot::register_property("main_menu",
                              &GUI::main_menu,
                              {},
@@ -35,7 +43,17 @@ namespace moon_buggy
 
   auto GUI::_ready() -> void
   {
+    CRASH_COND(hud.is_null());
     CRASH_COND(main_menu.is_null());
+  }
+
+  auto GUI::show_hud(unsigned level_number) -> godot::Node *
+  {
+    hide_all_layers();
+    auto hud_node = hud->instance();
+    add_child(hud_node);
+    hud_node->set("level_number", level_number);
+    return hud_node;
   }
 
   auto GUI::show_main_menu() -> godot::Node *

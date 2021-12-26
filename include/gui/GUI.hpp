@@ -30,12 +30,14 @@ namespace moon_buggy
     /// Exported Methods
     auto _ready() -> void;
 
+    auto show_hud(unsigned level_number) -> godot::Node *;
     auto show_main_menu() -> godot::Node *;
 
     /// Internal Functions
     auto hide_all_layers() -> void;
 
     /// Exported Properties
+    godot::Ref<godot::PackedScene> hud{};
     godot::Ref<godot::PackedScene> main_menu{};
   };
 

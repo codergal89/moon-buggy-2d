@@ -30,6 +30,8 @@ namespace moon_buggy
     /// Internal Variables
     Game * game;
     GUI * gui;
+
+    unsigned level_number;
   };
 }  // namespace moon_buggy
 

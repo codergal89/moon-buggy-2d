@@ -31,6 +31,7 @@ auto MoonBuggy2D::_ready() -> void
 
 auto MoonBuggy2D::on_start_game() -> void
 {
+    gui->call("show_hud", godot::Array::make(++level_number));
     game->call("start");
 }
 
