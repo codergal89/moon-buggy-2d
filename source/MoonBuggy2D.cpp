@@ -31,7 +31,7 @@ auto MoonBuggy2D::_ready() -> void
 
 auto MoonBuggy2D::on_start_game() -> void
 {
-
+    game->call("start");
 }
 
 }
