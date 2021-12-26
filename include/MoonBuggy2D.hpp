@@ -10,6 +10,7 @@
 #include <Godot.hpp>
 #include <Node.hpp>
 #include <RandomNumberGenerator.hpp>
+#include <String.hpp>
 
 namespace moon_buggy
 {
@@ -31,6 +32,7 @@ namespace moon_buggy
 
     /// Internal Variables
     godot::Ref<godot::RandomNumberGenerator> theme_rng;
+    godot::String theme; 
 
     Game * game;
     GUI * gui;

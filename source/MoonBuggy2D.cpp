@@ -21,6 +21,7 @@ namespace moon_buggy
   {
     theme_rng.instance();
     theme_rng->randomize();
+    theme = random_theme(theme_rng);
   }
 
   auto MoonBuggy2D::_ready() -> void
@@ -29,7 +30,7 @@ namespace moon_buggy
     gui = get_typed_node<GUI>("GUI");
     space = get_typed_node<Space>("Background/Space");
 
-    space->call("select_theme", random_theme(theme_rng));
+    space->call("select_theme", theme);
     space->set("enable_autoscrolling", true);
 
     auto main_menu = static_cast<godot::Node *>(gui->call("show_main_menu"));
