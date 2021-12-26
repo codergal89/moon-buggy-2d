@@ -9,8 +9,9 @@
 #include <CanvasLayer.hpp>
 #include <Defs.hpp>
 #include <Godot.hpp>
-#include <Ref.hpp>
+#include <Node.hpp>
 #include <PackedScene.hpp>
+#include <Ref.hpp>
 
 namespace moon_buggy
 {
@@ -29,7 +30,7 @@ namespace moon_buggy
     /// Exported Methods
     auto _ready() -> void;
 
-    auto show_main_menu() -> void;
+    auto show_main_menu() -> godot::Node *;
 
     /// Internal Functions
     auto hide_all_layers() -> void;

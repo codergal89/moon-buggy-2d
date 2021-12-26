@@ -38,10 +38,12 @@ namespace moon_buggy
     CRASH_COND(main_menu.is_null());
   }
 
-  auto GUI::show_main_menu() -> void
+  auto GUI::show_main_menu() -> godot::Node *
   {
     hide_all_layers();
-    add_child(main_menu->instance());
+    auto main_menu_node = main_menu->instance();
+    add_child(main_menu_node);
+    return main_menu_node;
   }
 
   auto GUI::hide_all_layers() -> void

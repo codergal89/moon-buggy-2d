@@ -2,6 +2,7 @@
 
 #include "core/MeteorSpawner.hpp"
 #include "core/Theming.hpp"
+#include "gui/Signals.hpp"
 
 #include <Dictionary.hpp>
 #include <Godot.hpp>
@@ -16,7 +17,7 @@ namespace moon_buggy
     godot::register_method("_ready", &MainMenu::_ready);
     godot::register_method("on_start_button_clicked", &MainMenu::on_start_button_clicked);
 
-    godot::register_signal<MainMenu>("start_game", godot::Dictionary{});
+    godot::register_signal<MainMenu>(gui::signals::start_game, godot::Dictionary{});
   }
 
   auto MainMenu::_init() -> void
@@ -33,7 +34,7 @@ namespace moon_buggy
 
   auto MainMenu::on_start_button_clicked() -> void
   {
-    emit_signal("start_game");
+    emit_signal(gui::signals::start_game);
   }
 
 }  // namespace moon_buggy

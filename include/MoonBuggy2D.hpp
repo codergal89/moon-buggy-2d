@@ -25,6 +25,8 @@ namespace moon_buggy
     /// Exported Methods
     auto _ready() -> void;
 
+    auto on_start_game() -> void;
+
     /// Internal Variables
     Game * game;
     GUI * gui;
