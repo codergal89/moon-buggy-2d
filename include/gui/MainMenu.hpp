@@ -4,9 +4,9 @@
 #include "support/SilentGodotClass.hpp"
 #include "support/TypedNodeCastMixin.hpp"
 
-#include <Node.hpp>
 #include <Defs.hpp>
 #include <Godot.hpp>
+#include <Node.hpp>
 #include <RandomNumberGenerator.hpp>
 #include <Ref.hpp>
 

@@ -4,7 +4,7 @@
 namespace moon_buggy::gui::signals
 {
 
-constexpr auto start_game{"start_game"};
+  constexpr auto start_game{"start_game"};
 
 }
 

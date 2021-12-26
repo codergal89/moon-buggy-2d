@@ -3,6 +3,7 @@
 #include "game/Buggy.hpp"
 #include "game/LevelGenerator.hpp"
 #include "game/Map.hpp"
+
 #include <Godot.hpp>
 #include <Timer.hpp>
 
