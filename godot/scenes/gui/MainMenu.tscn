@@ -16,13 +16,8 @@ action = "ui_accept"
 [sub_resource type="ShortCut" id=3]
 shortcut = SubResource( 2 )
 
-[node name="MainMenu" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="MainMenu" type="Node"]
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" type="CanvasLayer" parent="."]
 
@@ -33,23 +28,30 @@ enable_autoscrolling = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="RowContainer" type="VBoxContainer" parent="UI"]
+[node name="RootContainer" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = 32.0
-margin_right = -32.0
-margin_bottom = -32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RowContainer" type="VBoxContainer" parent="UI/RootContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = -40.0
 custom_constants/separation = 32
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="UI/RowContainer"]
-margin_top = 138.0
-margin_right = 656.0
-margin_bottom = 195.0
+[node name="Title" type="Label" parent="UI/RootContainer/RowContainer"]
+margin_top = 130.0
+margin_right = 640.0
+margin_bottom = 187.0
 custom_fonts/font = SubResource( 1 )
 text = "Moon Buggy"
 align = 1
@@ -59,10 +61,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartButton" type="Button" parent="UI/RowContainer"]
-margin_top = 227.0
-margin_right = 656.0
-margin_bottom = 277.0
+[node name="StartButton" type="Button" parent="UI/RootContainer/RowContainer"]
+margin_top = 219.0
+margin_right = 640.0
+margin_bottom = 269.0
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
 shortcut_in_tooltip = false
@@ -72,4 +74,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="UI/RowContainer/StartButton" to="." method="on_start_button_clicked"]
+[connection signal="pressed" from="UI/RootContainer/RowContainer/StartButton" to="." method="on_start_button_clicked"]

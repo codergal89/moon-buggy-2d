@@ -1,10 +1,10 @@
 #ifndef MOON_BUGGY_2D_MAIN_MENU
 #define MOON_BUGGY_2D_MAIN_MENU
 
-#include "support/TypedNodeCastMixin.hpp"
 #include "support/SilentGodotClass.hpp"
+#include "support/TypedNodeCastMixin.hpp"
 
-#include <Control.hpp>
+#include <Node.hpp>
 #include <Defs.hpp>
 #include <Godot.hpp>
 #include <RandomNumberGenerator.hpp>
@@ -14,7 +14,7 @@ namespace moon_buggy
 {
 
   struct MainMenu
-      : godot::Control
+      : godot::Node
       , TypedNodeCastMixin<MainMenu>
   {
     auto static _register_methods() -> void;
@@ -22,10 +22,11 @@ namespace moon_buggy
     auto _init() -> void;
 
   private:
-    SILENT_GODOT_CLASS(MainMenu, godot::Control)
+    SILENT_GODOT_CLASS(MainMenu, godot::Node)
 
     /// Exported Methods
     auto _ready() -> void;
+
     auto on_start_button_clicked() -> void;
 
     /// Internal Variables

@@ -23,7 +23,7 @@ auto MoonBuggy2D::_ready() -> void
     game = get_typed_node<Game>("Game");
     gui = get_typed_node<GUI>("GUI");
 
-    // gui->call("show_main_menu");
+    gui->call("show_main_menu");
 }
 
 }

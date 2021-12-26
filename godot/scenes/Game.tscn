@@ -1,13 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/MoonBuggy2D.gdns" type="Script" id=2]
 [ext_resource path="res://scripts/game/LevelGenerator.gdns" type="Script" id=7]
 [ext_resource path="res://scripts/game/Game.gdns" type="Script" id=8]
 [ext_resource path="res://scenes/gui/MainMenu.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/gui/HUD.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/gui/LevelComplete.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/gui/BuggyCrashed.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scripts/gui/GUI.gdns" type="Script" id=25]
 
 [node name="MoonBuggy2D" type="Node"]
@@ -29,20 +26,8 @@ script = ExtResource( 7 )
 level_descriptor_source = "res://config/levels.json"
 
 [node name="Map" parent="Game" instance=ExtResource( 1 )]
-visible = false
 
 [node name="GUI" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
 script = ExtResource( 25 )
-
-[node name="MainMenu" parent="GUI" instance=ExtResource( 11 )]
-visible = false
-
-[node name="LevelComplete" parent="GUI" instance=ExtResource( 13 )]
-visible = false
-
-[node name="BuggyCrashed" parent="GUI" instance=ExtResource( 14 )]
-visible = false
-
-[node name="HUD" parent="GUI" instance=ExtResource( 12 )]
-visible = false
+main_menu = ExtResource( 11 )
