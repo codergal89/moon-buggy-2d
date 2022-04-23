@@ -1,0 +1,6 @@
+/.import
+/.mono
+/data_*
+
+/export/*/*
+/!export/*/.gitkeep
