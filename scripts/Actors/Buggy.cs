@@ -1,7 +1,7 @@
 using Godot;
 using MoonBuggy2D.extensions;
 
-namespace MoonBuggy2D.scripts
+namespace MoonBuggy2D.scripts.Actors
 {
     public class Buggy : KinematicBody2D
     {

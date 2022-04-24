@@ -1,4 +1,6 @@
 using Godot;
+using MoonBuggy2D.scripts.Actors;
+using MoonBuggy2D.scripts.UI;
 
 namespace MoonBuggy2D.scripts
 {
