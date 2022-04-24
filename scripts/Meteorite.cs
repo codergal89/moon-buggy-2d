@@ -5,24 +5,18 @@ namespace MoonBuggy2D.scripts
 {
     public class Meteorite : RigidBody2D
     {
-        public enum Color
-        {
-            Blue,
-            Purple
-        }
-
         public CollisionShape2D CollisionShape;
         public AnimatedSprite FlyingSprite;
         public AnimatedSprite ImpactedSprite;
         public VisibilityNotifier2D VisibilityNotifier;
  
-        public Color CurrentColor
+        public ColorTheme Theme
         {
-            get => EnumExtensions.ParseEnum<Color>(ImpactedSprite.Animation.ToLower());
+            get => EnumExtensions.ParseEnum<ColorTheme>(ImpactedSprite.Animation.ToLower());
             set => ImpactedSprite.Animation = value.Name().ToLower();
         }
 
-        public int NumberOfShapes
+        public int ShapeCount
         {
             get => ImpactedSprite.Frames.GetFrameCount(ImpactedSprite.Animation);
         }
