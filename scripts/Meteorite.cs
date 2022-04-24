@@ -9,17 +9,14 @@ namespace MoonBuggy2D.scripts
         public AnimatedSprite FlyingSprite;
         public AnimatedSprite ImpactedSprite;
         public VisibilityNotifier2D VisibilityNotifier;
- 
+
         public ColorTheme Theme
         {
             get => EnumExtensions.ParseEnum<ColorTheme>(ImpactedSprite.Animation.ToLower());
             set => ImpactedSprite.Animation = value.Name().ToLower();
         }
 
-        public int ShapeCount
-        {
-            get => ImpactedSprite.Frames.GetFrameCount(ImpactedSprite.Animation);
-        }
+        public int ShapeCount => ImpactedSprite.Frames.GetFrameCount(ImpactedSprite.Animation);
 
         public override void _Ready()
         {
