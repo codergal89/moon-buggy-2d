@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/backgrounds/space_purple.png" type="Texture" id=1]
+[ext_resource path="res://assets/backgrounds/space_blue.png" type="Texture" id=2]
+[ext_resource path="res://assets/backgrounds/stars_blue.png" type="Texture" id=3]
+[ext_resource path="res://assets/backgrounds/stars_purple.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "blue",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "purple",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "blue",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "purple",
+"speed": 5.0
+} ]
+
+[node name="Background" type="ParallaxBackground"]
+offset = Vector2( 512, 240 )
+transform = Transform2D( 1, 0, 0, 1, 512, 240 )
+
+[node name="Space" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 1024, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Space"]
+frames = SubResource( 1 )
+animation = "purple"
+
+[node name="Stars" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.18, 1 )
+motion_mirroring = Vector2( 1024, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Stars"]
+frames = SubResource( 2 )
+animation = "purple"
