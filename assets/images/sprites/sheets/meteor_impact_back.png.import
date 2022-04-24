@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/moon_base_front.png-9843e4e184f8511ee476ed882f78a392.stex"
+path="res://.import/meteor_impact_back.png-d7ff94acbf4f7ced409b1a61f205bceb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/moon_base_front.png"
-dest_files=[ "res://.import/moon_base_front.png-9843e4e184f8511ee476ed882f78a392.stex" ]
+source_file="res://assets/images/sprites/sheets/meteor_impact_back.png"
+dest_files=[ "res://.import/meteor_impact_back.png-d7ff94acbf4f7ced409b1a61f205bceb.stex" ]
 
 [params]
 

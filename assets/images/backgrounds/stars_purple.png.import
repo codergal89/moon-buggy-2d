@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/buggy_jump_start.png-115d820227c3a646518867976138e5da.stex"
+path="res://.import/stars_purple.png-abfe421be68d0bf5b603b691e8e08e84.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/buggy_jump_start.png"
-dest_files=[ "res://.import/buggy_jump_start.png-115d820227c3a646518867976138e5da.stex" ]
+source_file="res://assets/images/backgrounds/stars_purple.png"
+dest_files=[ "res://.import/stars_purple.png-abfe421be68d0bf5b603b691e8e08e84.stex" ]
 
 [params]
 

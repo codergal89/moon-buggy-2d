@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blue_meteor.png-cc354f1023a057f38bef9669f98bc949.stex"
+path="res://.import/buggy_jump_land.png-79c89611b2de8aa4fd7bc9f4dbc94013.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/blue_meteor.png"
-dest_files=[ "res://.import/blue_meteor.png-cc354f1023a057f38bef9669f98bc949.stex" ]
+source_file="res://assets/images/sprites/sheets/buggy_jump_land.png"
+dest_files=[ "res://.import/buggy_jump_land.png-79c89611b2de8aa4fd7bc9f4dbc94013.stex" ]
 
 [params]
 

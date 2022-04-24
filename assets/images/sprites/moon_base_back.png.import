@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/buggy_idle.png-be5dab915ba4302a201bf8678f323acd.stex"
+path="res://.import/moon_base_back.png-21d309a3b3e7ee104ed6cf7f32e1fe89.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/buggy_idle.png"
-dest_files=[ "res://.import/buggy_idle.png-be5dab915ba4302a201bf8678f323acd.stex" ]
+source_file="res://assets/images/sprites/moon_base_back.png"
+dest_files=[ "res://.import/moon_base_back.png-21d309a3b3e7ee104ed6cf7f32e1fe89.stex" ]
 
 [params]
 

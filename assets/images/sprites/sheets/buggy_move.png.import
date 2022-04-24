@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/meteor_impact_back.png-44eabf4f0f850761eff0d245b898d127.stex"
+path="res://.import/buggy_move.png-2774948bfc8596daeb237c52adfbb42c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/meteor_impact_back.png"
-dest_files=[ "res://.import/meteor_impact_back.png-44eabf4f0f850761eff0d245b898d127.stex" ]
+source_file="res://assets/images/sprites/sheets/buggy_move.png"
+dest_files=[ "res://.import/buggy_move.png-2774948bfc8596daeb237c52adfbb42c.stex" ]
 
 [params]
 

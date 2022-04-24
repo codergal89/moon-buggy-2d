@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/meteor_flying.png-c1842f98fd223723be3846c5d6eb137d.stex"
+path="res://.import/stars_blue.png-4784a9e57fcabf2a47b73e65330fa241.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/meteor_flying.png"
-dest_files=[ "res://.import/meteor_flying.png-c1842f98fd223723be3846c5d6eb137d.stex" ]
+source_file="res://assets/images/backgrounds/stars_blue.png"
+dest_files=[ "res://.import/stars_blue.png-4784a9e57fcabf2a47b73e65330fa241.stex" ]
 
 [params]
 

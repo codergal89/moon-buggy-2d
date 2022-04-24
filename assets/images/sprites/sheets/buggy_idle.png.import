@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/earth_large.png-4beddcf063c5480737db4f1961430be8.stex"
+path="res://.import/buggy_idle.png-63dd24d1932cf8482b4a198a41126986.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/earth_large.png"
-dest_files=[ "res://.import/earth_large.png-4beddcf063c5480737db4f1961430be8.stex" ]
+source_file="res://assets/images/sprites/sheets/buggy_idle.png"
+dest_files=[ "res://.import/buggy_idle.png-63dd24d1932cf8482b4a198a41126986.stex" ]
 
 [params]
 

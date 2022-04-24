@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/buggy_move.png-fce55cce11f12cc809f0668497ba104f.stex"
+path="res://.import/blue_meteor.png-e9220125f627b774661074c18268b5ff.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/buggy_move.png"
-dest_files=[ "res://.import/buggy_move.png-fce55cce11f12cc809f0668497ba104f.stex" ]
+source_file="res://assets/images/sprites/sheets/blue_meteor.png"
+dest_files=[ "res://.import/blue_meteor.png-e9220125f627b774661074c18268b5ff.stex" ]
 
 [params]
 

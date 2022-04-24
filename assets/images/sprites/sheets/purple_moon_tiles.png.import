@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/flag.png-d304e798e9eda046f5356f1acf8e5c0d.stex"
+path="res://.import/purple_moon_tiles.png-668aa8d1ba4e098400c51d77db03e041.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/flag.png"
-dest_files=[ "res://.import/flag.png-d304e798e9eda046f5356f1acf8e5c0d.stex" ]
+source_file="res://assets/images/sprites/sheets/purple_moon_tiles.png"
+dest_files=[ "res://.import/purple_moon_tiles.png-668aa8d1ba4e098400c51d77db03e041.stex" ]
 
 [params]
 
