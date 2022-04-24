@@ -1,6 +1,6 @@
 using System;
 
-namespace MoonBuggy2D.extensions
+namespace MoonBuggy2D.scripts.Extensions
 {
     public static class EnumExtensions
     {

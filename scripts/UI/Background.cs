@@ -1,5 +1,5 @@
 using Godot;
-using MoonBuggy2D.extensions;
+using MoonBuggy2D.scripts.Extensions;
 
 namespace MoonBuggy2D.scripts.UI
 {
