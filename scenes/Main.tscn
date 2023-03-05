@@ -8,4 +8,3 @@
 [node name="Background" parent="." instance=ExtResource("3")]
 
 [node name="Buggy" parent="." instance=ExtResource("2")]
-animation = 2

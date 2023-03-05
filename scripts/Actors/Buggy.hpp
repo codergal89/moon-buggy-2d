@@ -1,10 +1,10 @@
 #ifndef MB2D_SCRIPTS_ACTORS_BUGGY_HPP
 #define MB2D_SCRIPTS_ACTORS_BUGGY_HPP
 
+#include "godot_cpp/classes/animated_sprite2d.hpp"
 #include "godot_cpp/classes/character_body2d.hpp"
 #include "godot_cpp/classes/collision_polygon2d.hpp"
-#include "godot_cpp/classes/animated_sprite2d.hpp"
-#include "godot_cpp/classes/ref.hpp"
+
 #include "godot_cpp/core/class_db.hpp"
 #include "godot_cpp/core/binder_common.hpp"
 #include "godot_cpp/variant/string.hpp"

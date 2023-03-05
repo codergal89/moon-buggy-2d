@@ -1,98 +1,143 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=3 uid="uid://boouelt6vxqgl"]
 
-[ext_resource path="res://assets/images/sprites/sheets/purple_meteor.png" type="Texture2D" id=1]
-[ext_resource path="res://assets/images/sprites/sheets/blue_meteor.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/images/sprites/sheets/meteor_flying.png" type="Texture2D" id=4]
+[ext_resource type="Texture2D" uid="uid://bcngi7o0abhb2" path="res://assets/images/sprites/sheets/purple_meteor.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dpgbhen2k8xnq" path="res://assets/images/sprites/sheets/blue_meteor.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bt7ej7w6hs3t1" path="res://assets/images/sprites/sheets/meteor_flying.png" id="4"]
 
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 128, 128 )
+[sub_resource type="AtlasTexture" id="11"]
+atlas = ExtResource("4")
+region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 4 )
-region = Rect2( 128, 0, 128, 128 )
+[sub_resource type="AtlasTexture" id="12"]
+atlas = ExtResource("4")
+region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 4 )
-region = Rect2( 256, 0, 128, 128 )
+[sub_resource type="AtlasTexture" id="13"]
+atlas = ExtResource("4")
+region = Rect2(256, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 4 )
-region = Rect2( 384, 0, 128, 128 )
+[sub_resource type="AtlasTexture" id="14"]
+atlas = ExtResource("4")
+region = Rect2(384, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 4 )
-region = Rect2( 512, 0, 128, 128 )
+[sub_resource type="AtlasTexture" id="15"]
+atlas = ExtResource("4")
+region = Rect2(512, 0, 128, 128)
 
-[sub_resource type="SpriteFrames" id=9]
-animations = [ {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+[sub_resource type="SpriteFrames" id="9"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("11")
+}, {
+"duration": 1.0,
+"texture": SubResource("12")
+}, {
+"duration": 1.0,
+"texture": SubResource("13")
+}, {
+"duration": 1.0,
+"texture": SubResource("14")
+}, {
+"duration": 1.0,
+"texture": SubResource("15")
+}],
 "loop": true,
-"name": "default",
+"name": &"default",
 "speed": 12.0
-} ]
+}]
 
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 30, 30 )
+[sub_resource type="AtlasTexture" id="16"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 30, 30)
 
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 2 )
-region = Rect2( 30, 0, 30, 30 )
+[sub_resource type="AtlasTexture" id="17"]
+atlas = ExtResource("2")
+region = Rect2(30, 0, 30, 30)
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 2 )
-region = Rect2( 60, 0, 30, 30 )
+[sub_resource type="AtlasTexture" id="18"]
+atlas = ExtResource("2")
+region = Rect2(60, 0, 30, 30)
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 2 )
-region = Rect2( 90, 0, 30, 30 )
+[sub_resource type="AtlasTexture" id="19"]
+atlas = ExtResource("2")
+region = Rect2(90, 0, 30, 30)
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 30, 30 )
+[sub_resource type="AtlasTexture" id="20"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 30, 30)
 
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 30, 0, 30, 30 )
+[sub_resource type="AtlasTexture" id="21"]
+atlas = ExtResource("1")
+region = Rect2(30, 0, 30, 30)
 
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
-region = Rect2( 60, 0, 30, 30 )
+[sub_resource type="AtlasTexture" id="22"]
+atlas = ExtResource("1")
+region = Rect2(60, 0, 30, 30)
 
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 1 )
-region = Rect2( 90, 0, 30, 30 )
+[sub_resource type="AtlasTexture" id="23"]
+atlas = ExtResource("1")
+region = Rect2(90, 0, 30, 30)
 
-[sub_resource type="SpriteFrames" id=24]
-animations = [ {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+[sub_resource type="SpriteFrames" id="24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("16")
+}, {
+"duration": 1.0,
+"texture": SubResource("17")
+}, {
+"duration": 1.0,
+"texture": SubResource("18")
+}, {
+"duration": 1.0,
+"texture": SubResource("19")
+}],
 "loop": true,
-"name": "blue",
+"name": &"blue",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("20")
+}, {
+"duration": 1.0,
+"texture": SubResource("21")
+}, {
+"duration": 1.0,
+"texture": SubResource("22")
+}, {
+"duration": 1.0,
+"texture": SubResource("23")
+}],
 "loop": true,
-"name": "purple",
+"name": &"purple",
 "speed": 5.0
-} ]
+}]
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id="10"]
 radius = 15.0333
 
-[node name="Meteorite" type="RigidBody2D"]
+[node name="Meteorite" type="Meteorite"]
+mass = 800.0
 
 [node name="FlyingSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2( -2, -54 )
+unique_name_in_owner = true
+position = Vector2(-2, -54)
 rotation = -0.785398
-frames = SubResource( 9 )
+sprite_frames = SubResource("9")
+frame_progress = 0.781511
 
 [node name="ImpactedSprite" type="AnimatedSprite2D" parent="."]
-frames = SubResource( 24 )
-animation = "blue"
+unique_name_in_owner = true
+sprite_frames = SubResource("24")
+animation = &"blue"
 
-[node name="CollisionShape3D" type="CollisionShape2D" parent="."]
-shape = SubResource( 10 )
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("10")
 
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2( -15, -15, 30, 30 )
+[node name="VisibilityNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+rect = Rect2(-15, -15, 30, 30)
