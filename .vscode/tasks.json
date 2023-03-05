@@ -1,0 +1,46 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "conan: install",
+            "type": "shell",
+            "command": "conan",
+            "args": [
+                "install",
+                "--profile:host=${workspaceFolder}/.conan/profiles/default",
+                "--settings:host=build_type=${input:buildType}",
+                "--build=missing",
+                "${workspaceFolder}/conanfile.py"
+            ]
+        },
+        {
+            "label": "conan: build",
+            "type": "shell",
+            "command": "conan",
+            "args": [
+                "build",
+                "--profile:host=${workspaceFolder}/.conan/profiles/default",
+                "--settings:host=build_type=${input:buildType}",
+                "--build=missing",
+                "${workspaceFolder}/conanfile.py"
+            ],
+            "dependsOn": "conan: install",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+    ],
+    "inputs": [
+        {
+            "id": "buildType",
+            "type": "pickString",
+            "options": [
+                "Debug",
+                "Release"
+            ],
+            "description": "The desired build type.",
+            "default": "Debug"
+        }
+    ]
+}

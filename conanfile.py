@@ -35,14 +35,11 @@ class MoonBuggy2DConan(ConanFile):
         cmake.build()
 
     def generate(self):
-        self.settings.compiler.cppstd = 20
-
         toolchain = CMakeToolchain(self)
         toolchain.variables["CMAKE_EXPORT_COMPILE_COMMANDS"] = True
         toolchain.variables["MOON_BUGGY_2D_VERSION"] = self.version
         toolchain.variables["MOON_BUGGY_2D_DESCRIPTION"] = self.description
         toolchain.variables["MOON_BUGGY_2D_BIN_DIR"] = os.path.join(self.recipe_folder, "bin")
-
         toolchain.generate()
 
     def layout(self):
