@@ -1,6 +1,9 @@
 /.import
 /.mono
 /.godot
+
+/bin
+/build
 /data_*
 
 /export/*/*

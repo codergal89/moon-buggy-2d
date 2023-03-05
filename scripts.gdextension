@@ -1,0 +1,9 @@
+[configuration]
+
+entry_symbol = "scripts_library_init"
+
+[libraries]
+
+linux.debug.x86_64 = "res://bin/libscripts.Linux.Debug.so"
+linux.release.x86_64 = "res://bin/libscripts.Linux.Release.so"
+

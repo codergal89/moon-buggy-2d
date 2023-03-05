@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://6fydw3p8600q"]
 
-[ext_resource path="res://scenes/Actors/Buggy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/UI/Background.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" uid="uid://dokt7vk0svhc4" path="res://scenes/Actors/Buggy.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/UI/Background.tscn" id="3"]
 
 [node name="Main" type="Node"]
 
-[node name="Background" parent="." instance=ExtResource( 3 )]
+[node name="Background" parent="." instance=ExtResource("3")]
 
-[node name="Buggy" parent="." instance=ExtResource( 2 )]
+[node name="Buggy" parent="." instance=ExtResource("2")]
+animation = 2
