@@ -8,11 +8,14 @@
 #include <godot_cpp/core/memory.hpp>
 
 #include <godot_cpp/classes/engine.hpp>
+#include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
 #include <godot_cpp/classes/path_follow2d.hpp>
+#include <godot_cpp/classes/random_number_generator.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
+#include <godot_cpp/classes/timer.hpp>
 
 namespace mb2d
 {
@@ -25,6 +28,9 @@ namespace mb2d
     {
       godot::ClassDB::bind_method(godot::D_METHOD("get_meteor_scene"), &MeteorSpawner::get_meteor_scene);
       godot::ClassDB::bind_method(godot::D_METHOD("set_meteor_scene"), &MeteorSpawner::set_meteor_scene, "scene");
+      godot::ClassDB::bind_method(godot::D_METHOD("on_spawn_timer_timeout"), &MeteorSpawner::on_spawn_timer_timeout);
+      godot::ClassDB::bind_method(godot::D_METHOD("start"), &MeteorSpawner::start);
+      godot::ClassDB::bind_method(godot::D_METHOD("stop"), &MeteorSpawner::stop);
 
       bind_properties();
     }
@@ -38,54 +44,97 @@ namespace mb2d
 
     auto _ready() -> void override
     {
+      rng.instantiate();
+
+      meteors = get_node<godot::Node>("%Meteors");
       spawn_point = get_node<godot::PathFollow2D>("%SpawnPoint");
+      spawn_timer = get_node<godot::Timer>("%SpawnTimer");
 
       ERR_FAIL_NULL(meteor_scene);
+      ERR_FAIL_NULL(rng);
+      ERR_FAIL_NULL(meteors);
       ERR_FAIL_NULL(spawn_point);
-    }
+      ERR_FAIL_NULL(spawn_timer);
 
-    auto _physics_process(double delta) -> void override
-    {
       if (!godot::Engine::get_singleton()->is_editor_hint())
       {
-        physics_process_in_game(delta);
+        ready_in_game();
       }
     }
 
-    auto physics_process_in_game(double delta) -> void
+    /**
+     * @brief Ready actions to be perfomed when not running in the editor.
+     */
+    auto ready_in_game() -> void
     {
-      auto current_ratio = spawn_point->get_progress_ratio();
-      auto new_ratio = current_ratio + delta * 1.0;
-      spawn_point->set_progress_ratio(new_ratio);
+      rng->randomize();
+
+      spawn_timer->connect("timeout", {this, "on_spawn_timer_timeout"});
+      spawn_timer->set_wait_time(0.2);
     }
 
-    auto _process(double) -> void override
+    /**
+     * @brief Spawn a new meteor at a random location.
+     */
+    auto spawn_meteor() -> void
     {
-      if (!godot::Engine::get_singleton()->is_editor_hint())
-      {
-        process_in_game();
-      }
+      auto progress = rng->randf_range(0.0, 1.0);
+      auto meteor = cast_to<Meteor>(meteor_scene->instantiate());
+
+      spawn_point->set_progress_ratio(progress);
+      auto position = spawn_point->get_global_position();
+
+      meteor->set_position(position);
+      meteors->add_child(meteor);
     }
 
-    auto process_in_game() -> void
-    {
-      auto meteor = meteor_scene->instantiate();
-      spawn_point->add_child(meteor);
-    }
-
+    /**
+     * @brief Get the scene used for new meteors.
+     */
     auto get_meteor_scene() const -> godot::Ref<godot::PackedScene>
     {
       return meteor_scene;
     }
 
+    /**
+     * @brief Set the scene used for new meteors.
+     */
     auto set_meteor_scene(godot::Ref<godot::PackedScene> scene) -> void
     {
       meteor_scene = scene;
     }
 
+    /**
+     * @brief Start the spawning of new meteors.
+     */
+    auto start() -> void
+    {
+      spawn_timer->start();
+    }
+
+    /**
+     * @brief Stop the spawning of new meteors.
+     */
+    auto stop() -> void
+    {
+      spawn_timer->stop();
+    }
+
+    /**
+     * @brief Callback for the "timeout()" event of the spawn timer.
+     */
+    auto on_spawn_timer_timeout() -> void
+    {
+      spawn_meteor();
+      spawn_timer->set_wait_time(0.2);
+    }
+
   private:
-    godot::PathFollow2D * spawn_point{};
     godot::Ref<godot::PackedScene> meteor_scene{};
+    godot::Ref<godot::RandomNumberGenerator> rng{};
+    godot::Node * meteors{};
+    godot::PathFollow2D * spawn_point{};
+    godot::Timer * spawn_timer{};
   };
 
 }  // namespace mb2d

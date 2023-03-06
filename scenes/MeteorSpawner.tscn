@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://cd7j14y085qpg"]
 
 [ext_resource type="PackedScene" uid="uid://boouelt6vxqgl" path="res://scenes/Actors/Meteor.tscn" id="1_yss5g"]
 
@@ -10,6 +10,12 @@ point_count = 2
 
 [node name="MeteorSpawner" type="MeteorSpawner"]
 meteor_scene = ExtResource("1_yss5g")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="Meteors" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="Path" type="Path2D" parent="."]
 curve = SubResource("Curve2D_8jidv")
