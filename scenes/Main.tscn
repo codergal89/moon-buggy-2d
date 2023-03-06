@@ -6,6 +6,7 @@
 [node name="Main" type="Main"]
 
 [node name="Background" parent="." instance=ExtResource("3")]
+unique_name_in_owner = true
 
 [node name="MeteorSpawner" parent="." instance=ExtResource("2_jq0ij")]
 unique_name_in_owner = true
