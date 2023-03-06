@@ -63,6 +63,8 @@ namespace mb2d
       auto radians = godot::Math::deg_to_rad(angle);
       apply_impulse(godot::Vector2::from_angle(radians) * cStartingVelocity);
       rotate(radians);
+
+      visibility_notifier->connect("screen_exited", {this, "queue_free"});
     }
 
     auto get_angle() const -> double
