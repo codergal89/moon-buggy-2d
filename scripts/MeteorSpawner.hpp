@@ -82,9 +82,12 @@ namespace mb2d
       auto meteor = cast_to<Meteor>(meteor_scene->instantiate());
 
       spawn_point->set_progress_ratio(progress);
+
       auto position = spawn_point->get_global_position();
+      auto angle = rng->randf_range(45.0, 135.0);
 
       meteor->set_position(position);
+      meteor->set_angle(angle);
       meteors->add_child(meteor);
     }
 
