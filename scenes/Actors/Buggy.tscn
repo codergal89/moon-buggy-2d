@@ -215,7 +215,6 @@ animations = [{
 unique_name_in_owner = true
 sprite_frames = SubResource("1")
 animation = &"idling"
-frame_progress = 0.139777
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 unique_name_in_owner = true
