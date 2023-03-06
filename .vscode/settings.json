@@ -1,0 +1,10 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/scripts",
+    "cmake.configureOnOpen": false,
+    "cmake.skipConfigureIfCachePresent": true,
+    "cmake.useCMakePresets": "always",
+
+    "files.exclude": {
+        "build/**/_deps": true
+    },
+}

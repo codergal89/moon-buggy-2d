@@ -1,0 +1,14 @@
+{
+    "profiles": [
+        {
+            "name": "moon-buggy-2d",
+            "conanFile": "${workspaceFolder}/conanfile.py",
+            "profile": "default",
+            "installArg": "--build=missing --profile:host=${workspaceFolder}/.conan/default --settings:host=build_type=Debug",
+            "buildArg": "--settings:host=build_type=Debug --profile:host=${workspaceFolder}/.conan/default",
+            "createUser": "",
+            "createChannel": "",
+            "createArg": ""
+        }
+    ]
+}

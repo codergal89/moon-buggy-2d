@@ -43,7 +43,7 @@ class MoonBuggy2DConan(ConanFile):
         toolchain.generate()
 
     def layout(self):
-        cmake_layout(self, generator="Unix Makefiles", src_folder="scripts")
+        cmake_layout(self, generator="Ninja", src_folder="scripts")
 
     def package(self):
         cmake = CMake(self)

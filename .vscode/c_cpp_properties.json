@@ -3,9 +3,8 @@
         {
             "name": "Linux (Debug)",
             "compileCommands": "${workspaceFolder}/build/Debug/compile_commands.json",
-            "intelliSenseMode": "gcc-x64",
             "mergeConfigurations": true,
-            "compilerPath": "/usr/bin/gcc",
+            "configurationProvider": "ms-vscode.cmake-tools",
             "includePath": [
                 "${workspaceFolder}/build/Debug/_deps/godot-cpp-build/gen/include",
                 "${workspaceFolder}/build/Debug/_deps/godot-cpp-src/include",
@@ -16,9 +15,8 @@
         {
             "name": "Linux (Release)",
             "compileCommands": "${workspaceFolder}/build/Release/compile_commands.json",
-            "intelliSenseMode": "gcc-x64",
             "mergeConfigurations": true,
-            "compilerPath": "/usr/bin/gcc",
+            "configurationProvider": "ms-vscode.cmake-tools",
             "includePath": [
                 "${workspaceFolder}/build/Debug/_deps/godot-cpp-build/gen/include",
                 "${workspaceFolder}/build/Debug/_deps/godot-cpp-src/include",
