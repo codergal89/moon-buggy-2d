@@ -1,5 +1,6 @@
 #include "Actors/Buggy.hpp"
 #include "Actors/Meteorite.hpp"
+#include "MeteorSpawner.hpp"
 
 #include <gdextension_interface.h>
 
@@ -18,6 +19,7 @@ namespace mb2d
 
         godot::ClassDB::register_class<mb2d::Buggy>();
         godot::ClassDB::register_class<mb2d::Meteorite>();
+        godot::ClassDB::register_class<mb2d::MeteorSpawner>();
     }
 
     auto unregister_classes(godot::ModuleInitializationLevel level) -> void

@@ -8,7 +8,8 @@
             "compilerPath": "/usr/bin/gcc",
             "includePath": [
                 "${workspaceFolder}/build/Debug/_deps/godot-cpp-build/gen/include",
-                "${workspaceFolder}/build/Debug/_deps/godot-cpp-src/include"
+                "${workspaceFolder}/build/Debug/_deps/godot-cpp-src/include",
+                "${workspaceFolder}/build/Debug/_deps/godot-cpp-src/gdextension"
             ],
             "cppStandard": "c++20"
         },
@@ -20,7 +21,8 @@
             "compilerPath": "/usr/bin/gcc",
             "includePath": [
                 "${workspaceFolder}/build/Debug/_deps/godot-cpp-build/gen/include",
-                "${workspaceFolder}/build/Debug/_deps/godot-cpp-src/include"
+                "${workspaceFolder}/build/Debug/_deps/godot-cpp-src/include",
+                "${workspaceFolder}/build/Debug/_deps/godot-cpp-src/gdextension"
             ],
             "cppStandard": "c++20"
         }
