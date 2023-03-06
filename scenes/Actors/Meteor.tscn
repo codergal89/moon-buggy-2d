@@ -124,10 +124,9 @@ mass = 800.0
 
 [node name="FlyingSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-2, -54)
-rotation = -0.785398
+rotation = -2.35619
 sprite_frames = SubResource("9")
-frame_progress = 0.781511
+offset = Vector2(38, -39)
 
 [node name="ImpactedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
