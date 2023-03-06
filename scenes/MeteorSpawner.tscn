@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://br635j8uwbrgs"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="PackedScene" uid="uid://boouelt6vxqgl" path="res://scenes/Actors/Meteorite.tscn" id="1_yss5g"]
+[ext_resource type="PackedScene" uid="uid://boouelt6vxqgl" path="res://scenes/Actors/Meteor.tscn" id="1_yss5g"]
 
 [sub_resource type="Curve2D" id="Curve2D_8jidv"]
 _data = {

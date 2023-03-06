@@ -13,11 +13,11 @@
 namespace mb2d
 {
 
-    struct Meteorite : godot::RigidBody2D
+    struct Meteor : godot::RigidBody2D
     {
         auto static constexpr cStartingVelocity = 100.0;
 
-        GDCLASS(Meteorite, godot::RigidBody2D)
+        GDCLASS(Meteor, godot::RigidBody2D)
 
         static auto _bind_methods() -> void
         {

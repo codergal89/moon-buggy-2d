@@ -119,7 +119,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="10"]
 radius = 15.0333
 
-[node name="Meteorite" type="Meteorite"]
+[node name="Meteor" type="Meteor"]
 mass = 800.0
 
 [node name="FlyingSprite" type="AnimatedSprite2D" parent="."]

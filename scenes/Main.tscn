@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://6fydw3p8600q"]
 
-[ext_resource type="PackedScene" uid="uid://br635j8uwbrgs" path="res://scenes/MeteorSpawner.tscn" id="2_jq0ij"]
+[ext_resource type="PackedScene" path="res://scenes/MeteorSpawner.tscn" id="2_jq0ij"]
 [ext_resource type="PackedScene" path="res://scenes/UI/Background.tscn" id="3"]
 
 [node name="Main" type="Node"]

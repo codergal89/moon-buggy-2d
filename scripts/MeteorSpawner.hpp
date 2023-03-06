@@ -12,7 +12,7 @@
 #include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/core/memory.hpp>
 
-#include "Actors/Meteorite.hpp"
+#include "Actors/Meteor.hpp"
 
 namespace mb2d
 {
