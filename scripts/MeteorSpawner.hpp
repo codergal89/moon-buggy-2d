@@ -30,28 +30,29 @@ namespace mb2d
                     godot::Variant::OBJECT,
                     "meteor_scene",
                     godot::PROPERTY_HINT_RESOURCE_TYPE,
-                    "PackedScene"
-                ),
+                    "PackedScene"),
                 "set_meteor_scene",
-                "get_meteor_scene"
-            );
+                "get_meteor_scene");
         }
 
         auto _ready() -> void override
         {
             spawn_point = get_node<godot::PathFollow2D>("%SpawnPoint");
 
-            ERR_FAIL_COND(meteor_scene.is_null());
-            ERR_FAIL_COND(spawn_point == nullptr);
+            ERR_FAIL_NULL(meteor_scene);
+            ERR_FAIL_NULL(spawn_point);
         }
 
         auto _physics_process(double delta) -> void override
         {
-            if (godot::Engine::get_singleton()->is_editor_hint())
+            if (!godot::Engine::get_singleton()->is_editor_hint())
             {
-                return;
+                physics_process_in_game(delta);
             }
+        }
 
+        auto physics_process_in_game(double delta) -> void
+        {
             auto current_ratio = spawn_point->get_progress_ratio();
             auto new_ratio = current_ratio + delta * 1.0;
             spawn_point->set_progress_ratio(new_ratio);
@@ -59,11 +60,14 @@ namespace mb2d
 
         auto _process(double) -> void override
         {
-            if (godot::Engine::get_singleton()->is_editor_hint())
+            if (!godot::Engine::get_singleton()->is_editor_hint())
             {
-                return;
+                process_in_game();
             }
+        }
 
+        auto process_in_game() -> void
+        {
             auto meteor = meteor_scene->instantiate();
             spawn_point->add_child(meteor);
         }
@@ -79,7 +83,7 @@ namespace mb2d
         }
 
     private:
-        godot::PathFollow2D * spawn_point{};
+        godot::PathFollow2D *spawn_point{};
         godot::Ref<godot::PackedScene> meteor_scene{};
     };
 
