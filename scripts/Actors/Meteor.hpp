@@ -10,6 +10,7 @@
 #include <godot_cpp/classes/animated_sprite2d.hpp>
 #include <godot_cpp/classes/collision_shape2d.hpp>
 #include <godot_cpp/classes/engine.hpp>
+#include <godot_cpp/classes/physics_direct_body_state2d.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/rigid_body2d.hpp>
 #include <godot_cpp/classes/visible_on_screen_notifier2d.hpp>
@@ -62,9 +63,17 @@ namespace mb2d
 
       auto radians = godot::Math::deg_to_rad(angle);
       apply_impulse(godot::Vector2::from_angle(radians) * cStartingVelocity);
-      rotate(radians);
+      set_rotation(radians);
 
       visibility_notifier->connect("screen_exited", {this, "queue_free"});
+    }
+
+    auto _integrate_forces(godot::PhysicsDirectBodyState2D * state) -> void override
+    {
+      auto right = godot::Vector2(1.0, 0.0);
+      auto direction_of_travel = state->get_linear_velocity();
+      auto angle = right.angle_to(direction_of_travel);
+      set_rotation(angle);
     }
 
     auto get_angle() const -> double
