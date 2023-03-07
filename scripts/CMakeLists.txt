@@ -9,6 +9,9 @@ project("Moon Buggy 2D"
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${MOON_BUGGY_2D_BIN_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${MOON_BUGGY_2D_BIN_DIR}")
 
+include("CheckIPOSupported")
+check_ipo_supported(RESULT MB2D_IPO_IS_SUPPORTED)
+
 # External Dependencies
 
 include("FetchContent")
@@ -42,4 +45,5 @@ target_include_directories("scripts" PUBLIC
 
 set_target_properties("scripts" PROPERTIES
     OUTPUT_NAME "scripts.${CMAKE_SYSTEM_NAME}.${CMAKE_BUILD_TYPE}"
+    INTERPROCEDURAL_OPTIMIZATION ${MB2D_IPO_IS_SUPPORTED}
 )
