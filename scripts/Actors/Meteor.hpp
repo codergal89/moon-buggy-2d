@@ -26,16 +26,16 @@ namespace mb2d
 
     auto static _bind_methods() -> void
     {
-      godot::ClassDB::bind_method(godot::D_METHOD("get_angle"), &Meteor::get_angle);
-      godot::ClassDB::bind_method(godot::D_METHOD("set_angle", "degrees"), &Meteor::set_angle);
+      godot::ClassDB::bind_method(godot::D_METHOD("get_starting_angle"), &Meteor::get_starting_angle);
+      godot::ClassDB::bind_method(godot::D_METHOD("set_starting_angle", "degrees"), &Meteor::set_starting_angle);
 
       bind_properties();
     }
 
     auto static bind_properties() -> void
     {
-      auto angle = godot::PropertyInfo{godot::Variant::FLOAT, "angle", godot::PROPERTY_HINT_RANGE, "0,180,0.1"};
-      ADD_PROPERTY(angle, "set_angle", "get_angle");
+      auto angle = godot::PropertyInfo{godot::Variant::FLOAT, "starting_angle", godot::PROPERTY_HINT_RANGE, "0,180,0.1"};
+      ADD_PROPERTY(angle, "set_starting_angle", "get_starting_angle");
     }
 
     auto _ready() -> void override
@@ -61,7 +61,7 @@ namespace mb2d
       flying_sprite->play();
       impacted_sprite->set_visible(false);
 
-      auto radians = godot::Math::deg_to_rad(angle);
+      auto radians = godot::Math::deg_to_rad(starting_angle);
       apply_impulse(godot::Vector2::from_angle(radians) * cStartingVelocity);
       set_rotation(radians);
 
@@ -76,18 +76,18 @@ namespace mb2d
       set_rotation(angle);
     }
 
-    auto get_angle() const -> double
+    auto get_starting_angle() const -> double
     {
-      return angle;
+      return starting_angle;
     }
 
-    auto set_angle(double degrees) -> void
+    auto set_starting_angle(double degrees) -> void
     {
-      angle = degrees;
+      starting_angle = degrees;
     }
 
   private:
-    double angle;
+    double starting_angle;
 
     godot::CollisionShape2D * collision_shape;
     godot::AnimatedSprite2D * flying_sprite;

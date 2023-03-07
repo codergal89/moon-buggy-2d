@@ -87,7 +87,7 @@ namespace mb2d
       auto angle = rng->randf_range(45.0, 135.0);
 
       meteor->set_position(position);
-      meteor->set_angle(angle);
+      meteor->set_starting_angle(angle);
       meteors->add_child(meteor);
     }
 
