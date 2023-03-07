@@ -23,6 +23,7 @@
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/timer.hpp>
+
 #include <cstdint>
 
 namespace mb2d
@@ -30,12 +31,18 @@ namespace mb2d
 
   struct MeteorSpawner : godot::Node2D
   {
+    auto constexpr static cDefaultMaximumSpawnAngle{135.0};
+    auto constexpr static cDefaultMinimumSpawnAngle{45.0};
     auto constexpr static cDefaultMeteorLimit{5u};
 
     GDCLASS(MeteorSpawner, godot::Node2D)
 
     auto static _bind_methods() -> void
     {
+      godot::ClassDB::bind_method(godot::D_METHOD("get_maximum_spawn_angle"), &MeteorSpawner::get_maximum_spawn_angle);
+      godot::ClassDB::bind_method(godot::D_METHOD("set_maximum_spawn_angle"), &MeteorSpawner::set_maximum_spawn_angle, "degrees");
+      godot::ClassDB::bind_method(godot::D_METHOD("get_minimum_spawn_angle"), &MeteorSpawner::get_minimum_spawn_angle);
+      godot::ClassDB::bind_method(godot::D_METHOD("set_minimum_spawn_angle"), &MeteorSpawner::set_minimum_spawn_angle, "degrees");
       godot::ClassDB::bind_method(godot::D_METHOD("get_meteor_limit"), &MeteorSpawner::get_meteor_limit);
       godot::ClassDB::bind_method(godot::D_METHOD("set_meteor_limit"), &MeteorSpawner::set_meteor_limit, "count");
       godot::ClassDB::bind_method(godot::D_METHOD("get_meteor_scene"), &MeteorSpawner::get_meteor_scene);
@@ -49,9 +56,13 @@ namespace mb2d
 
     auto static bind_properties() -> void
     {
+      auto maximum_spawn_angle = godot::PropertyInfo{godot::Variant::FLOAT, "maximum_spawn_angle", godot::PROPERTY_HINT_RANGE, "0,180,0.1"};
+      auto minimum_spawn_angle = godot::PropertyInfo{godot::Variant::FLOAT, "minimum_spawn_angle", godot::PROPERTY_HINT_RANGE, "0,180,0.1"};
       auto meteor_limit = godot::PropertyInfo{godot::Variant::INT, "meteor_limit", godot::PROPERTY_HINT_RANGE, "0,32,1"};
       auto meteor_scene = godot::PropertyInfo{godot::Variant::OBJECT, "meteor_scene", godot::PROPERTY_HINT_RESOURCE_TYPE, "PackedScene"};
 
+      ADD_PROPERTY(maximum_spawn_angle, "set_maximum_spawn_angle", "get_maximum_spawn_angle");
+      ADD_PROPERTY(minimum_spawn_angle, "set_minimum_spawn_angle", "get_minimum_spawn_angle");
       ADD_PROPERTY(meteor_limit, "set_meteor_limit", "get_meteor_limit");
       ADD_PROPERTY(meteor_scene, "set_meteor_scene", "get_meteor_scene");
     }
@@ -103,11 +114,51 @@ namespace mb2d
       spawn_point->set_progress_ratio(progress);
 
       auto position = spawn_point->get_global_position();
-      auto angle = rng->randf_range(45.0, 135.0);
+      auto angle = rng->randf_range(minimum_spawn_angle, maximum_spawn_angle);
 
       meteor->set_position(position);
       meteor->set_starting_angle(angle);
       meteors->add_child(meteor);
+    }
+
+    /**
+     * @brief Get the maximum spawn angle for meteors.
+     */
+    auto get_maximum_spawn_angle() const -> double
+    {
+      return maximum_spawn_angle;
+    }
+
+    /**
+     * @brief Set the maximum spawn angle for meteors.
+     */
+    auto set_maximum_spawn_angle(double degrees) -> void
+    {
+      maximum_spawn_angle = degrees;
+      if (maximum_spawn_angle < minimum_spawn_angle)
+      {
+        this->set("minimum_spawn_angle", degrees);
+      }
+    }
+
+    /**
+     * @brief Get the minimum spawn angle for meteors.
+     */
+    auto get_minimum_spawn_angle() const -> double
+    {
+      return minimum_spawn_angle;
+    }
+
+    /**
+     * @brief Set the minimum spawn angle for meteors.
+     */
+    auto set_minimum_spawn_angle(double degrees) -> void
+    {
+      minimum_spawn_angle = degrees;
+      if (minimum_spawn_angle > maximum_spawn_angle)
+      {
+        this->set("maximum_spawn_angle", degrees);
+      }
     }
 
     /**
@@ -145,9 +196,7 @@ namespace mb2d
     auto get_meteor_count() const -> int64_t
     {
       CRASH_COND(meteors == nullptr);
-      return CountIf(meteors->get_children(), [](auto node){
-        return !!godot::Object::cast_to<Meteor>(node);
-      });
+      return CountIf(meteors->get_children(), [](auto node) { return !!godot::Object::cast_to<Meteor>(node); });
     }
 
     /**
@@ -176,6 +225,8 @@ namespace mb2d
     }
 
   private:
+    double maximum_spawn_angle{cDefaultMaximumSpawnAngle};
+    double minimum_spawn_angle{cDefaultMinimumSpawnAngle};
     unsigned int meteor_limit{cDefaultMeteorLimit};
     godot::Ref<godot::PackedScene> meteor_scene{};
     godot::Node * meteors{};
