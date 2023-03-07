@@ -25,7 +25,7 @@ namespace mb2d
     godot::ClassDB::register_class<mb2d::MeteorSpawner>();
   }
 
-  auto unregister_classes(godot::ModuleInitializationLevel level) -> void
+  auto unregister_classes(godot::ModuleInitializationLevel) -> void
   {
   }
 }  // namespace mb2d

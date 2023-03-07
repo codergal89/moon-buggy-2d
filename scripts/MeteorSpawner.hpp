@@ -32,7 +32,7 @@ namespace mb2d
   {
     auto constexpr static cDefaultMeteorLimit{5u};
 
-    GDCLASS(MeteorSpawner, godot::Node2D);
+    GDCLASS(MeteorSpawner, godot::Node2D)
 
     auto static _bind_methods() -> void
     {

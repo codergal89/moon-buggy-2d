@@ -44,7 +44,7 @@ namespace mb2d
 
   struct Buggy : godot::CharacterBody2D
   {
-    GDCLASS(Buggy, godot::CharacterBody2D);
+    GDCLASS(Buggy, godot::CharacterBody2D)
 
     static auto _bind_methods() -> void
     {

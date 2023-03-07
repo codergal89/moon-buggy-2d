@@ -25,6 +25,13 @@ FetchContent_MakeAvailable("godot-cpp")
 
 add_library("scripts" SHARED "scripts.cpp")
 
+target_compile_options("scripts" PUBLIC
+    "$<$<CXX_COMPILER_ID:GNU,Clang>:-Wall>"
+    "$<$<CXX_COMPILER_ID:GNU,Clang>:-Wextra>"
+    "$<$<CXX_COMPILER_ID:GNU,Clang>:-Werror>"
+    "$<$<CXX_COMPILER_ID:GNU,Clang>:-pedantic-errors>"
+)
+
 target_link_libraries("scripts" PUBLIC
     "godot::cpp"
 )
