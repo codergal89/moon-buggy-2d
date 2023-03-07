@@ -3,6 +3,7 @@
 
 #include "Actors/Meteor.hpp"
 #include "Helpers/ArrayHelpers.hpp"
+#include "Helpers/DontWarn.hpp"
 
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
@@ -35,7 +36,7 @@ namespace mb2d
     auto constexpr static cDefaultMinimumSpawnAngle{45.0};
     auto constexpr static cDefaultMeteorLimit{5u};
 
-    GDCLASS(MeteorSpawner, godot::Node2D)
+    DONT_WARN(GDCLASS(MeteorSpawner, godot::Node2D))
 
     auto static _bind_methods() -> void
     {

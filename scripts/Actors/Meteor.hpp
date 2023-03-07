@@ -1,6 +1,8 @@
 #ifndef MB2D_SCRIPTS_ACTORS_METEOR_HPP
 #define MB2D_SCRIPTS_ACTORS_METEOR_HPP
 
+#include "Helpers/DontWarn.hpp"
+
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/core/math.hpp>
@@ -22,7 +24,7 @@ namespace mb2d
   {
     auto static constexpr cStartingVelocity = 800.0;
 
-    GDCLASS(Meteor, godot::RigidBody2D)
+    DONT_WARN(GDCLASS(Meteor, godot::RigidBody2D))
 
     auto static _bind_methods() -> void
     {

@@ -1,6 +1,8 @@
 #ifndef MB2D_SCRIPTS_ACTORS_BUGGY_HPP
 #define MB2D_SCRIPTS_ACTORS_BUGGY_HPP
 
+#include "Helpers/DontWarn.hpp"
+
 #include <godot_cpp/core/binder_common.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
@@ -23,7 +25,7 @@ namespace mb2d
     Landing,
   };
 
-  auto to_string(BuggyAnimation const & animation) -> godot::String
+  auto inline to_string(BuggyAnimation const & animation) -> godot::String
   {
     switch (animation)
     {
@@ -44,7 +46,7 @@ namespace mb2d
 
   struct Buggy : godot::CharacterBody2D
   {
-    GDCLASS(Buggy, godot::CharacterBody2D)
+    DONT_WARN(GDCLASS(Buggy, godot::CharacterBody2D))
 
     static auto _bind_methods() -> void
     {

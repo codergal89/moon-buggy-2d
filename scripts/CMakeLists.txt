@@ -36,6 +36,10 @@ target_link_libraries("scripts" PUBLIC
     "godot::cpp"
 )
 
+target_include_directories("scripts" PUBLIC
+    "${PROJECT_SOURCE_DIR}"
+)
+
 set_target_properties("scripts" PROPERTIES
     OUTPUT_NAME "scripts.${CMAKE_SYSTEM_NAME}.${CMAKE_BUILD_TYPE}"
 )
