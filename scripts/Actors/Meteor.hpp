@@ -2,6 +2,7 @@
 #define MB2D_SCRIPTS_ACTORS_METEOR_HPP
 
 #include "Helpers/DontWarn.hpp"
+#include "Helpers/PropertiesGetSet.hpp"
 
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
@@ -20,24 +21,18 @@
 namespace mb2d
 {
 
-  struct Meteor : godot::RigidBody2D
+  struct Meteor
+      : godot::RigidBody2D
+      , helpers::EasyProperties<Meteor>
   {
     auto static constexpr cStartingVelocity = 800.0;
 
+    ENABLE_EASY_PROPERTIES();
     DONT_WARN(GDCLASS(Meteor, godot::RigidBody2D))
 
     auto static _bind_methods() -> void
     {
-      godot::ClassDB::bind_method(godot::D_METHOD("get_starting_angle"), &Meteor::get_starting_angle);
-      godot::ClassDB::bind_method(godot::D_METHOD("set_starting_angle", "degrees"), &Meteor::set_starting_angle);
-
-      bind_properties();
-    }
-
-    auto static bind_properties() -> void
-    {
-      auto angle = godot::PropertyInfo{godot::Variant::FLOAT, "starting_angle", godot::PROPERTY_HINT_RANGE, "0,180,0.1"};
-      ADD_PROPERTY(angle, "set_starting_angle", "get_starting_angle");
+      add_property("starting_angle", &Meteor::starting_angle, 0, 180, 0.1);
     }
 
     auto _ready() -> void override
@@ -76,16 +71,6 @@ namespace mb2d
       auto direction_of_travel = state->get_linear_velocity();
       auto angle = right.angle_to(direction_of_travel);
       set_rotation(angle);
-    }
-
-    auto get_starting_angle() const -> double
-    {
-      return starting_angle;
-    }
-
-    auto set_starting_angle(double degrees) -> void
-    {
-      starting_angle = degrees;
     }
 
   private:

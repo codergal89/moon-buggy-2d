@@ -1,6 +1,7 @@
 #ifndef MB2D_SCRIPTS_MAIN_HPP
 #define MB2D_SCRIPTS_MAIN_HPP
 
+#include "Helpers/DontWarn.hpp"
 #include "MeteorSpawner.hpp"
 
 #include <godot_cpp/core/error_macros.hpp>
@@ -13,7 +14,7 @@ namespace mb2d
 {
   struct Main : godot::Node
   {
-    GDCLASS(Main, godot::Node)
+    DONT_WARN(GDCLASS(Main, godot::Node))
 
     auto static _bind_methods() -> void
     {

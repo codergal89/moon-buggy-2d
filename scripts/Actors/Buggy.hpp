@@ -2,6 +2,7 @@
 #define MB2D_SCRIPTS_ACTORS_BUGGY_HPP
 
 #include "Helpers/DontWarn.hpp"
+#include "Helpers/PropertiesGetSet.hpp"
 
 #include <godot_cpp/core/binder_common.hpp>
 #include <godot_cpp/core/class_db.hpp>
@@ -12,6 +13,7 @@
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/collision_polygon2d.hpp>
 #include <godot_cpp/classes/engine.hpp>
+#include <godot_cpp/classes/global_constants.hpp>
 
 namespace mb2d
 {
@@ -44,32 +46,26 @@ namespace mb2d
     }
   }
 
-  struct Buggy : godot::CharacterBody2D
+  struct Buggy
+      : godot::CharacterBody2D
+      , helpers::EasyProperties<Buggy>
   {
+    ENABLE_EASY_PROPERTIES();
     DONT_WARN(GDCLASS(Buggy, godot::CharacterBody2D))
 
     static auto _bind_methods() -> void
-    {
-      godot::ClassDB::bind_method(godot::D_METHOD("set_animation", "animation"), &Buggy::set_animation);
-      godot::ClassDB::bind_method(godot::D_METHOD("get_animation"), &Buggy::get_animation);
-
-      bind_enums();
-      bind_properties();
-    }
-
-    static auto bind_enums() -> void
     {
       BIND_ENUM_CONSTANT(BuggyAnimation::Driving);
       BIND_ENUM_CONSTANT(BuggyAnimation::Flying);
       BIND_ENUM_CONSTANT(BuggyAnimation::Idling);
       BIND_ENUM_CONSTANT(BuggyAnimation::Jumping);
       BIND_ENUM_CONSTANT(BuggyAnimation::Landing);
-    }
 
-    static auto bind_properties() -> void
-    {
-      auto animation = godot::PropertyInfo{godot::Variant::INT, "animation", godot::PropertyHint::PROPERTY_HINT_ENUM};
-      ADD_PROPERTY(animation, "set_animation", "get_animation");
+      add_property("animation",
+                   &Buggy::current_animation,
+                   &Buggy::set_animation,
+                   godot::PROPERTY_HINT_ENUM,
+                   "Driving,Flying,Idling,Jumping,Landing");
     }
 
     auto _ready() -> void override
@@ -88,12 +84,7 @@ namespace mb2d
 
     auto ready_in_game() -> void
     {
-      set_animation(BuggyAnimation::Idling);
-    }
-
-    auto get_animation() const -> BuggyAnimation
-    {
-      return current_animation;
+      set_animation(current_animation);
     }
 
     auto set_animation(BuggyAnimation animation) -> void

@@ -7,5 +7,4 @@
     __VA_ARGS__ \
     _Pragma("GCC diagnostic pop")
 
-
 #endif
