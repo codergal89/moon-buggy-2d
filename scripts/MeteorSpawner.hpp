@@ -86,20 +86,16 @@ namespace mb2d
       spawn_timer->set_one_shot(true);
     }
 
-    auto start_spawn_timer() -> void
-    {
-      auto delay = rng->randf_range(spawn_delay - spawn_delay_jitter, spawn_delay + spawn_delay_jitter);
-      spawn_timer->start(delay);
-    }
-
     /**
-     * @brief Spawn a new meteor at a random location.
+     * @brief Try to spawn a new meteor at a random location, respecting the meteor limit.
+     *
+     * @return @p true iff. a meteor was spawned, @p false otherwise.
      */
-    auto spawn_meteor() -> void
+    auto spawn_meteor() -> bool
     {
       if (static_cast<unsigned int>(this->get("meteor_count")) >= meteor_limit)
       {
-        return;
+        return false;
       }
 
       auto progress = rng->randf_range(0.0, 1.0);
@@ -113,6 +109,8 @@ namespace mb2d
       meteor->set_position(position);
       meteor->set("starting_angle", angle);
       meteors->add_child(meteor);
+
+      return true;
     }
 
     /**
@@ -139,6 +137,9 @@ namespace mb2d
       }
     }
 
+    /**
+     * @brief Get the number of currently active meteors.
+     */
     auto get_meteor_count() const -> int64_t
     {
       if (!is_inside_tree())
@@ -174,6 +175,12 @@ namespace mb2d
     }
 
   private:
+    auto start_spawn_timer() -> void
+    {
+      auto delay = rng->randf_range(spawn_delay - spawn_delay_jitter, spawn_delay + spawn_delay_jitter);
+      spawn_timer->start(delay);
+    }
+
     double maximum_spawn_angle{cDefaultMaximumSpawnAngle};
     double minimum_spawn_angle{cDefaultMinimumSpawnAngle};
     unsigned int meteor_limit{cDefaultMeteorLimit};
