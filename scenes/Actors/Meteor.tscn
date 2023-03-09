@@ -117,6 +117,7 @@ animations = [{
 }]
 
 [node name="Meteor" type="Meteor"]
+texture_filter = 1
 mass = 800.0
 
 [node name="FlyingSprite" type="AnimatedSprite2D" parent="."]

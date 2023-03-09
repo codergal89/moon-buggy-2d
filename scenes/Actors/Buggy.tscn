@@ -213,6 +213,7 @@ animations = [{
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+texture_filter = 1
 sprite_frames = SubResource("1")
 animation = &"idling"
 

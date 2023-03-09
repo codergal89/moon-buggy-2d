@@ -48,6 +48,7 @@ offset = Vector2(512, 240)
 transform = Transform2D(1, 0, 0, 1, 512, 240)
 
 [node name="Space" type="ParallaxLayer" parent="."]
+texture_filter = 1
 motion_scale = Vector2(0.2, 1)
 motion_mirroring = Vector2(1024, 0)
 
@@ -56,6 +57,7 @@ sprite_frames = SubResource("1")
 animation = &"purple"
 
 [node name="Stars" type="ParallaxLayer" parent="."]
+texture_filter = 1
 motion_scale = Vector2(0.18, 1)
 motion_mirroring = Vector2(1024, 0)
 
