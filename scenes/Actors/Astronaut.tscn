@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dstvb5s8gjo1h"]
+
+[ext_resource type="SpriteFrames" uid="uid://ditxe6kfpuhuu" path="res://assets/images/sprites/sheets/astronaut.tres" id="1_df78g"]
+
+[node name="Astronaut" type="CharacterBody2D"]
+texture_filter = 1
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_df78g")
+animation = &"walking"
