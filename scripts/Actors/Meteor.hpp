@@ -11,7 +11,7 @@
 #include <godot_cpp/variant/vector2.hpp>
 
 #include <godot_cpp/classes/animated_sprite2d.hpp>
-#include <godot_cpp/classes/collision_shape2d.hpp>
+#include <godot_cpp/classes/collision_polygon2d.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/physics_direct_body_state2d.hpp>
 #include <godot_cpp/classes/ref.hpp>
@@ -37,7 +37,7 @@ namespace mb2d
 
     auto _ready() -> void override
     {
-      collision_shape = get_node<godot::CollisionShape2D>("%CollisionShape");
+      collision_shape = get_node<godot::CollisionPolygon2D>("%CollisionShape");
       flying_sprite = get_node<godot::AnimatedSprite2D>("%FlyingSprite");
       impacted_sprite = get_node<godot::AnimatedSprite2D>("%ImpactedSprite");
       visibility_notifier = get_node<godot::VisibleOnScreenNotifier2D>("%VisibilityNotifier");
@@ -76,7 +76,7 @@ namespace mb2d
   private:
     double starting_angle;
 
-    godot::CollisionShape2D * collision_shape;
+    godot::CollisionPolygon2D * collision_shape;
     godot::AnimatedSprite2D * flying_sprite;
     godot::AnimatedSprite2D * impacted_sprite;
     godot::VisibleOnScreenNotifier2D * visibility_notifier;
