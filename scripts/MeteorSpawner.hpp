@@ -8,9 +8,6 @@
 
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
-#include <godot_cpp/core/memory.hpp>
-#include <godot_cpp/core/object.hpp>
-#include <godot_cpp/core/property_info.hpp>
 #include <godot_cpp/variant/typed_array.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
@@ -23,7 +20,6 @@
 #include <godot_cpp/classes/path_follow2d.hpp>
 #include <godot_cpp/classes/random_number_generator.hpp>
 #include <godot_cpp/classes/ref.hpp>
-#include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/timer.hpp>
 
 #include <cstdint>
@@ -38,6 +34,8 @@ namespace mb2d
     auto constexpr static cDefaultMaximumSpawnAngle{135.0};
     auto constexpr static cDefaultMinimumSpawnAngle{45.0};
     auto constexpr static cDefaultMeteorLimit{5u};
+    auto constexpr static cDefaultSpawnDelay{1};
+    auto constexpr static cDefaultSpawnDelayJitter{0.5};
 
     ENABLE_EASY_PROPERTIES();
     DONT_WARN(GDCLASS(MeteorSpawner, godot::Node2D))
@@ -53,6 +51,8 @@ namespace mb2d
       add_property("meteor_count", &MeteorSpawner::get_meteor_count);
       add_property("meteor_limit", &MeteorSpawner::meteor_limit, 0, 32, 1);
       add_property("meteor_scene", &MeteorSpawner::meteor_scene);
+      add_property("spawn_delay", &MeteorSpawner::spawn_delay, 0.1, 10, 0.01);
+      add_property("spawn_delay_jitter", &MeteorSpawner::spawn_delay_jitter, 0, 10, 0.01);
     }
 
     auto _ready() -> void override
@@ -83,7 +83,13 @@ namespace mb2d
       rng->randomize();
 
       spawn_timer->connect("timeout", {this, "on_spawn_timer_timeout"});
-      spawn_timer->set_wait_time(0.2);
+      spawn_timer->set_one_shot(true);
+    }
+
+    auto start_spawn_timer() -> void
+    {
+      auto delay = rng->randf_range(spawn_delay - spawn_delay_jitter, spawn_delay + spawn_delay_jitter);
+      spawn_timer->start(delay);
     }
 
     /**
@@ -147,7 +153,7 @@ namespace mb2d
      */
     auto start() -> void
     {
-      spawn_timer->start();
+      start_spawn_timer();
     }
 
     /**
@@ -164,7 +170,7 @@ namespace mb2d
     auto on_spawn_timer_timeout() -> void
     {
       spawn_meteor();
-      spawn_timer->set_wait_time(0.2);
+      start_spawn_timer();
     }
 
   private:
@@ -174,6 +180,8 @@ namespace mb2d
     godot::Ref<godot::PackedScene> meteor_scene{};
     godot::Node * meteors{};
     godot::Ref<godot::RandomNumberGenerator> rng{};
+    double spawn_delay{cDefaultSpawnDelay};
+    double spawn_delay_jitter{cDefaultSpawnDelayJitter};
     godot::PathFollow2D * spawn_point{};
     godot::Timer * spawn_timer{};
   };

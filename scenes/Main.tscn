@@ -9,4 +9,6 @@
 unique_name_in_owner = true
 
 [node name="MeteorSpawner" parent="." instance=ExtResource("2_jq0ij")]
+spawn_delay = 0.5
+spawn_delay_jitter = 0.25
 unique_name_in_owner = true
