@@ -8,6 +8,6 @@
 /data_*
 
 /export/*/*
-/!export/*/.gitkeep
+!/export/*/.gitkeep
 
 /compile_commands.json
