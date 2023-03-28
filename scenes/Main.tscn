@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://6fydw3p8600q"]
+[gd_scene load_steps=4 format=3 uid="uid://gkwq0jtqv3nx"]
 
 [ext_resource type="PackedScene" uid="uid://cd7j14y085qpg" path="res://scenes/MeteorSpawner.tscn" id="2_jq0ij"]
 [ext_resource type="PackedScene" uid="uid://bilvubf04u0vw" path="res://scenes/UI/Background.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cyrvjq7i7x53n" path="res://scenes/Menus/MainMenu.tscn" id="3_3fn23"]
 
 [node name="Main" type="Main"]
+
+[node name="Menus" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="Menus" instance=ExtResource("3_3fn23")]
 
 [node name="Background" parent="." instance=ExtResource("3")]
 unique_name_in_owner = true
@@ -12,3 +17,5 @@ unique_name_in_owner = true
 spawn_delay = 0.5
 spawn_delay_jitter = 0.25
 unique_name_in_owner = true
+
+[connection signal="quit_pressed" from="Menus/MainMenu" to="." method="on_quit_pressed"]

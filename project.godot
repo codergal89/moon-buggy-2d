@@ -25,6 +25,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Moon Buggy 2D"
 
+[gui]
+
+theme/custom="res://assets/themes/default.tres"
+
 [physics]
 
 2d/default_gravity=162.5

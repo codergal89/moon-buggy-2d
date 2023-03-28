@@ -1,6 +1,7 @@
 #include "Actors/Buggy.hpp"
 #include "Actors/Meteor.hpp"
 #include "Main.hpp"
+#include "Menus/MainMenu.hpp"
 #include "MeteorSpawner.hpp"
 
 #include <gdextension_interface.h>
@@ -22,6 +23,7 @@ namespace mb2d
     godot::ClassDB::register_class<mb2d::Buggy>();
     godot::ClassDB::register_class<mb2d::Meteor>();
     godot::ClassDB::register_class<mb2d::Main>();
+    godot::ClassDB::register_class<mb2d::MainMenu>();
     godot::ClassDB::register_class<mb2d::MeteorSpawner>();
   }
 

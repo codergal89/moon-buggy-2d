@@ -4,11 +4,13 @@
 #include "Helpers/DontWarn.hpp"
 #include "MeteorSpawner.hpp"
 
+#include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
 
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/parallax_background.hpp>
+#include <godot_cpp/classes/scene_tree.hpp>
 
 namespace mb2d
 {
@@ -18,6 +20,7 @@ namespace mb2d
 
     auto static _bind_methods() -> void
     {
+      godot::ClassDB::bind_method(godot::D_METHOD("on_quit_pressed"), &Main::on_quit_pressed);
     }
 
     auto _ready() -> void override
@@ -54,6 +57,11 @@ namespace mb2d
     }
 
   private:
+    auto on_quit_pressed() -> void
+    {
+      get_tree()->quit();
+    }
+
     godot::ParallaxBackground * background{};
     MeteorSpawner * meteor_spawner{};
   };

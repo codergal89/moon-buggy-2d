@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dn54r6rwahewl"]
+
+[ext_resource type="FontFile" uid="uid://dlpfokbvn7l0l" path="res://assets/fonts/monogram.ttf" id="1_uxbbe"]
+
+[resource]
+default_font = ExtResource("1_uxbbe")
+default_font_size = 32
+Fonts/fonts/large = ExtResource("1_uxbbe")
+Fonts/fonts/normal = ExtResource("1_uxbbe")
