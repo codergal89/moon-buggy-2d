@@ -3,8 +3,6 @@
 
     "cmake.sourceDirectory": "${workspaceFolder}/scripts",
     "cmake.configureOnOpen": false,
-    "cmake.configureOnEdit": false,
-    "cmake.skipConfigureIfCachePresent": true,
     "cmake.useCMakePresets": "always",
     "cmake.mergedCompileCommands": "${workspaceFolder}/compile_commands.json",
 

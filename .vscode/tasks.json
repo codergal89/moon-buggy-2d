@@ -21,7 +21,6 @@
                 "build",
                 "--profile:host=${workspaceFolder}/.conan/profiles/default",
                 "--settings:host=build_type=${input:buildType}",
-                "--build=missing",
                 "${workspaceFolder}/conanfile.py"
             ],
             "dependsOn": "conan: install",

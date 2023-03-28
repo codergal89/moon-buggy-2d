@@ -25,8 +25,8 @@ class MoonBuggy2DConan(ConanFile):
         "build_type",
     )
     tool_requires = (
-        "cmake/[~3.25]",
-        "ninja/[~1.11]",
+        "cmake/[>3.25]",
+        "ninja/[>1.11]",
     )
 
     def build(self):
@@ -35,7 +35,7 @@ class MoonBuggy2DConan(ConanFile):
         cmake.build()
 
     def generate(self):
-        toolchain = CMakeToolchain(self)
+        toolchain = CMakeToolchain(self, generator="Ninja Multi-Config")
         toolchain.variables["CMAKE_EXPORT_COMPILE_COMMANDS"] = True
         toolchain.variables["MOON_BUGGY_2D_VERSION"] = self.version
         toolchain.variables["MOON_BUGGY_2D_DESCRIPTION"] = self.description
@@ -43,7 +43,7 @@ class MoonBuggy2DConan(ConanFile):
         toolchain.generate()
 
     def layout(self):
-        cmake_layout(self, generator="Ninja", src_folder="scripts")
+        cmake_layout(self, generator="Ninja Multi-Config", src_folder="scripts")
 
     def package(self):
         cmake = CMake(self)
