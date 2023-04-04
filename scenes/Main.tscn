@@ -9,6 +9,7 @@
 [node name="Menus" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" parent="Menus" instance=ExtResource("3_3fn23")]
+unique_name_in_owner = true
 
 [node name="Background" parent="." instance=ExtResource("3")]
 unique_name_in_owner = true
@@ -19,3 +20,4 @@ spawn_delay_jitter = 0.25
 unique_name_in_owner = true
 
 [connection signal="quit_pressed" from="Menus/MainMenu" to="." method="on_quit_pressed"]
+[connection signal="start_pressed" from="Menus/MainMenu" to="." method="on_start_pressed"]

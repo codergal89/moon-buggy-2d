@@ -2,6 +2,7 @@
 #define MB2D_SCRIPTS_MAIN_HPP
 
 #include "Helpers/DontWarn.hpp"
+#include "Menus/MainMenu.hpp"
 #include "MeteorSpawner.hpp"
 
 #include <godot_cpp/core/class_db.hpp>
@@ -21,6 +22,7 @@ namespace mb2d
     auto static _bind_methods() -> void
     {
       godot::ClassDB::bind_method(godot::D_METHOD("on_quit_pressed"), &Main::on_quit_pressed);
+      godot::ClassDB::bind_method(godot::D_METHOD("on_start_pressed"), &Main::on_start_pressed);
     }
 
     auto _notification(int notification) -> void
@@ -41,9 +43,11 @@ namespace mb2d
     auto ready() -> void
     {
       background = get_node<godot::ParallaxBackground>("%Background");
+      main_menu = get_node<MainMenu>("%MainMenu");
       meteor_spawner = get_node<MeteorSpawner>("%MeteorSpawner");
 
       ERR_FAIL_NULL(background);
+      ERR_FAIL_NULL(main_menu);
       ERR_FAIL_NULL(meteor_spawner);
 
       if (!godot::Engine::get_singleton()->is_editor_hint())
@@ -76,7 +80,13 @@ namespace mb2d
       get_tree()->quit();
     }
 
+    auto on_start_pressed() -> void
+    {
+      main_menu->hide();
+    }
+
     godot::ParallaxBackground * background{};
+    MainMenu * main_menu{};
     MeteorSpawner * meteor_spawner{};
   };
 }  // namespace mb2d
