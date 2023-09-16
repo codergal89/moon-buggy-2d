@@ -41,6 +41,8 @@ namespace mb2d
       credits_button->connect("pressed", godot::Callable{this, "handle_button_press"}.bindv(godot::Array::make(credits_button)));
       quit_button->connect("pressed", godot::Callable{this, "handle_button_press"}.bindv(godot::Array::make(quit_button)));
       start_button->connect("pressed", godot::Callable{this, "handle_button_press"}.bindv(godot::Array::make(start_button)));
+
+      start_button->grab_focus();
     }
 
   private:
