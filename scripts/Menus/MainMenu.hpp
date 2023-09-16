@@ -12,6 +12,9 @@
 #include <godot_cpp/classes/button.hpp>
 #include <godot_cpp/classes/control.hpp>
 
+#include <algorithm>
+#include <initializer_list>
+
 namespace mb2d
 {
 
@@ -39,21 +42,11 @@ namespace mb2d
     }
 
   private:
-    auto ready() -> void
+    auto connect_buttons(std::initializer_list<godot::Button *> buttons) -> void
     {
-      credits_button = get_node<godot::Button>("%Credits");
-      quit_button = get_node<godot::Button>("%Quit");
-      start_button = get_node<godot::Button>("%Start");
-
-      ERR_FAIL_NULL(credits_button);
-      ERR_FAIL_NULL(quit_button);
-      ERR_FAIL_NULL(start_button);
-
-      credits_button->connect("pressed", godot::Callable{this, "handle_button_press"}.bindv(godot::Array::make(credits_button)));
-      quit_button->connect("pressed", godot::Callable{this, "handle_button_press"}.bindv(godot::Array::make(quit_button)));
-      start_button->connect("pressed", godot::Callable{this, "handle_button_press"}.bindv(godot::Array::make(start_button)));
-
-      start_button->grab_focus();
+      std::ranges::for_each(buttons, [this](auto button) {
+        button->connect("pressed", godot::Callable{this, "handle_button_press"}.bindv(godot::Array::make(button)));
+      });
     }
 
     auto handle_button_press(godot::Button * button) -> void
@@ -74,6 +67,21 @@ namespace mb2d
       {
         godot::UtilityFunctions::push_warning("Unknown button '", button, "' pressed!");
       }
+    }
+
+    auto ready() -> void
+    {
+      credits_button = get_node<godot::Button>("%Credits");
+      quit_button = get_node<godot::Button>("%Quit");
+      start_button = get_node<godot::Button>("%Start");
+
+      ERR_FAIL_NULL(credits_button);
+      ERR_FAIL_NULL(quit_button);
+      ERR_FAIL_NULL(start_button);
+
+      connect_buttons({credits_button, quit_button, start_button});
+
+      start_button->grab_focus();
     }
 
     godot::Button * credits_button;
