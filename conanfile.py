@@ -25,8 +25,8 @@ class MoonBuggy2DConan(ConanFile):
         "build_type",
     )
     tool_requires = (
-        "cmake/[>3.25]",
-        "ninja/[>1.11]",
+        "cmake/[>=3.25]",
+        "ninja/[>=1.11]",
     )
 
     def build(self):
