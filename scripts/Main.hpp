@@ -23,7 +23,22 @@ namespace mb2d
       godot::ClassDB::bind_method(godot::D_METHOD("on_quit_pressed"), &Main::on_quit_pressed);
     }
 
-    auto _ready() -> void override
+    auto _notification(int notification) -> void
+    {
+      switch (notification)
+      {
+      case NOTIFICATION_READY:
+        ready();
+        set_process(true);
+        break;
+      case NOTIFICATION_PROCESS:
+        process(get_process_delta_time());
+        break;
+      }
+    }
+
+  private:
+    auto ready() -> void
     {
       background = get_node<godot::ParallaxBackground>("%Background");
       meteor_spawner = get_node<MeteorSpawner>("%MeteorSpawner");
@@ -42,7 +57,7 @@ namespace mb2d
       meteor_spawner->start();
     }
 
-    auto _process(double delta) -> void override
+    auto process(double delta) -> void
     {
       if (!godot::Engine::get_singleton()->is_editor_hint())
       {
@@ -56,7 +71,6 @@ namespace mb2d
       background->set_scroll_offset(offset + godot::Vector2(10.0, 0.0) * delta);
     }
 
-  private:
     auto on_quit_pressed() -> void
     {
       get_tree()->quit();

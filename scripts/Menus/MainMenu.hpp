@@ -28,7 +28,18 @@ namespace mb2d
       ADD_SIGNAL(godot::MethodInfo{"start_pressed"});
     }
 
-    auto _ready() -> void override
+    auto _notification(int notification) -> void
+    {
+      switch (notification)
+      {
+      case NOTIFICATION_READY:
+        ready();
+        set_process(true);
+      }
+    }
+
+  private:
+    auto ready() -> void
     {
       credits_button = get_node<godot::Button>("%Credits");
       quit_button = get_node<godot::Button>("%Quit");
@@ -45,7 +56,6 @@ namespace mb2d
       start_button->grab_focus();
     }
 
-  private:
     auto handle_button_press(godot::Button * button) -> void
     {
       if (button == credits_button)

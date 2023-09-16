@@ -35,7 +35,27 @@ namespace mb2d
       add_property("starting_angle", &Meteor::starting_angle, 0, 180, 0.1);
     }
 
-    auto _ready() -> void override
+    auto _notification(int notification) -> void
+    {
+      switch (notification)
+      {
+      case NOTIFICATION_READY:
+        ready();
+        set_process(true);
+        break;
+      }
+    }
+
+    auto _integrate_forces(godot::PhysicsDirectBodyState2D * state) -> void override
+    {
+      auto right = godot::Vector2(1.0, 0.0);
+      auto direction_of_travel = state->get_linear_velocity();
+      auto angle = right.angle_to(direction_of_travel);
+      set_rotation(angle);
+    }
+
+  private:
+    auto ready() -> void
     {
       collision_shape = get_node<godot::CollisionPolygon2D>("%CollisionShape");
       flying_sprite = get_node<godot::AnimatedSprite2D>("%FlyingSprite");
@@ -65,15 +85,6 @@ namespace mb2d
       visibility_notifier->connect("screen_exited", {this, "queue_free"});
     }
 
-    auto _integrate_forces(godot::PhysicsDirectBodyState2D * state) -> void override
-    {
-      auto right = godot::Vector2(1.0, 0.0);
-      auto direction_of_travel = state->get_linear_velocity();
-      auto angle = right.angle_to(direction_of_travel);
-      set_rotation(angle);
-    }
-
-  private:
     double starting_angle;
 
     godot::CollisionPolygon2D * collision_shape;

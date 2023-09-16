@@ -68,7 +68,19 @@ namespace mb2d
                    "Driving,Flying,Idling,Jumping,Landing");
     }
 
-    auto _ready() -> void override
+    auto _notification(int notification) -> void
+    {
+      switch (notification)
+      {
+      case NOTIFICATION_READY:
+        ready();
+        set_process(true);
+        break;
+      }
+    }
+
+  private:
+    auto ready() -> void
     {
       collision_polygon = get_node<godot::CollisionPolygon2D>("CollisionPolygon");
       sprite = get_node<godot::AnimatedSprite2D>("Sprite");
@@ -93,7 +105,6 @@ namespace mb2d
       sprite->play(mb2d::to_string(animation));
     }
 
-  private:
     godot::CollisionPolygon2D * collision_polygon;
     godot::AnimatedSprite2D * sprite;
     BuggyAnimation current_animation{BuggyAnimation::Idling};

@@ -55,7 +55,56 @@ namespace mb2d
       add_property("spawn_delay_jitter", &MeteorSpawner::spawn_delay_jitter, 0, 10, 0.01);
     }
 
-    auto _ready() -> void override
+    /**
+     * @brief Start the spawning of new meteors.
+     */
+    auto start() -> void
+    {
+      start_spawn_timer();
+    }
+
+    /**
+     * @brief Stop the spawning of new meteors.
+     */
+    auto stop() -> void
+    {
+      spawn_timer->stop();
+    }
+
+    /**
+     * @brief Callback for the "timeout()" event of the spawn timer.
+     */
+    auto on_spawn_timer_timeout() -> void
+    {
+      spawn_meteor();
+      start_spawn_timer();
+    }
+
+  private:
+    auto _notification(int notification) -> void
+    {
+      switch (notification)
+      {
+      case NOTIFICATION_READY:
+        ready();
+        set_process(true);
+        break;
+      }
+    }
+
+    /**
+     * @brief Get the number of currently active meteors.
+     */
+    auto get_meteor_count() const -> int64_t
+    {
+      if (!is_inside_tree())
+      {
+        return 0;
+      }
+      return CountIf(meteors->get_children(), [](auto node) { return !!godot::Object::cast_to<Meteor>(node); });
+    }
+
+    auto ready() -> void
     {
       rng.instantiate();
 
@@ -87,6 +136,30 @@ namespace mb2d
     }
 
     /**
+     * @brief Set the maximum spawn angle for meteors.
+     */
+    auto set_maximum_spawn_angle(double degrees) -> void
+    {
+      maximum_spawn_angle = degrees;
+      if (maximum_spawn_angle < minimum_spawn_angle)
+      {
+        this->set("minimum_spawn_angle", degrees);
+      }
+    }
+
+    /**
+     * @brief Set the minimum spawn angle for meteors.
+     */
+    auto set_minimum_spawn_angle(double degrees) -> void
+    {
+      minimum_spawn_angle = degrees;
+      if (minimum_spawn_angle > maximum_spawn_angle)
+      {
+        this->set("maximum_spawn_angle", degrees);
+      }
+    }
+
+    /**
      * @brief Try to spawn a new meteor at a random location, respecting the meteor limit.
      *
      * @return @p true iff. a meteor was spawned, @p false otherwise.
@@ -113,68 +186,6 @@ namespace mb2d
       return true;
     }
 
-    /**
-     * @brief Set the maximum spawn angle for meteors.
-     */
-    auto set_maximum_spawn_angle(double degrees) -> void
-    {
-      maximum_spawn_angle = degrees;
-      if (maximum_spawn_angle < minimum_spawn_angle)
-      {
-        this->set("minimum_spawn_angle", degrees);
-      }
-    }
-
-    /**
-     * @brief Set the minimum spawn angle for meteors.
-     */
-    auto set_minimum_spawn_angle(double degrees) -> void
-    {
-      minimum_spawn_angle = degrees;
-      if (minimum_spawn_angle > maximum_spawn_angle)
-      {
-        this->set("maximum_spawn_angle", degrees);
-      }
-    }
-
-    /**
-     * @brief Get the number of currently active meteors.
-     */
-    auto get_meteor_count() const -> int64_t
-    {
-      if (!is_inside_tree())
-      {
-        return 0;
-      }
-      return CountIf(meteors->get_children(), [](auto node) { return !!godot::Object::cast_to<Meteor>(node); });
-    }
-
-    /**
-     * @brief Start the spawning of new meteors.
-     */
-    auto start() -> void
-    {
-      start_spawn_timer();
-    }
-
-    /**
-     * @brief Stop the spawning of new meteors.
-     */
-    auto stop() -> void
-    {
-      spawn_timer->stop();
-    }
-
-    /**
-     * @brief Callback for the "timeout()" event of the spawn timer.
-     */
-    auto on_spawn_timer_timeout() -> void
-    {
-      spawn_meteor();
-      start_spawn_timer();
-    }
-
-  private:
     auto start_spawn_timer() -> void
     {
       auto delay = rng->randf_range(spawn_delay - spawn_delay_jitter, spawn_delay + spawn_delay_jitter);
