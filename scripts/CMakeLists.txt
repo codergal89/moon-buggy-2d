@@ -14,15 +14,7 @@ check_ipo_supported(RESULT MB2D_IPO_IS_SUPPORTED)
 
 # External Dependencies
 
-include("FetchContent")
-
-FetchContent_Declare("godot-cpp"
-    GIT_REPOSITORY "https://github.com/godotengine/godot-cpp.git"
-    GIT_TAG "godot-4.1.1-stable"
-    # OVERRIDE_FIND_PACKAGE
-)
-
-FetchContent_MakeAvailable("godot-cpp")
+find_package("godot-cpp")
 
 # Scripts
 
@@ -36,7 +28,7 @@ target_compile_options("scripts" PUBLIC
 )
 
 target_link_libraries("scripts" PUBLIC
-    "godot::cpp"
+    "godot-cpp::godot-cpp"
 )
 
 target_include_directories("scripts" PUBLIC

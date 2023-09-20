@@ -16,7 +16,7 @@ class MoonBuggy2DConan(ConanFile):
         "revision": "auto",
     }
     generators = (
-        "CMakeDeps"
+        "CMakeDeps",
     )
     settings = (
         "os",
@@ -24,9 +24,11 @@ class MoonBuggy2DConan(ConanFile):
         "compiler",
         "build_type",
     )
+    requires = (
+        "godot-cpp/[~4.1]",
+    )
     tool_requires = (
         "cmake/[>=3.25]",
-        "ninja/[>=1.11]",
     )
 
     def build(self):
@@ -35,7 +37,7 @@ class MoonBuggy2DConan(ConanFile):
         cmake.build()
 
     def generate(self):
-        toolchain = CMakeToolchain(self, generator="Ninja Multi-Config")
+        toolchain = CMakeToolchain(self)
         toolchain.variables["CMAKE_EXPORT_COMPILE_COMMANDS"] = True
         toolchain.variables["MOON_BUGGY_2D_VERSION"] = self.version
         toolchain.variables["MOON_BUGGY_2D_DESCRIPTION"] = self.description
@@ -43,7 +45,7 @@ class MoonBuggy2DConan(ConanFile):
         toolchain.generate()
 
     def layout(self):
-        cmake_layout(self, generator="Ninja Multi-Config", src_folder="scripts")
+        cmake_layout(self, src_folder="scripts")
 
     def package(self):
         cmake = CMake(self)
