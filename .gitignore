@@ -1,13 +1,12 @@
-/.cache
-/.godot
-/.import
-/.mono
+# Godot 4+ specific ignores
+.godot/
 
-/bin
-/build
-/data_*
-
+# Godot export specific ignores
 /export/*/*
 !/export/*/.gitkeep
 
+# C++ specific ignores
+/.cache
+/bin
+/build
 /compile_commands.json
