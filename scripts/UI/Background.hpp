@@ -3,6 +3,7 @@
 
 #include "Helpers/DontWarn.hpp"
 #include "Helpers/PropertiesGetSet.hpp"
+#include "UI/Color.hpp"
 
 #include <godot_cpp/core/binder_common.hpp>
 #include <godot_cpp/core/class_db.hpp>
@@ -20,25 +21,6 @@
 namespace mb2d
 {
 
-  enum BackgroundColor
-  {
-    Blue,
-    Purple,
-  };
-
-  auto inline to_string(BackgroundColor const & color) -> godot::String
-  {
-    switch (color)
-    {
-    case BackgroundColor::Blue:
-      return "blue";
-    case BackgroundColor::Purple:
-      return "purple";
-    default:
-      CRASH_NOW_MSG("Invalid enum value for background color!");
-    }
-  }
-
   struct Background
       : godot::ParallaxBackground
       , helpers::EasyProperties<Background>
@@ -48,9 +30,6 @@ namespace mb2d
 
     auto static _bind_methods() -> void
     {
-      BIND_ENUM_CONSTANT(BackgroundColor::Blue);
-      BIND_ENUM_CONSTANT(BackgroundColor::Purple);
-
       godot::ClassDB::bind_method(godot::D_METHOD("start", "speed"), &Background::start);
       godot::ClassDB::bind_method(godot::D_METHOD("stop"), &Background::stop);
 
@@ -125,7 +104,7 @@ namespace mb2d
       stars_sprite->set_animation(mb2d::to_string(this->color));
     }
 
-    auto set_color(BackgroundColor color) -> void
+    auto set_color(UIColor color) -> void
     {
       this->color = color;
       if (space_sprite && stars_sprite)
@@ -140,11 +119,9 @@ namespace mb2d
     godot::AnimatedSprite2D * stars_sprite;
     float speed{};
     bool scrolling{};
-    BackgroundColor color{BackgroundColor::Blue};
+    UIColor color{UIColor::UIColorBlue};
   };
 
 }  // namespace mb2d
-
-VARIANT_ENUM_CAST(mb2d::BackgroundColor);
 
 #endif
