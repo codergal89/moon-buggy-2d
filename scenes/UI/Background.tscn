@@ -44,6 +44,7 @@ animations = [{
 }]
 
 [node name="Background" type="Background"]
+color = 1
 offset = Vector2(512, 240)
 transform = Transform2D(1, 0, 0, 1, 512, 240)
 
@@ -52,7 +53,7 @@ unique_name_in_owner = true
 texture_filter = 1
 motion_mirroring = Vector2(1024, 0)
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="Space"]
+[node name="Sprite" type="AnimatedSprite2D" parent="Space"]
 sprite_frames = SubResource("1")
 animation = &"purple"
 
@@ -62,6 +63,6 @@ texture_filter = 1
 motion_scale = Vector2(0.9, 1)
 motion_mirroring = Vector2(1024, 0)
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="Stars"]
+[node name="Sprite" type="AnimatedSprite2D" parent="Stars"]
 sprite_frames = SubResource("2")
 animation = &"purple"
