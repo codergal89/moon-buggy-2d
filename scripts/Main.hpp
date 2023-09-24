@@ -4,6 +4,7 @@
 #include "Helpers/DontWarn.hpp"
 #include "Menus/MainMenu.hpp"
 #include "MeteorSpawner.hpp"
+#include "UI/Background.hpp"
 
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
@@ -33,16 +34,13 @@ namespace mb2d
         ready();
         set_process(true);
         break;
-      case NOTIFICATION_PROCESS:
-        process(get_process_delta_time());
-        break;
       }
     }
 
   private:
     auto ready() -> void
     {
-      background = get_node<godot::ParallaxBackground>("%Background");
+      background = get_node<Background>("%Background");
       main_menu = get_node<MainMenu>("%MainMenu");
       meteor_spawner = get_node<MeteorSpawner>("%MeteorSpawner");
 
@@ -58,21 +56,8 @@ namespace mb2d
 
     auto ready_in_game() -> void
     {
+      background->start(10);
       meteor_spawner->start();
-    }
-
-    auto process(double delta) -> void
-    {
-      if (!godot::Engine::get_singleton()->is_editor_hint())
-      {
-        process_in_game(delta);
-      }
-    }
-
-    auto process_in_game(double delta) -> void
-    {
-      auto offset = background->get_scroll_offset();
-      background->set_scroll_offset(offset + godot::Vector2(10.0, 0.0) * delta);
     }
 
     auto on_quit_pressed() -> void
@@ -85,7 +70,7 @@ namespace mb2d
       main_menu->hide();
     }
 
-    godot::ParallaxBackground * background{};
+    Background * background{};
     MainMenu * main_menu{};
     MeteorSpawner * meteor_spawner{};
   };
