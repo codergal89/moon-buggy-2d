@@ -50,7 +50,6 @@ transform = Transform2D(1, 0, 0, 1, 512, 240)
 [node name="Space" type="ParallaxLayer" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
-motion_scale = Vector2(0.2, 1)
 motion_mirroring = Vector2(1024, 0)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Space"]
@@ -60,7 +59,7 @@ animation = &"purple"
 [node name="Stars" type="ParallaxLayer" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
-motion_scale = Vector2(0.18, 1)
+motion_scale = Vector2(0.9, 1)
 motion_mirroring = Vector2(1024, 0)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Stars"]
