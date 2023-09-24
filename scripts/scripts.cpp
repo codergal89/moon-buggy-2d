@@ -3,6 +3,7 @@
 #include "Main.hpp"
 #include "Menus/MainMenu.hpp"
 #include "MeteorSpawner.hpp"
+#include "UI/Background.hpp"
 
 #include <gdextension_interface.h>
 
@@ -20,6 +21,7 @@ namespace mb2d
       return;
     }
 
+    godot::ClassDB::register_class<mb2d::Background>();
     godot::ClassDB::register_class<mb2d::Buggy>();
     godot::ClassDB::register_class<mb2d::Meteor>();
     godot::ClassDB::register_class<mb2d::Main>();

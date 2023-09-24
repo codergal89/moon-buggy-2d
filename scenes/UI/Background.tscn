@@ -43,7 +43,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Background" type="ParallaxBackground"]
+[node name="Background" type="Background"]
 offset = Vector2(512, 240)
 transform = Transform2D(1, 0, 0, 1, 512, 240)
 
