@@ -6,7 +6,7 @@
   "res://tests"
  ],
  "disable_colors": false,
- "double_strategy": 1,
+ "double_strategy": 0,
  "errors_do_not_cause_failure": false,
  "font_color": "ccccccff",
  "font_name": "CourierPrime",
@@ -17,7 +17,7 @@
  "include_subdirs": true,
  "inner_class": null,
  "junit_xml_file": "res://tests/report.xml",
- "junit_xml_timestamp": true,
+ "junit_xml_timestamp": false,
  "log_level": 1,
  "opacity": 100,
  "paint_after": 0.1,
