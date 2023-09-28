@@ -9,7 +9,6 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/variant/string.hpp>
-#include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
 #include <godot_cpp/classes/animated_sprite2d.hpp>
@@ -107,7 +106,7 @@ namespace mb2d
     auto set_color(UIColor color) -> void
     {
       this->color = color;
-      if (space_sprite && stars_sprite)
+      if (is_node_ready())
       {
         apply_color();
       }
