@@ -5,8 +5,8 @@ compatibility_minimum = 4.1
 
 [libraries]
 
-linux.debug.x86_64 = "res://bin/libscripts.Linux.Debug.so"
-linux.release.x86_64 = "res://bin/libscripts.Linux.Release.so"
+linux.debug.x86_64 = "res://build/Debug/scripts.linux.x86_64.debug.so"
+linux.release.x86_64 = "res://build/Release/scripts.linux.x86_64.release.so"
 
-windows.debug.x86_64 = "res://bin/libscripts.Windows.Debug.dll"
-windows.release.x86_64 = "res://bin/libscripts.Windows.Release.dll"
+windows.debug.x86_64 = "res://bin/Debug/scripts.windows.x86_64.debug.dll"
+windows.release.x86_64 = "res://bin/Debug/scripts.windows.x86_64.release.dll"
