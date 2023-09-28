@@ -5,8 +5,12 @@
 /export/*/*
 !/export/*/.gitkeep
 
+# GUT specific ignores
+/tests/report.xml
+
 # C++ specific ignores
 /.cache
 /bin
 /build
 /compile_commands.json
+
