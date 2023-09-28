@@ -25,6 +25,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Moon Buggy 2D"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [gui]
 
 theme/custom="res://assets/themes/default.tres"
