@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dihkljqd6qmgl"]
+
+[ext_resource type="SpriteFrames" uid="uid://bwh1vdwqpig8o" path="res://assets/spritesheets/buggy.tres" id="1_ordkh"]
+[ext_resource type="Script" uid="uid://clw8wad88k5x3" path="res://components/buggy.gd" id="1_yvbad"]
+
+[node name="Buggy" type="Node2D"]
+script = ExtResource("1_yvbad")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+sprite_frames = ExtResource("1_ordkh")
+animation = &"drive"

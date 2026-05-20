@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkpids4l5roy3"]
+
+[ext_resource type="Script" uid="uid://ybcadaoxm4rq" path="res://components/space_background.gd" id="1_gqvc1"]
+[ext_resource type="Texture2D" uid="uid://cfkl3i6txy8na" path="res://assets/backgrounds/space_purple.png" id="1_stfb6"]
+[ext_resource type="Texture2D" uid="uid://gjjvdhpw6e7u" path="res://assets/backgrounds/stars_purple.png" id="2_wb1py"]
+[ext_resource type="Texture2D" uid="uid://bew8m2r1bb4y0" path="res://assets/backgrounds/space_blue.png" id="2_wdsn8"]
+[ext_resource type="Texture2D" uid="uid://er80b3t7dkhf" path="res://assets/backgrounds/stars_blue.png" id="4_kbbb8"]
+
+[node name="SpaceBackground" type="Node2D"]
+script = ExtResource("1_gqvc1")
+
+[node name="Space" type="Parallax2D" parent="."]
+repeat_size = Vector2(1024, 0)
+
+[node name="Blue" type="Sprite2D" parent="Space"]
+texture = ExtResource("2_wdsn8")
+centered = false
+
+[node name="Purple" type="Sprite2D" parent="Space"]
+texture = ExtResource("1_stfb6")
+centered = false
+
+[node name="Stars" type="Parallax2D" parent="."]
+repeat_size = Vector2(1024, 0)
+
+[node name="Blue" type="Sprite2D" parent="Stars"]
+texture = ExtResource("4_kbbb8")
+centered = false
+
+[node name="Purple" type="Sprite2D" parent="Stars"]
+texture = ExtResource("2_wb1py")
+centered = false

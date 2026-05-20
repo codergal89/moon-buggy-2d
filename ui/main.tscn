@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdcois27t8hvv"]
+
+[ext_resource type="PackedScene" uid="uid://b5aceskalmit7" path="res://components/meteor_spawner.tscn" id="1_nil3n"]
+[ext_resource type="PackedScene" uid="uid://bkpids4l5roy3" path="res://components/space_background.tscn" id="2_vjqhe"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_vjqhe")]
+autoscroll = true
+
+[node name="Spawner" parent="." instance=ExtResource("1_nil3n")]
+ignore_gravity = true
+cooldown = 0.5
+probability = 0.75
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -50.5
+offset_right = -40.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Start"
+
+[node name="Credits" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Quit" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Quit"

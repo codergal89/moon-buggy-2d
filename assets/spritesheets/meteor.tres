@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bskfnkqnofmxv"]
+
+[ext_resource type="Texture2D" uid="uid://cxkhpq4jibtkf" path="res://assets/spritesheets/meteor_fly.png" id="1_5ohgr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3p033"]
+atlas = ExtResource("1_5ohgr")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiptr"]
+atlas = ExtResource("1_5ohgr")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6wfn"]
+atlas = ExtResource("1_5ohgr")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lveoh"]
+atlas = ExtResource("1_5ohgr")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvan7"]
+atlas = ExtResource("1_5ohgr")
+region = Rect2(512, 0, 128, 128)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3p033")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qiptr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6wfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lveoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvan7")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
